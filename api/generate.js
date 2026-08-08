@@ -154,6 +154,13 @@ For each tension:
 - explanation: 2–3 sentences identifying the supporting evidence and what this tension may mean when testing possible work environments or directions
 
 If the evidence genuinely supports only one tension, do not invent another.
+### WHAT KEPT SHOWING UP
+
+Return exactly 4 distinct, evidence-supported patterns.
+
+Each pattern should reflect a recurring signal across the user's answers, not a single isolated response.
+
+Do not create filler patterns merely to reach four. When supported by the evidence, distinguish different dimensions such as curiosity, energy, contribution style, or working environment.
 6. HYPOTHESIS CONSTRUCTION PROCEDURE:
 
 Before producing the report, silently organize the user's evidence into four buckets:
