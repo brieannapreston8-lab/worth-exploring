@@ -1,0 +1,380 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Worth Exploring — Career directions, not career answers</title>
+
+  <!-- Tailwind CSS -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            sage: {
+              50: '#F4F7F5', 100: '#E8ECE9', 200: '#D1DCD5', 300: '#A3B8AD',
+              400: '#759384', 500: '#5C7C6B', 600: '#4A6B53', 700: '#3B5442',
+              800: '#2C3D31', 900: '#1D2720'
+            },
+            paper: '#FAF8F5',
+            ink: '#1C1B1A'
+          }
+        }
+      }
+    }
+  </script>
+
+  <!-- Lucide Icons -->
+  <script src="https://unpkg.com/lucide@latest"></script>
+</head>
+<body class="bg-paper text-ink font-sans min-h-screen selection:bg-sage-600 selection:text-white">
+
+  <!-- HEADER -->
+  <header class="border-b border-stone-200 bg-paper/80 backdrop-blur-md sticky top-0 z-50 print:hidden">
+    <div class="max-w-3xl mx-auto px-6 h-16 flex items-center justify-between">
+      <h1 class="font-serif text-2xl font-bold tracking-tight">Worth Exploring</h1>
+      <span class="text-xs font-semibold uppercase tracking-wider text-sage-600">Career directions, not answers</span>
+    </div>
+  </header>
+
+  <main class="max-w-2xl mx-auto px-6 py-12">
+
+    <!-- VIEW 1: HOME -->
+    <div id="view-home" class="space-y-8">
+      <span class="inline-block px-3 py-1 bg-sage-100 text-sage-800 rounded-full text-xs font-semibold uppercase tracking-wider">
+        Career Experiments, Not Career Answers
+      </span>
+      <h2 class="font-serif text-5xl leading-tight font-bold text-stone-900">
+        Stop looking for your destiny. <br>
+        <span class="italic font-normal text-stone-600">Test a few directions.</span>
+      </h2>
+      <p class="text-lg text-stone-600 leading-relaxed">
+        In 10 minutes, we will map the patterns in your curiosity, energy, and working style—then give you 3 to 5 low-risk experiments to test out in the real world before making any life-changing decisions.
+      </p>
+
+      <button onclick="startAssessment()" class="px-8 py-4 bg-sage-600 text-white rounded-lg font-medium hover:bg-sage-700 transition flex items-center gap-3 shadow-sm">
+        <span>Start Exploring</span>
+        <i data-lucide="arrow-right" class="w-5 h-5"></i>
+      </button>
+    </div>
+
+    <!-- VIEW 2: QUESTION CONTAINER -->
+    <div id="view-assessment" class="hidden space-y-8">
+      <!-- Progress -->
+      <div class="space-y-2">
+        <div class="flex justify-between text-xs font-semibold text-stone-500 uppercase tracking-wider">
+          <span id="question-phase">Phase</span>
+          <span id="question-number">Question 1 of 16</span>
+        </div>
+        <div class="w-full bg-stone-200 h-1.5 rounded-full overflow-hidden">
+          <div id="progress-bar" class="bg-sage-600 h-full transition-all duration-300" style="width: 6%;"></div>
+        </div>
+      </div>
+
+      <!-- Question Content -->
+      <div class="space-y-6">
+        <h3 id="question-title" class="font-serif text-3xl text-stone-900 leading-snug"></h3>
+        <p id="question-subtitle" class="text-stone-600 text-sm"></p>
+        <div id="question-input-area" class="space-y-3"></div>
+      </div>
+
+      <!-- Nav -->
+      <div class="pt-6 flex items-center justify-between border-t border-stone-200">
+        <button onclick="prevQuestion()" class="px-4 py-2 text-stone-600 hover:text-stone-900 text-sm font-medium">Back</button>
+        <button onclick="nextQuestion()" id="next-btn" class="px-6 py-2.5 bg-sage-600 text-white rounded-lg text-sm font-medium hover:bg-sage-700 transition">Next</button>
+      </div>
+    </div>
+
+    <!-- VIEW 3: LOADING -->
+    <div id="view-loading" class="hidden py-24 text-center space-y-4">
+      <div class="w-10 h-10 border-2 border-stone-300 border-t-sage-600 rounded-full animate-spin mx-auto"></div>
+      <h3 class="font-serif text-2xl text-stone-900">Connecting a few threads...</h3>
+      <p id="loading-subtext" class="text-sm text-stone-500 animate-pulse">Comparing what energizes you with what drains you...</p>
+    </div>
+
+    <!-- VIEW 4: RESULTS -->
+    <div id="view-result" class="hidden space-y-12">
+      <div class="border-b border-stone-200 pb-6 flex justify-between items-end print:hidden">
+        <div>
+          <span class="text-xs font-semibold uppercase tracking-wider text-sage-600">Exploratory Report</span>
+          <h2 class="font-serif text-4xl text-stone-900 mt-1">Your Career Hypotheses</h2>
+        </div>
+        <button onclick="window.print()" class="px-4 py-2 bg-white border border-stone-300 rounded-lg text-sm font-medium hover:bg-stone-50">Print PDF</button>
+      </div>
+
+      <!-- Patterns -->
+      <section class="space-y-4">
+        <h3 class="font-serif text-2xl text-stone-900">What Kept Showing Up</h3>
+        <div id="patterns-container" class="grid grid-cols-1 md:grid-cols-2 gap-4"></div>
+      </section>
+
+      <!-- Tensions -->
+      <section class="p-6 bg-stone-100 rounded-xl border border-stone-200 space-y-3">
+        <h3 class="font-serif text-xl text-stone-900">Core Tensions to Mind</h3>
+        <div id="tensions-container" class="space-y-3"></div>
+      </section>
+
+      <!-- Hypotheses -->
+      <section class="space-y-6">
+        <h3 class="font-serif text-2xl text-stone-900">Career Hypotheses to Test</h3>
+        <div id="hypotheses-container" class="space-y-6"></div>
+      </section>
+
+      <!-- Dealbreakers -->
+      <section class="p-6 bg-stone-900 text-white rounded-xl space-y-3">
+        <h3 class="font-serif text-xl">Things Not to Ignore</h3>
+        <ul id="dealbreakers-container" class="space-y-2 text-sm text-stone-300 list-disc list-inside"></ul>
+      </section>
+
+      <!-- 30 Day Plan -->
+      <section class="space-y-4">
+        <h3 class="font-serif text-2xl text-stone-900">Your Next 30 Days</h3>
+        <div id="plan-container" class="space-y-3"></div>
+      </section>
+
+      <button onclick="location.reload()" class="w-full py-3 bg-stone-200 text-stone-800 rounded-lg text-sm font-medium hover:bg-stone-300 print:hidden">Start Over</button>
+    </div>
+
+  </main>
+
+  <script>
+    // QUESTIONS DATA
+    const QUESTIONS = [
+      { id: "rabbit_holes", phase: "Curiosity & Attention", title: "When nobody is paying you or grading you, what Wikipedia rabbit holes do you voluntarily disappear into?", subtitle: "Select up to 3 topics.", type: "multi", max: 3, options: [
+        { label: "How complex systems, machines, or infrastructures work", value: "systems" },
+        { label: "Human psychology, behavior, and why communities act the way they do", value: "psychology" },
+        { label: "Art, design, aesthetics, or creative history", value: "art_design" },
+        { label: "Science, medicine, or empirical discoveries", value: "science" },
+        { label: "Economics, business models, or how value is generated", value: "economics" },
+        { label: "History, policy, or how societies evolve and fail", value: "history" }
+      ]},
+      { id: "irrational_annoyance", phase: "Curiosity & Attention", title: "What everyday problem or inefficiency makes you irrationally annoyed because you know there has to be a better way?", subtitle: "Short answer", type: "text", placeholder: "e.g., Bad onboarding in software, confusing medical forms..." },
+      { id: "jealousy_trigger", phase: "Curiosity & Attention", title: "Whose job or working life makes you slightly jealous—not for status, but for how they spend their days?", subtitle: "Short answer", type: "text", placeholder: "e.g., A friend who writes long-form essays, a lab researcher..." },
+      { id: "shadow_activities", phase: "Curiosity & Attention", title: "If you could shadow someone for a week with zero risk, which daily activities would you want to observe?", subtitle: "Select up to 3.", type: "multi", max: 3, options: [
+        { label: "Investigating a complex, unsolved question from scratch", value: "investigating" },
+        { label: "Facilitating high-stakes meetings where opposing groups need alignment", value: "facilitating" },
+        { label: "Designing and building a digital tool or creative asset", value: "building" },
+        { label: "Analyzing messy data to find the hidden narrative", value: "analyzing" },
+        { label: "Teaching or coaching individuals through transitions", value: "teaching" },
+        { label: "Managing operations of a fast-moving, chaotic project", value: "operations" }
+      ]},
+      { id: "flow_work", phase: "Energy & Mechanics", title: "What kind of work makes two hours feel like twenty minutes?", subtitle: "Select up to 3.", type: "multi", max: 3, options: [
+        { label: "Deep solo research or reading", value: "research" },
+        { label: "Writing, drafting, or building from a blank page", value: "writing" },
+        { label: "Editing, polishing, or refining an existing system", value: "editing" },
+        { label: "1-on-1 conversations where you are advising or problem-solving", value: "advising" },
+        { label: "Organizing chaotic files, budgets, or schedules into order", value: "organizing" }
+      ]},
+      { id: "energy_vampires", phase: "Energy & Mechanics", title: "Which of these hypothetical tortures would suck your life force out fastest?", subtitle: "Select up to 3.", type: "multi", max: 3, options: [
+        { label: "Arguing about HOW to do a task for 2 hours instead of just testing it", value: "bikeshedding" },
+        { label: "Following a 50-page rule binder where creative variance is banned", value: "rigidity" },
+        { label: "Sitting alone in a silent room for 3 weeks with a spreadsheet", value: "isolation" },
+        { label: "Having to pretend to care about a product you think is useless", value: "inauthenticity" },
+        { label: "Having to perform, smile, and be 'on' when your battery is at 2%", value: "social_drain" }
+      ]},
+      { id: "competence_trap", phase: "Energy & Mechanics", title: "What are you good at that you never want to be paid to do again?", subtitle: "Short answer", type: "text", placeholder: "e.g., Fixing deck formatting, organizing project boards..." },
+      { id: "tolerable_fatigue", phase: "Energy & Mechanics", title: "At the end of a long workday, which type of exhaustion feels satisfying?", type: "radio", options: [
+        { label: "Tangible: I built, made, or fixed something physical/digital I can point to.", value: "tangible" },
+        { label: "Intellectual: I wrestled with a hard abstract problem until my brain hurt.", value: "intellectual" },
+        { label: "Relational: I spent all day supporting, aligning, or listening to people.", value: "relational" },
+        { label: "Operational: I cleared a massive backlog and restored order.", value: "operational" }
+      ]},
+      { id: "autonomy_preference", phase: "Environment & Style", title: "Where is your sweet spot between total freedom and clear structure?", type: "slider", left: "Give me a playbook", right: "Blank canvas" },
+      { id: "social_intensity", phase: "Environment & Style", title: "How much of your ideal week involves direct interaction with other humans?", type: "slider", left: "90% Solo Deep Work", right: "90% Social Syncs" },
+      { id: "movie_credits", phase: "Environment & Style", title: "In the credits of a project that changed the world, which role satisfies you most?", type: "radio", options: [
+        { label: "The World-Builder: Quietly designed the universe, even if strangers don't know my face.", value: "builder" },
+        { label: "The Storyteller: On stage conveying emotion and holding the message.", value: "storyteller" },
+        { label: "The Fixer: Solved the impossible crisis behind the scenes so the dream didn't crash.", value: "fixer" },
+        { label: "The Instigator: Asked the radical question and assembled the team.", value: "instigator" }
+      ]},
+      { id: "why_care", phase: "Environment & Style", title: "When work feels genuinely meaningful to you, where is the fuel coming from?", type: "radio", options: [
+        { label: "The Craft: Made something elegant or beautiful where there used to be a mess.", value: "craft" },
+        { label: "The Individual: Can point to a specific human whose burden is lighter today.", value: "human" },
+        { label: "The System: Helped rewire a broken system so the unfair thing stops.", value: "system" },
+        { label: "The Discovery: Uncovered a hidden truth or solved a complex puzzle.", value: "discovery" }
+      ]},
+      { id: "permanent_delete", phase: "Constraints & Realities", title: "What is one responsibility from your past two years you want to permanently delete?", subtitle: "Short answer", type: "text", placeholder: "e.g., Billing time in 15-min increments, managing direct reports..." },
+      { id: "decision_types", phase: "Constraints & Realities", title: "What types of decisions do you actually enjoy being responsible for?", subtitle: "Select up to 2.", type: "multi", max: 2, options: [
+        { label: "Editorial/Aesthetic: What looks or sounds right.", value: "editorial" },
+        { label: "Analytical: What the data says is the most rigorous path.", value: "analytical" },
+        { label: "Interpersonal: How to resolve human tension or protect morale.", value: "interpersonal" },
+        { label: "Strategic: Where to allocate resources for maximum leverage.", value: "strategic" }
+      ]},
+      { id: "practical_floor", phase: "Constraints & Realities", title: "Which practical reality is your non-negotiable anchor right now?", type: "radio", options: [
+        { label: "Geographic/Remote Freedom: Must have location flexibility.", value: "remote" },
+        { label: "Schedule Autonomy: Need control over WHEN I work.", value: "schedule" },
+        { label: "Financial Predictability: Need a stable income floor right now.", value: "financial" },
+        { label: "Low Emotional Carry-over: Laptop closes at 5 PM, brain is 100% off.", value: "boundaries" }
+      ]},
+      { id: "shadow_tradeoffs", phase: "Constraints & Realities", title: "Which of these shadows are you genuinely willing to live with right now?", subtitle: "Select up to 2.", type: "multi", max: 2, options: [
+        { label: "Ambiguity Shadow: Not knowing what tasks look like in 6 months, as long as I learn fast.", value: "ambiguity" },
+        { label: "Anonymity Shadow: High-impact work that rarely gets public glory, as long as I have peace.", value: "anonymity" },
+        { label: "Income Shadow: Lower ceiling on wealth, as long as daily work aligns with my sanity.", value: "income" },
+        { label: "Routine Shadow: Predictable work, as long as evenings/weekends belong 100% to my life.", value: "routine" }
+      ]}
+    ];
+
+    // APP STATE
+    let currentIdx = 0;
+    let answers = {};
+
+    function startAssessment() {
+      document.getElementById('view-home').classList.add('hidden');
+      document.getElementById('view-assessment').classList.remove('hidden');
+      renderQuestion();
+    }
+
+    function renderQuestion() {
+      const q = QUESTIONS[currentIdx];
+      document.getElementById('question-phase').innerText = q.phase;
+      document.getElementById('question-number').innerText = `Question ${currentIdx + 1} of ${QUESTIONS.length}`;
+      document.getElementById('progress-bar').style.width = `${((currentIdx + 1) / QUESTIONS.length) * 100}%`;
+      document.getElementById('question-title').innerText = q.title;
+      document.getElementById('question-subtitle').innerText = q.subtitle || '';
+
+      const area = document.getElementById('question-input-area');
+      area.innerHTML = '';
+
+      if (q.type === 'multi' || q.type === 'radio') {
+        q.options.forEach(opt => {
+          const btn = document.createElement('button');
+          const isSelected = q.type === 'multi' 
+            ? (answers[q.id] || []).includes(opt.value)
+            : answers[q.id] === opt.value;
+
+          btn.className = `w-full text-left p-4 rounded-xl border text-sm font-medium transition ${
+            isSelected ? 'bg-stone-900 text-white border-stone-900' : 'bg-white text-stone-800 border-stone-200 hover:border-stone-400'
+          }`;
+          btn.innerText = opt.label;
+          btn.onclick = () => {
+            if (q.type === 'radio') {
+              answers[q.id] = opt.value;
+            } else {
+              let curr = answers[q.id] || [];
+              if (curr.includes(opt.value)) {
+                curr = curr.filter(v => v !== opt.value);
+              } else if (!q.max || curr.length < q.max) {
+                curr.push(opt.value);
+              }
+              answers[q.id] = curr;
+            }
+            renderQuestion();
+          };
+          area.appendChild(btn);
+        });
+      } else if (q.type === 'text') {
+        const txt = document.createElement('textarea');
+        txt.className = "w-full p-4 rounded-xl border border-stone-200 bg-white text-sm focus:outline-none focus:ring-2 focus:ring-sage-600";
+        txt.rows = 3;
+        txt.placeholder = q.placeholder;
+        txt.value = answers[q.id] || '';
+        txt.oninput = (e) => answers[q.id] = e.target.value;
+        area.appendChild(txt);
+      } else if (q.type === 'slider') {
+        const wrap = document.createElement('div');
+        wrap.className = "bg-white p-6 rounded-xl border border-stone-200 space-y-4";
+        wrap.innerHTML = `
+          <input type="range" min="1" max="5" value="${answers[q.id] || 3}" class="w-full accent-sage-600 cursor-pointer" onchange="answers['${q.id}'] = this.value">
+          <div class="flex justify-between text-xs text-stone-500 font-medium">
+            <span>${q.left}</span>
+            <span>${q.right}</span>
+          </div>
+        `;
+        area.appendChild(wrap);
+      }
+      lucide.createIcons();
+    }
+
+    function nextQuestion() {
+      if (currentIdx < QUESTIONS.length - 1) {
+        currentIdx++;
+        renderQuestion();
+      } else {
+        submitToGemini();
+      }
+    }
+
+    function prevQuestion() {
+      if (currentIdx > 0) {
+        currentIdx--;
+        renderQuestion();
+      }
+    }
+
+    async function submitToGemini() {
+      document.getElementById('view-assessment').classList.add('hidden');
+      document.getElementById('view-loading').classList.remove('hidden');
+
+      try {
+        const res = await fetch('/api/generate', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ answers })
+        });
+
+        if (!res.ok) {
+          throw new Error('Failed to generate results.');
+        }
+
+        const output = await res.json();
+        renderResults(output);
+      } catch (err) {
+        alert('Error analyzing responses: ' + err.message);
+        document.getElementById('view-loading').classList.add('hidden');
+        document.getElementById('view-assessment').classList.remove('hidden');
+      }
+    }
+
+    function renderResults(res) {
+      document.getElementById('view-loading').classList.add('hidden');
+      document.getElementById('view-result').classList.remove('hidden');
+
+      // Patterns
+      document.getElementById('patterns-container').innerHTML = (res.patterns || []).map(p => `
+        <div class="bg-white p-5 rounded-xl border border-stone-200">
+          <span class="text-xs font-bold uppercase tracking-wider text-sage-600">${p.title}</span>
+          <p class="text-xs text-stone-600 mt-1">${p.description}</p>
+        </div>
+      `).join('');
+
+      // Tensions
+      document.getElementById('tensions-container').innerHTML = (res.tensions || []).map(t => `
+        <div>
+          <h4 class="font-semibold text-stone-900 text-sm">${t.title}</h4>
+          <p class="text-xs text-stone-600">${t.explanation}</p>
+        </div>
+      `).join('');
+
+      // Hypotheses
+      document.getElementById('hypotheses-container').innerHTML = (res.hypotheses || []).map((h, i) => `
+        <div class="bg-white p-6 rounded-2xl border border-stone-200 space-y-4">
+          <span class="text-xs font-semibold uppercase text-stone-400">Hypothesis 0${i+1}</span>
+          <h4 class="font-serif text-2xl text-stone-900">${h.title}</h4>
+          <p class="text-sm text-stone-700">${h.why_it_appeared}</p>
+          <div class="bg-sage-50 p-4 rounded-xl border border-sage-100 text-xs space-y-1">
+            <p class="font-bold text-sage-800">1-Hour Test: ${h.small_experiment}</p>
+            <p class="text-sage-700">Weekend Test: ${h.medium_experiment}</p>
+          </div>
+        </div>
+      `).join('');
+
+      // Dealbreakers
+      document.getElementById('dealbreakers-container').innerHTML = (res.dealbreakers || []).map(d => `<li>${d}</li>`).join('');
+      
+      // 30 Day Plan
+      document.getElementById('plan-container').innerHTML = (res.thirty_day_plan || []).map(item => `
+        <div class="bg-white p-4 rounded-xl border border-stone-200">
+          <span class="text-xs font-bold uppercase text-sage-600">${item.week}</span>
+          <h5 class="font-semibold text-sm text-stone-900">${item.action_item}</h5>
+          <p class="text-xs text-stone-500 mt-1">${item.rationale}</p>
+        </div>
+      `).join('');
+
+      lucide.createIcons();
+    }
+
+    lucide.createIcons();
+  </script>
+</body>
+</html>
