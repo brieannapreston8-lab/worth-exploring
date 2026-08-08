@@ -1,7 +1,99 @@
 export const config = {
   runtime: 'edge',
 };
+const REPORT_SCHEMA = {
+  type: "object",
+  required: ["patterns", "tensions", "hypotheses", "dealbreakers", "thirty_day_plan"],
+  properties: {
+    patterns: {
+      type: "array",
+      minItems: 3,
+      maxItems: 4,
+      items: {
+        type: "object",
+        required: ["title", "description"],
+        properties: {
+          title: { type: "string" },
+          description: { type: "string" }
+        }
+      }
+    },
 
+    tensions: {
+      type: "array",
+      minItems: 1,
+      maxItems: 2,
+      items: {
+        type: "object",
+        required: ["title", "explanation"],
+        properties: {
+          title: { type: "string" },
+          explanation: { type: "string" }
+        }
+      }
+    },
+
+    hypotheses: {
+      type: "array",
+      minItems: 3,
+      maxItems: 4,
+      items: {
+        type: "object",
+        required: [
+          "title",
+          "why_it_appeared",
+          "example_work",
+          "example_environments",
+          "watch_out_for",
+          "small_experiment",
+          "medium_experiment",
+          "research_questions"
+        ],
+        properties: {
+          title: { type: "string" },
+          why_it_appeared: { type: "string" },
+          example_work: {
+            type: "array",
+            items: { type: "string" }
+          },
+          example_environments: {
+            type: "array",
+            items: { type: "string" }
+          },
+          watch_out_for: { type: "string" },
+          small_experiment: { type: "string" },
+          medium_experiment: { type: "string" },
+          research_questions: {
+            type: "array",
+            items: { type: "string" }
+          }
+        }
+      }
+    },
+
+    dealbreakers: {
+      type: "array",
+      minItems: 3,
+      maxItems: 4,
+      items: { type: "string" }
+    },
+
+    thirty_day_plan: {
+      type: "array",
+      minItems: 4,
+      maxItems: 4,
+      items: {
+        type: "object",
+        required: ["week", "action_item", "rationale"],
+        properties: {
+          week: { type: "string" },
+          action_item: { type: "string" },
+          rationale: { type: "string" }
+        }
+      }
+    }
+  }
+};
 const SYSTEM_PROMPT = `You are an expert career researcher, pattern recognizer, and organizational designer powering an exploration tool called "Worth Exploring."
 
 ### CORE PHILOSOPHY & MANDATES
@@ -246,11 +338,13 @@ export default async function handler(req) {
             parts: [{ text: SYSTEM_PROMPT + "\n\n" + userPrompt }]
           }],
           generationConfig: {
-            responseMimeType: "application/json"
-          }
-        })
-      }
-    );
+  responseFormat: {
+    text: {
+      mimeType: "application/json",
+      schema: REPORT_SCHEMA
+    }
+  }
+}
 
     const data = await res.json();
 
