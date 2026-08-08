@@ -129,8 +129,14 @@ export default async function handler(req) {
     );
 
     const data = await res.json();
-    const candidateText = data.candidates?.[0]?.content?.parts?.[0]?.text;
 
+if (!res.ok) {
+  throw new Error(
+    data?.error?.message || `Gemini API returned status ${res.status}`
+  );
+}
+
+const candidateText = data.candidates?.[0]?.content?.parts?.[0]?.text;
     if (!candidateText) {
       throw new Error("Empty response from Gemini API.");
     }
