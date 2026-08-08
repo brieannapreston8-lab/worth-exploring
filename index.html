@@ -77,6 +77,9 @@
         <h3 id="question-title" class="font-serif text-3xl text-stone-900 leading-snug"></h3>
         <p id="question-subtitle" class="text-stone-600 text-sm"></p>
         <div id="question-input-area" class="space-y-3"></div>
+        <p id="answer-error" class="hidden text-sm text-stone-500 italic">
+  Add an answer before continuing.
+</p>
       </div>
 
       <!-- Nav -->
@@ -289,14 +292,31 @@
       lucide.createIcons();
     }
 
-    function nextQuestion() {
-      if (currentIdx < QUESTIONS.length - 1) {
-        currentIdx++;
-        renderQuestion();
-      } else {
-        submitToGemini();
-      }
-    }
+   function nextQuestion() {
+  const q = QUESTIONS[currentIdx];
+  const answer = answers[q.id];
+
+  const hasAnswer =
+    q.type === 'multi'
+      ? Array.isArray(answer) && answer.length > 0
+      : q.type === 'text'
+        ? typeof answer === 'string' && answer.trim().length > 0
+        : answer !== undefined && answer !== null && answer !== '';
+
+  if (!hasAnswer) {
+    document.getElementById('answer-error').classList.remove('hidden');
+    return;
+  }
+
+  document.getElementById('answer-error').classList.add('hidden');
+
+  if (currentIdx < QUESTIONS.length - 1) {
+    currentIdx++;
+    renderQuestion();
+  } else {
+    submitToGemini();
+  }
+}
 
     function prevQuestion() {
       if (currentIdx > 0) {
