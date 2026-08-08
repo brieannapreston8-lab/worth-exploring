@@ -122,7 +122,6 @@ export default async function handler(req) {
             parts: [{ text: SYSTEM_PROMPT + "\n\n" + userPrompt }]
           }],
           generationConfig: {
-            temperature: 0.4,
             responseMimeType: "application/json"
           }
         })
