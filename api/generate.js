@@ -345,25 +345,40 @@ export default async function handler(req) {
     
     Synthesize their report now following the strict JSON schema and Autonomy Multiplier rules.`;
 
-    const res = await fetch(
-      `https://generativelanguage.googleapis.com/v1beta/models/gemini-3.6-flash:generateContent?key=${apiKey}`,
-      {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({
-          contents: [{
-            role: "user",
-            parts: [{ text: SYSTEM_PROMPT + "\n\n" + userPrompt }]
-          }],
-  generationConfig: {
-  responseMimeType: "application/json",
-  responseSchema: toGeminiSchema(REPORT_SCHEMA)
-}
-        })
-      }
-    );
+let res;
+let data;
 
-    const data = await res.json();
+for (let attempt = 0; attempt < 3; attempt++) {
+  res = await fetch(
+    `https://generativelanguage.googleapis.com/v1beta/models/gemini-3.6-flash:generateContent?key=${apiKey}`,
+    {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({
+        contents: [{
+          role: "user",
+          parts: [{ text: SYSTEM_PROMPT + "\n\n" + userPrompt }]
+        }],
+        generationConfig: {
+          responseMimeType: "application/json",
+          responseSchema: toGeminiSchema(REPORT_SCHEMA)
+        }
+      })
+    }
+  );
+
+  data = await res.json();
+
+  if (res.ok) break;
+
+  const retryable = res.status === 503 || res.status === 429;
+
+  if (!retryable || attempt === 2) break;
+
+  await new Promise(resolve =>
+    setTimeout(resolve, 1000 * Math.pow(2, attempt))
+  );
+}
 
 if (!res.ok) {
   throw new Error(
