@@ -272,6 +272,9 @@
         txt.oninput = (e) => answers[q.id] = e.target.value;
         area.appendChild(txt);
       } else if (q.type === 'slider') {
+        if (answers[q.id] === undefined) {
+    answers[q.id] = "3";
+}
         const wrap = document.createElement('div');
         wrap.className = "bg-white p-6 rounded-xl border border-stone-200 space-y-4";
         wrap.innerHTML = `
