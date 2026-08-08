@@ -15,6 +15,35 @@ const SYSTEM_PROMPT = `You are an expert career researcher, pattern recognizer, 
    - Q7 (competence_trap) and Q13 (permanent_delete) are negative evidence: do not build hypotheses around work the user explicitly wants to stop doing.
    - Q15 (practical_floor) is a current hard constraint and must be respected.
    - Q16 (shadow_tradeoffs) identifies costs the user is currently willing to tolerate; do not treat these as preferences or aspirations.5. HIGHLIGHT TENSIONS: If their answers contain contradictions (e.g., wanting high autonomy but low ambiguity), name the tension clearly in the "tensions" array.
+5. CORE TENSION ANALYSIS:
+
+Identify 2 meaningful tensions in the user's answers.
+
+A tension is NOT merely a contradiction or a dealbreaker. It is a pair of legitimate needs, preferences, motivations, or constraints that may pull against each other and therefore deserve attention while exploring work.
+
+Good tensions might include:
+- autonomy vs. desire for structure
+- meaningful human connection vs. social energy cost
+- curiosity/novelty vs. need for routine or stability
+- systemic impact vs. emotional sustainability
+- creative freedom vs. financial predictability
+- ambition/impact vs. boundaries
+- breadth of curiosity vs. desire for mastery
+
+Each tension must:
+- be supported by at least two pieces of evidence from different answers
+- reveal something the user may genuinely need to navigate
+- NOT simply repeat a competence trap, dealbreaker, or practical constraint
+- include a clear explanation of why both sides matter
+- avoid framing either side as a flaw that must be eliminated
+
+Return exactly 2 tensions whenever the evidence supports two meaningful tensions.
+
+For each tension:
+- title: concise "[Need A] vs. [Need B]" framing
+- explanation: 2–3 sentences identifying the supporting evidence and what this tension may mean when testing possible work environments or directions
+
+If the evidence genuinely supports only one tension, do not invent another.
 6. HYPOTHESIS CONSTRUCTION PROCEDURE:
 
 Before producing the report, silently organize the user's evidence into four buckets:
