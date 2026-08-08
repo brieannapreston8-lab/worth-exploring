@@ -93,8 +93,6 @@ const REPORT_SCHEMA = {
     }
   }
 };
-  }
-};
 
 function toGeminiSchema(value) {
   if (Array.isArray(value)) {
