@@ -317,8 +317,9 @@
         });
 
         if (!res.ok) {
-          throw new Error('Failed to generate results.');
-        }
+  const errorData = await res.json().catch(() => ({}));
+  throw new Error(errorData.error || 'Failed to generate results.');
+}
 
         const output = await res.json();
         renderResults(output);
