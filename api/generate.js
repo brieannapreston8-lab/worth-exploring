@@ -34,7 +34,7 @@ const REPORT_SCHEMA = {
 
     hypotheses: {
       type: "array",
-      minItems: 3,
+      minItems: 4,
       maxItems: 4,
       items: {
         type: "object",
