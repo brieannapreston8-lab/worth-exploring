@@ -18,7 +18,24 @@ const REPORT_SCHEMA = {
         }
       }
     },
+function toGeminiSchema(value) {
+  if (Array.isArray(value)) {
+    return value.map(toGeminiSchema);
+  }
 
+  if (value && typeof value === 'object') {
+    return Object.fromEntries(
+      Object.entries(value).map(([key, val]) => [
+        key,
+        key === 'type' && typeof val === 'string'
+          ? val.toUpperCase()
+          : toGeminiSchema(val)
+      ])
+    );
+  }
+
+  return value;
+}
     tensions: {
       type: "array",
       minItems: 1,
@@ -337,13 +354,9 @@ export default async function handler(req) {
             role: "user",
             parts: [{ text: SYSTEM_PROMPT + "\n\n" + userPrompt }]
           }],
-         generationConfig: {
-  responseFormat: {
-    text: {
-      mimeType: "application/json",
-      schema: REPORT_SCHEMA
-    }
-  }
+  generationConfig: {
+  responseMimeType: "application/json",
+  responseSchema: toGeminiSchema(REPORT_SCHEMA)
 }
         })
       }
