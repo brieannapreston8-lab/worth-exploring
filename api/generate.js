@@ -337,7 +337,7 @@ export default async function handler(req) {
             role: "user",
             parts: [{ text: SYSTEM_PROMPT + "\n\n" + userPrompt }]
           }],
-          generationConfig: {
+         generationConfig: {
   responseFormat: {
     text: {
       mimeType: "application/json",
@@ -345,6 +345,9 @@ export default async function handler(req) {
     }
   }
 }
+        })
+      }
+    );
 
     const data = await res.json();
 
