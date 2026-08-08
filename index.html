@@ -25,6 +25,14 @@
     }
   </script>
 
+<style>
+  @media print {
+    .no-print {
+      display: none !important;
+    }
+  }
+</style>
+
   <!-- Lucide Icons -->
   <script src="https://unpkg.com/lucide@latest"></script>
 </head>
@@ -160,7 +168,7 @@ Keep what makes you curious. Question what doesn’t. Follow what feels worth ex
         <div id="plan-container" class="space-y-3"></div>
       </section>
 <!-- Testing Feedback -->
-<section class="pt-4 print:hidden">
+<section class="pt-4 <section class="pt-4 no-print">:hidden">
   <div class="bg-sage-50 border border-sage-100 rounded-xl p-6 space-y-3">
     <span class="text-xs font-semibold uppercase tracking-wider text-sage-600">
       An experiment in progress
@@ -189,7 +197,7 @@ Keep what makes you curious. Question what doesn’t. Follow what feels worth ex
     </a>
   </div>
 </section>
-      <button onclick="location.reload()" class="w-full py-3 bg-stone-200 text-stone-800 rounded-lg text-sm font-medium hover:bg-stone-300 print:hidden">Start Over</button>
+      <button onclick="location.reload()" class="w-full py-3 bg-stone-200 text-stone-800 rounded-lg text-sm font-medium hover:bg-stone-300 print:hidden no-print">Start Over</button>
     </div>
 
   </main>
