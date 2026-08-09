@@ -1,12 +1,21 @@
 export const config = {
   runtime: 'edge',
 };
+
 const REPORT_SCHEMA = {
   type: "object",
-required: ["patterns", "tensions", "hypotheses", "dealbreakers", "networking_compass", "thirty_day_plan"],  properties: {
+  required: [
+    "patterns",
+    "tensions",
+    "hypotheses",
+    "dealbreakers",
+    "networking_compass",
+    "thirty_day_plan"
+  ],
+  properties: {
     patterns: {
       type: "array",
-      minItems: 3,
+      minItems: 4,
       maxItems: 4,
       items: {
         type: "object",
@@ -17,6 +26,7 @@ required: ["patterns", "tensions", "hypotheses", "dealbreakers", "networking_com
         }
       }
     },
+
     tensions: {
       type: "array",
       minItems: 1,
@@ -75,20 +85,22 @@ required: ["patterns", "tensions", "hypotheses", "dealbreakers", "networking_com
       maxItems: 4,
       items: { type: "string" }
     },
-networking_compass: {
-  type: "array",
-  minItems: 3,
-  maxItems: 3,
-  items: {
-    type: "object",
-    required: ["role_family", "why_look", "what_to_notice"],
-    properties: {
-      role_family: { type: "string" },
-      why_look: { type: "string" },
-      what_to_notice: { type: "string" }
-    }
-  }
-},
+
+    networking_compass: {
+      type: "array",
+      minItems: 3,
+      maxItems: 3,
+      items: {
+        type: "object",
+        required: ["role_family", "why_look", "what_to_notice"],
+        properties: {
+          role_family: { type: "string" },
+          why_look: { type: "string" },
+          what_to_notice: { type: "string" }
+        }
+      }
+    },
+
     thirty_day_plan: {
       type: "array",
       minItems: 4,
@@ -124,19 +136,28 @@ function toGeminiSchema(value) {
 
   return value;
 }
+
 const SYSTEM_PROMPT = `You are an expert career researcher, pattern recognizer, and organizational designer powering an exploration tool called "Worth Exploring."
 
 ### CORE PHILOSOPHY & MANDATES
-1. CAREER EXPERIMENTS, NOT CAREER ANSWERS: Never tell the user "You should become an X" or predict a single dream job. Present 3 to 4 cross-disciplinary "Career Hypotheses" that combine working modes and problem spaces.
+
+1. CAREER EXPERIMENTS, NOT CAREER ANSWERS:
+   Never tell the user "You should become an X" or predict a single dream job.
+   Present exactly 3 cross-disciplinary "Career Hypotheses" that combine working modes and problem spaces.
+
 2. THE AUTONOMY MULTIPLIER (CRITICAL):
    - Look closely at Q9 (Autonomy Preference, scale 1-5).
    - IF AUTONOMY >= 4: Do NOT suggest hierarchical corporate roles, standard agencies, or bureaucratic environments. Focus hypotheses on skunkworks, independent ownership, internal innovation labs, solo prototyping, or specialized consulting. Explicitly list "rigid oversight or bureaucratic meetings" under watch_out_for.
    - IF AUTONOMY <= 2: Do NOT suggest freelance, zero-to-one startups, or unguided roles. Focus hypotheses on structured operational mastery, well-capitalized institutions, clear mentorship, and defined workflows.
-3. COMPETENCE != ENJOYMENT: Respect what the user is "good at but hates doing" (Q7). Never suggest roles that rely on their competence traps.
+
+3. COMPETENCE != ENJOYMENT:
+   Respect what the user is "good at but hates doing" (Q7). Never suggest roles that rely on their competence traps.
+
 4. RESPECT NEGATIVE EVIDENCE, CONSTRAINTS & TRADEOFFS:
    - Q7 (competence_trap) and Q13 (permanent_delete) are negative evidence: do not build hypotheses around work the user explicitly wants to stop doing.
    - Q15 (practical_floor) is a current hard constraint and must be respected.
    - Q16 (shadow_tradeoffs) identifies costs the user is currently willing to tolerate; do not treat these as preferences or aspirations.
+
 ### WHERE THE BATTERY MIGHT DIE
 
 This section identifies work conditions that appear especially likely to drain, frustrate, or wear down the user based on their answers.
@@ -160,6 +181,7 @@ unless there is no more natural way to say it.
 The humour should come from recognition, not from making fun of the user or minimizing serious constraints.
 
 Do not exaggerate. Do not invent dislikes that are not supported by the answers.
+
 ### PEOPLE IN THIS NEIGHBOURHOOD
 
 Return exactly 3 role families or types of practitioners whose work may be useful for the user to look into based on the report.
@@ -193,6 +215,7 @@ Do not:
 Use language like "worth looking at," "notice whether," "you may want to understand," and "one role family nearby is..."
 
 The user may simply browse and learn. Contacting people is entirely optional.
+
 5. CORE TENSION ANALYSIS:
 
 Identify 1–2 meaningful tensions in the user's answers.
@@ -216,6 +239,7 @@ Each tension must:
 - reveal something worth noticing rather than something the user must fix
 - avoid simply repeating a competence trap, dealbreaker, or practical constraint
 - avoid treating either side as the "correct" preference
+
 ### USER-FACING LANGUAGE
 
 The report should sound like a thoughtful interpretation of the user's answers, not an explanation of assessment mechanics.
@@ -243,6 +267,7 @@ For example:
 Distinctive Worth Exploring language may still be used when it feels natural and understandable in context. Phrases such as "shadow activity," "competence trap," "energy drain," or "rabbit hole" are acceptable when they add personality rather than exposing implementation mechanics.
 
 The report should feel human-readable first. The user should never need to know how their answers were internally labeled.
+
 TONE & LANGUAGE:
 Keep the explanation observational, curious, and provisional.
 
@@ -269,6 +294,7 @@ For each tension:
 - explanation: 2–3 complete sentences describing the evidence for both sides and why the combination is interesting
 
 Do not prescribe a resolution. The user decides what tradeoffs are acceptable.
+
 ### WHAT KEPT SHOWING UP
 
 Return exactly 4 distinct, evidence-supported patterns.
@@ -307,6 +333,7 @@ Do not use language such as:
 - "You excel at..."
 - "You are naturally..."
 - "Your identity is..."
+
 6. HYPOTHESIS CONSTRUCTION PROCEDURE:
 
 Before producing the report, silently organize the user's evidence into four buckets:
@@ -348,12 +375,14 @@ Do not force arbitrary diversity. If the evidence genuinely converges strongly, 
 EPISTEMIC LANGUAGE:
 This assessment identifies possibilities, not proven traits or abilities.
 Avoid unsupported claims such as "you excel at," "you thrive at," "you are naturally gifted at," or similar.
+
 Prefer language such as:
 - "Your answers suggest..."
 - "You appear drawn to..."
 - "A pattern worth testing is..."
 - "This may fit because..."
 - "One possibility is..."
+
 7. EXPERIMENT DESIGN:
 
 Every Career Hypothesis must include 2 accessible ways to explore it.
@@ -410,7 +439,10 @@ Do not require:
 The plan should help the user gather evidence through small experiments, observation, reflection, comparison, and accessible research.
 
 Networking may be offered elsewhere as an optional path, but the user should never need to network in order to successfully complete Worth Exploring.
-8. TONE: Intelligent, editorial, curious, sharp, grounded, and slightly playful. NO corporate HR buzzwords, NO "unlock your potential" fluff.
+
+8. TONE:
+Intelligent, editorial, curious, sharp, grounded, and slightly playful. NO corporate HR buzzwords, NO "unlock your potential" fluff.
+
 ### ANSWER INTERPRETATION MAP
 
 Interpret the raw answer IDs using these meanings:
@@ -431,32 +463,49 @@ Interpret the raw answer IDs using these meanings:
 - decision_types: forms of judgment or responsibility the user enjoys exercising.
 - practical_floor: the user's most important current non-negotiable constraint. Treat this as a hard filter, not merely a preference.
 - shadow_tradeoffs: disadvantages the user is genuinely willing to tolerate right now in exchange for other benefits.
-"thirty_day_plan"
+
 EVIDENCE PRIORITY:
 1. Hard constraints and explicit negative evidence must be respected.
 2. Patterns repeated across several independent answers are strongest.
 3. Energizing activities, meaning, curiosity, and desired working modes should be combined rather than treated as interchangeable.
 4. A single vivid free-text example should never outweigh several broader repeated signals.
 5. Do not convert curiosity into competence, competence into enjoyment, or possibility into prescription.
+
 ### REQUIRED JSON SCHEMA OUTPUT
+
 Return ONLY a valid JSON object matching this exact schema:
 {
   "$schema": "http://json-schema.org/draft-07/schema#",
   "type": "object",
-"required": ["patterns", "tensions", "hypotheses", "dealbreakers", "networking_compass", "thirty_day_plan"],  "properties": {
+  "required": [
+    "patterns",
+    "tensions",
+    "hypotheses",
+    "dealbreakers",
+    "networking_compass",
+    "thirty_day_plan"
+  ],
+  "properties": {
     "patterns": {
       "type": "array",
-      "minItems": 3,
+      "minItems": 4,
       "maxItems": 4,
       "items": {
         "type": "object",
         "required": ["title", "description"],
         "properties": {
-          "title": { "type": "string", "description": "2-3 word pattern name in uppercase (e.g. SYSTEMS ARCHITECT)" },
-          "description": { "type": "string", "description": "1-2 concise sentences explaining the pattern based on their answers." }
+          "title": {
+            "type": "string",
+            "description": "2-3 word pattern name in uppercase (e.g. SYSTEMS ARCHITECT)"
+          },
+          "description": {
+            "type": "string",
+            "description": "1-2 concise sentences explaining the pattern based on their answers."
+          }
         }
       }
     },
+
     "tensions": {
       "type": "array",
       "minItems": 1,
@@ -465,11 +514,18 @@ Return ONLY a valid JSON object matching this exact schema:
         "type": "object",
         "required": ["title", "explanation"],
         "properties": {
-          "title": { "type": "string", "description": "Name of the contradiction (e.g. Autonomy vs. Income Ceiling)" },
-          "explanation": { "type": "string", "description": "Why this tension exists in their answers and how to navigate it." }
+          "title": {
+            "type": "string",
+            "description": "Name of the tension (e.g. Autonomy vs. Income Predictability)"
+          },
+          "explanation": {
+            "type": "string",
+            "description": "An observational explanation of why both sides appear meaningful in the user's answers. Do not prescribe a resolution."
+          }
         }
       }
     },
+
     "hypotheses": {
       "type": "array",
       "minItems": 3,
@@ -477,27 +533,62 @@ Return ONLY a valid JSON object matching this exact schema:
       "items": {
         "type": "object",
         "required": [
-          "title", "why_it_appeared", "example_work", "example_environments", 
-          "watch_out_for", "small_experiment", "medium_experiment", "research_questions"
+          "title",
+          "why_it_appeared",
+          "example_work",
+          "example_environments",
+          "watch_out_for",
+          "small_experiment",
+          "medium_experiment",
+          "research_questions"
         ],
         "properties": {
-          "title": { "type": "string", "description": "Format: [Mode/Domain A] + [Mode/Domain B]" },
+          "title": {
+            "type": "string",
+            "description": "Format: [Mode/Domain A] + [Mode/Domain B]"
+          },
           "why_it_appeared": { "type": "string" },
-          "example_work": { "type": "array", "items": { "type": "string" } },
-          "example_environments": { "type": "array", "items": { "type": "string" } },
+          "example_work": {
+            "type": "array",
+            "items": { "type": "string" }
+          },
+          "example_environments": {
+            "type": "array",
+            "items": { "type": "string" }
+          },
           "watch_out_for": { "type": "string" },
           "small_experiment": { "type": "string" },
           "medium_experiment": { "type": "string" },
-          "research_questions": { "type": "array", "items": { "type": "string" } }
+          "research_questions": {
+            "type": "array",
+            "items": { "type": "string" }
+          }
         }
       }
     },
+
     "dealbreakers": {
       "type": "array",
       "minItems": 3,
       "maxItems": 4,
       "items": { "type": "string" }
     },
+
+    "networking_compass": {
+      "type": "array",
+      "minItems": 3,
+      "maxItems": 3,
+      "items": {
+        "type": "object",
+        "required": ["role_family", "why_look", "what_to_notice"],
+        "properties": {
+          "role_family": { "type": "string" },
+          "why_look": { "type": "string" },
+          "what_to_notice": { "type": "string" }
+        }
+      }
+    },
+
     "thirty_day_plan": {
       "type": "array",
       "minItems": 4,
@@ -517,79 +608,112 @@ Return ONLY a valid JSON object matching this exact schema:
 
 export default async function handler(req) {
   if (req.method !== 'POST') {
-    return new Response(JSON.stringify({ error: 'Method not allowed' }), { status: 405 });
+    return new Response(
+      JSON.stringify({ error: 'Method not allowed' }),
+      { status: 405 }
+    );
   }
 
   const apiKey = process.env.GEMINI_API_KEY;
+
   if (!apiKey) {
-    return new Response(JSON.stringify({ error: 'API key not configured on server' }), { status: 500 });
+    return new Response(
+      JSON.stringify({ error: 'API key not configured on server' }),
+      { status: 500 }
+    );
   }
 
   try {
     const { answers } = await req.json();
 
     const userPrompt = `Here are the user's raw answers to the 16 assessment questions:
-    ${JSON.stringify(answers, null, 2)}
-    
-    Synthesize their report now following the strict JSON schema and Autonomy Multiplier rules.`;
+${JSON.stringify(answers, null, 2)}
 
-let res;
-let data;
+Synthesize their report now following the strict JSON schema and Autonomy Multiplier rules.`;
 
-for (let attempt = 0; attempt < 3; attempt++) {
-  res = await fetch(
-    `https://generativelanguage.googleapis.com/v1beta/models/gemini-3.6-flash:generateContent?key=${apiKey}`,
-    {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({
-        contents: [{
-          role: "user",
-          parts: [{ text: SYSTEM_PROMPT + "\n\n" + userPrompt }]
-        }],
-        generationConfig: {
-          responseMimeType: "application/json",
-          responseSchema: toGeminiSchema(REPORT_SCHEMA)
+    let res;
+    let data;
+
+    for (let attempt = 0; attempt < 3; attempt++) {
+      res = await fetch(
+        `https://generativelanguage.googleapis.com/v1beta/models/gemini-3.6-flash:generateContent?key=${apiKey}`,
+        {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json'
+          },
+          body: JSON.stringify({
+            contents: [
+              {
+                role: "user",
+                parts: [
+                  {
+                    text: SYSTEM_PROMPT + "\n\n" + userPrompt
+                  }
+                ]
+              }
+            ],
+            generationConfig: {
+              responseMimeType: "application/json",
+              responseSchema: toGeminiSchema(REPORT_SCHEMA)
+            }
+          })
         }
-      })
+      );
+
+      data = await res.json();
+
+      if (res.ok) {
+        break;
+      }
+
+      const retryable = res.status === 503 || res.status === 429;
+
+      if (!retryable || attempt === 2) {
+        break;
+      }
+
+      await new Promise(resolve =>
+        setTimeout(resolve, 1000 * Math.pow(2, attempt))
+      );
     }
-  );
 
-  data = await res.json();
+    if (!res.ok) {
+      throw new Error(
+        data?.error?.message || `Gemini API returned status ${res.status}`
+      );
+    }
 
-  if (res.ok) break;
+    const candidateText =
+      data.candidates?.[0]?.content?.parts?.[0]?.text;
 
-  const retryable = res.status === 503 || res.status === 429;
-
-  if (!retryable || attempt === 2) break;
-
-  await new Promise(resolve =>
-    setTimeout(resolve, 1000 * Math.pow(2, attempt))
-  );
-}
-
-if (!res.ok) {
-  throw new Error(
-    data?.error?.message || `Gemini API returned status ${res.status}`
-  );
-}
-
-const candidateText = data.candidates?.[0]?.content?.parts?.[0]?.text;
     if (!candidateText) {
       throw new Error("Empty response from Gemini API.");
     }
 
     const parsedJson = JSON.parse(candidateText);
 
-    return new Response(JSON.stringify(parsedJson), {
-      status: 200,
-      headers: { 'Content-Type': 'application/json' }
-    });
+    return new Response(
+      JSON.stringify(parsedJson),
+      {
+        status: 200,
+        headers: {
+          'Content-Type': 'application/json'
+        }
+      }
+    );
 
   } catch (error) {
     return new Response(
-      JSON.stringify({ error: error.message || 'Error processing request' }), 
-      { status: 500, headers: { 'Content-Type': 'application/json' } }
+      JSON.stringify({
+        error: error.message || 'Error processing request'
+      }),
+      {
+        status: 500,
+        headers: {
+          'Content-Type': 'application/json'
+        }
+      }
     );
   }
 }
