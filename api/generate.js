@@ -1,7 +1,3 @@
-export const config = {
-  runtime: 'edge',
-};
-
 const REPORT_SCHEMA = {
   type: "object",
   required: [
