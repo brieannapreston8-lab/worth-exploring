@@ -33,10 +33,10 @@
     }
   </script>
 
-  <!-- Reliable print-only rules -->
+  <!-- Print rules -->
   <style>
     @media print {
-      .no-print {
+      #start-over-btn {
         display: none !important;
       }
     }
@@ -49,9 +49,12 @@
 <body class="bg-paper text-ink font-sans min-h-screen selection:bg-sage-600 selection:text-white">
 
   <!-- HEADER -->
-  <header class="no-print border-b border-stone-200 bg-paper/80 backdrop-blur-md sticky top-0 z-50">
+  <header class="border-b border-stone-200 bg-paper/80 backdrop-blur-md sticky top-0 z-50">
     <div class="max-w-3xl mx-auto px-6 h-16 flex items-center justify-between">
-      <h1 class="font-serif text-2xl font-bold tracking-tight">Worth Exploring</h1>
+      <h1 class="font-serif text-2xl font-bold tracking-tight">
+        Worth Exploring
+      </h1>
+
       <span class="text-xs font-semibold uppercase tracking-wider text-sage-600">
         Career directions, not answers
       </span>
@@ -82,7 +85,10 @@
       <div class="bg-white border border-stone-200 rounded-xl p-6 space-y-4">
 
         <div class="space-y-2">
-          <h3 class="font-serif text-2xl text-stone-900">Before you begin</h3>
+          <h3 class="font-serif text-2xl text-stone-900">
+            Before you begin
+          </h3>
+
           <p class="font-semibold text-stone-800">
             This is an exploration, not an assessment.
           </p>
@@ -130,9 +136,15 @@
 
       <!-- Progress -->
       <div class="space-y-2">
+
         <div class="flex justify-between text-xs font-semibold text-stone-500 uppercase tracking-wider">
-          <span id="question-phase">Phase</span>
-          <span id="question-number">Question 1 of 16</span>
+          <span id="question-phase">
+            Phase
+          </span>
+
+          <span id="question-number">
+            Question 1 of 16
+          </span>
         </div>
 
         <div class="w-full bg-stone-200 h-1.5 rounded-full overflow-hidden">
@@ -142,10 +154,12 @@
             style="width: 6%;"
           ></div>
         </div>
+
       </div>
 
       <!-- Question Content -->
       <div class="space-y-6">
+
         <h3
           id="question-title"
           class="font-serif text-3xl text-stone-900 leading-snug"
@@ -167,6 +181,7 @@
         >
           Add an answer before continuing.
         </p>
+
       </div>
 
       <!-- Navigation -->
@@ -188,6 +203,7 @@
         </button>
 
       </div>
+
     </div>
 
     <!-- VIEW 3: LOADING -->
@@ -215,6 +231,7 @@
       <div class="border-b border-stone-200 pb-6 flex justify-between items-end">
 
         <div>
+
           <span class="text-xs font-semibold uppercase tracking-wider text-sage-600">
             Exploratory Report
           </span>
@@ -222,11 +239,12 @@
           <h2 class="font-serif text-4xl text-stone-900 mt-1">
             Your Work, Reconsidered
           </h2>
+
         </div>
 
         <button
           onclick="window.print()"
-          class="no-print px-4 py-2 bg-white border border-stone-300 rounded-lg text-sm font-medium hover:bg-stone-50"
+          class="px-4 py-2 bg-white border border-stone-300 rounded-lg text-sm font-medium hover:bg-stone-50"
         >
           Print PDF
         </button>
@@ -235,6 +253,7 @@
 
       <!-- Patterns -->
       <section class="space-y-4">
+
         <h3 class="font-serif text-2xl text-stone-900">
           What Kept Showing Up
         </h3>
@@ -243,6 +262,7 @@
           id="patterns-container"
           class="grid grid-cols-1 md:grid-cols-2 gap-4"
         ></div>
+
       </section>
 
       <!-- Tensions -->
@@ -286,25 +306,29 @@
         ></ul>
 
       </section>
-<!-- People in This Neighbourhood -->
-<section class="space-y-4">
 
-  <div class="space-y-1">
-    <h3 class="font-serif text-2xl text-stone-900">
-      People in This Neighbourhood
-    </h3>
+      <!-- People in This Neighbourhood -->
+      <section class="space-y-4">
 
-    <p class="text-sm text-stone-500">
-      A few kinds of work worth looking at from the outside. No networking assignment required.
-    </p>
-  </div>
+        <div class="space-y-1">
 
-  <div
-    id="networking-container"
-    class="space-y-3"
-  ></div>
+          <h3 class="font-serif text-2xl text-stone-900">
+            People in This Neighbourhood
+          </h3>
 
-</section>
+          <p class="text-sm text-stone-500">
+            A few kinds of work worth looking at from the outside. No networking assignment required.
+          </p>
+
+        </div>
+
+        <div
+          id="networking-container"
+          class="space-y-3"
+        ></div>
+
+      </section>
+
       <!-- 30 Day Plan -->
       <section class="space-y-4">
 
@@ -320,7 +344,7 @@
       </section>
 
       <!-- Testing Feedback -->
-<section class="pt-4">
+      <section class="pt-4">
 
         <div class="bg-sage-50 border border-sage-100 rounded-xl p-6 space-y-3">
 
@@ -356,8 +380,9 @@
 
       <!-- Start Over -->
       <button
+        id="start-over-btn"
         onclick="location.reload()"
-        class="no-print w-full py-3 bg-stone-200 text-stone-800 rounded-lg text-sm font-medium hover:bg-stone-300"
+        class="w-full py-3 bg-stone-200 text-stone-800 rounded-lg text-sm font-medium hover:bg-stone-300"
       >
         Start Over
       </button>
@@ -589,6 +614,7 @@
       document.getElementById('answer-error').classList.add('hidden');
 
       document.getElementById('question-phase').innerText = q.phase;
+
       document.getElementById('question-number').innerText =
         `Question ${currentIdx + 1} of ${QUESTIONS.length}`;
 
@@ -596,7 +622,9 @@
         `${((currentIdx + 1) / QUESTIONS.length) * 100}%`;
 
       document.getElementById('question-title').innerText = q.title;
-      document.getElementById('question-subtitle').innerText = q.subtitle || '';
+
+      document.getElementById('question-subtitle').innerText =
+        q.subtitle || '';
 
       const area = document.getElementById('question-input-area');
       area.innerHTML = '';
@@ -604,6 +632,7 @@
       if (q.type === 'multi' || q.type === 'radio') {
 
         q.options.forEach(opt => {
+
           const btn = document.createElement('button');
 
           const isSelected =
@@ -611,24 +640,33 @@
               ? (answers[q.id] || []).includes(opt.value)
               : answers[q.id] === opt.value;
 
-          btn.className = `w-full text-left p-4 rounded-xl border text-sm font-medium transition ${
-            isSelected
-              ? 'bg-stone-900 text-white border-stone-900'
-              : 'bg-white text-stone-800 border-stone-200 hover:border-stone-400'
-          }`;
+          btn.className =
+            `w-full text-left p-4 rounded-xl border text-sm font-medium transition ${
+              isSelected
+                ? 'bg-stone-900 text-white border-stone-900'
+                : 'bg-white text-stone-800 border-stone-200 hover:border-stone-400'
+            }`;
 
           btn.innerText = opt.label;
 
           btn.onclick = () => {
+
             if (q.type === 'radio') {
+
               answers[q.id] = opt.value;
+
             } else {
+
               let curr = answers[q.id] || [];
 
               if (curr.includes(opt.value)) {
+
                 curr = curr.filter(v => v !== opt.value);
+
               } else if (!q.max || curr.length < q.max) {
+
                 curr.push(opt.value);
+
               }
 
               answers[q.id] = curr;
@@ -699,20 +737,31 @@
           ? Array.isArray(answer) && answer.length > 0
           : q.type === 'text'
             ? typeof answer === 'string' && answer.trim().length > 0
-            : answer !== undefined && answer !== null && answer !== '';
+            : answer !== undefined &&
+              answer !== null &&
+              answer !== '';
 
       if (!hasAnswer) {
-        document.getElementById('answer-error').classList.remove('hidden');
+        document
+          .getElementById('answer-error')
+          .classList.remove('hidden');
+
         return;
       }
 
-      document.getElementById('answer-error').classList.add('hidden');
+      document
+        .getElementById('answer-error')
+        .classList.add('hidden');
 
       if (currentIdx < QUESTIONS.length - 1) {
+
         currentIdx++;
         renderQuestion();
+
       } else {
+
         submitToGemini();
+
       }
     }
 
@@ -724,10 +773,16 @@
     }
 
     async function submitToGemini() {
-      document.getElementById('view-assessment').classList.add('hidden');
-      document.getElementById('view-loading').classList.remove('hidden');
+      document
+        .getElementById('view-assessment')
+        .classList.add('hidden');
+
+      document
+        .getElementById('view-loading')
+        .classList.remove('hidden');
 
       try {
+
         const res = await fetch('/api/generate', {
           method: 'POST',
           headers: {
@@ -737,31 +792,51 @@
         });
 
         if (!res.ok) {
-          const errorData = await res.json().catch(() => ({}));
+
+          const errorData =
+            await res.json().catch(() => ({}));
+
           throw new Error(
-            errorData.error || 'Failed to generate results.'
+            errorData.error ||
+            'Failed to generate results.'
           );
         }
 
         const output = await res.json();
+
         renderResults(output);
 
       } catch (err) {
-        alert('Error analyzing responses: ' + err.message);
 
-        document.getElementById('view-loading').classList.add('hidden');
-        document.getElementById('view-assessment').classList.remove('hidden');
+        alert(
+          'Error analyzing responses: ' +
+          err.message
+        );
+
+        document
+          .getElementById('view-loading')
+          .classList.add('hidden');
+
+        document
+          .getElementById('view-assessment')
+          .classList.remove('hidden');
       }
     }
 
     function renderResults(res) {
-      document.getElementById('view-loading').classList.add('hidden');
-      document.getElementById('view-result').classList.remove('hidden');
+      document
+        .getElementById('view-loading')
+        .classList.add('hidden');
+
+      document
+        .getElementById('view-result')
+        .classList.remove('hidden');
 
       // Patterns
       document.getElementById('patterns-container').innerHTML =
         (res.patterns || []).map(p => `
           <div class="bg-white p-5 rounded-xl border border-stone-200">
+
             <span class="text-xs font-bold uppercase tracking-wider text-sage-600">
               ${p.title}
             </span>
@@ -769,6 +844,7 @@
             <p class="text-xs text-stone-600 mt-1">
               ${p.description}
             </p>
+
           </div>
         `).join('');
 
@@ -776,6 +852,7 @@
       document.getElementById('tensions-container').innerHTML =
         (res.tensions || []).map(t => `
           <div>
+
             <h4 class="font-semibold text-stone-900 text-sm">
               ${t.title}
             </h4>
@@ -783,6 +860,7 @@
             <p class="text-xs text-stone-600">
               ${t.explanation}
             </p>
+
           </div>
         `).join('');
 
@@ -806,12 +884,12 @@
             <div class="bg-sage-50 p-4 rounded-xl border border-sage-100 text-xs space-y-1">
 
               <p class="font-bold text-sage-800">
-  Try it → ${h.small_experiment}
-</p>
+                Try it → ${h.small_experiment}
+              </p>
 
-<p class="text-sage-700">
-  Look closer → ${h.medium_experiment}
-</p>
+              <p class="text-sage-700">
+                Look closer → ${h.medium_experiment}
+              </p>
 
             </div>
 
@@ -823,28 +901,30 @@
         (res.dealbreakers || [])
           .map(d => `<li>${d}</li>`)
           .join('');
-      
-// People in This Neighbourhood
-document.getElementById('networking-container').innerHTML =
-  (res.networking_compass || []).map(item => `
-    <div class="bg-white p-5 rounded-xl border border-stone-200 space-y-2">
 
-      <h4 class="font-serif text-lg text-stone-900">
-        ${item.role_family}
-      </h4>
+      // People in This Neighbourhood
+      document.getElementById('networking-container').innerHTML =
+        (res.networking_compass || []).map(item => `
+          <div class="bg-white p-5 rounded-xl border border-stone-200 space-y-2">
 
-      <p class="text-sm text-stone-600">
-        ${item.why_look}
-      </p>
+            <h4 class="font-serif text-lg text-stone-900">
+              ${item.role_family}
+            </h4>
 
-      <p class="text-xs text-sage-700">
-        <span class="font-semibold">Worth noticing:</span>
-        ${item.what_to_notice}
-      </p>
+            <p class="text-sm text-stone-600">
+              ${item.why_look}
+            </p>
 
-    </div>
-  `).join('');
-      
+            <p class="text-xs text-sage-700">
+              <span class="font-semibold">
+                Worth noticing:
+              </span>
+              ${item.what_to_notice}
+            </p>
+
+          </div>
+        `).join('');
+
       // 30 Day Plan
       document.getElementById('plan-container').innerHTML =
         (res.thirty_day_plan || []).map(item => `
