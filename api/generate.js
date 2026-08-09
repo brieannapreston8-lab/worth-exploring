@@ -652,6 +652,36 @@ EVIDENCE PRIORITY:
 4. A single vivid free-text example should never outweigh several broader repeated signals.
 5. Do not convert curiosity into competence, competence into enjoyment, or possibility into prescription.
 
+### PLAIN-ENGLISH RULE
+
+Write for an intelligent person who does not work in HR, consulting, product management, startups, or corporate strategy.
+
+Do not assume familiarity with workplace insider language.
+
+Avoid jargon, trendy professional shorthand, management-speak, startup slang, and specialist terms when a normal phrase would communicate the idea more clearly.
+
+Avoid terms such as:
+- bikeshedding
+- stakeholder management
+- operationalize
+- leverage (when used as a vague business verb)
+- bandwidth
+- value-add
+- low-hanging fruit
+- swim lanes
+- circle back
+- alignment (when a clearer description exists)
+- async / asynchronous when "written," "independent," or "not live" would be clearer
+- high-touch / low-touch
+- thought leadership
+- strategic enablement
+
+If a genuine career or discipline term is useful — such as Information Architecture, qualitative research, taxonomy, or Research Operations — it may be used, but explain the work itself in ordinary language.
+
+Prefer concrete descriptions of what a person would actually be doing.
+
+The user should never have to Google a phrase just to understand their own report.
+
 ### REQUIRED JSON SCHEMA OUTPUT
 
 Return ONLY a valid JSON object matching this exact schema:
