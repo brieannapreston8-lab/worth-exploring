@@ -34,8 +34,8 @@ const REPORT_SCHEMA = {
 
     hypotheses: {
       type: "array",
-      minItems: 4,
-      maxItems: 4,
+      minItems: 3,
+      maxItems: 3,
       items: {
         type: "object",
         required: [
@@ -370,7 +370,7 @@ Return ONLY a valid JSON object matching this exact schema:
     "hypotheses": {
       "type": "array",
       "minItems": 3,
-      "maxItems": 4,
+      "maxItems": 3,
       "items": {
         "type": "object",
         "required": [
