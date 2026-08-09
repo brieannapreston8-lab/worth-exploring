@@ -179,21 +179,45 @@ This section identifies work conditions that appear especially likely to drain, 
 
 Return 3–4 concise observations grounded in explicit negative evidence, energy drains, constraints, or competence traps.
 
-The tone should be clear, human, and lightly playful — not clinical or diagnostic.
+The tone should be clear, human, recognizable, and slightly more playful than the rest of the report.
 
-Prefer natural language such as:
-- "A calendar packed with meetings where nothing actually gets decided."
-- "Jobs where presenting is half the job, even if the title makes that easy to miss."
-- "Work that quietly turns a competence trap back into your full-time responsibility."
-- "Rigid environments where every small change needs six approvals."
+HUMOUR:
+0–2 of the 3–4 observations MAY use dry workplace humour, corporate-jargon parody, or a lightly absurd format when it makes the underlying drain more recognizable.
 
-Avoid overly corporate phrasing such as:
+Examples of the STYLE:
+- "Mission: reach alignment. Status: circling back indefinitely."
+- "A role where 'quick sync?' is less a question and more a recurring threat."
+- "'High visibility' that mysteriously means presenting the same deck to six different rooms."
+- "A job description that says 'wear many hats' and quietly means all of them."
+- "'Fast-paced environment' where most of the pace is Slack notifications."
+
+These examples are tone references only. Do NOT reuse them unless they genuinely fit the user's evidence.
+
+Humour must:
+- be directly grounded in something the user actually identified as draining
+- sharpen recognition rather than invent a personality trait
+- feel dry and intelligent rather than silly or meme-like
+- remain optional; never force a joke simply because this section permits humour
+
+Serious constraints should be stated plainly.
+
+Do NOT joke about:
+- financial needs
+- disability or accessibility needs
+- health
+- caregiving
+- safety
+- discrimination
+- other serious life constraints
+
+The remaining observations may be straightforward.
+
+Prefer natural language over corporate phrasing such as:
 - "positions focused on..."
 - "environments characterized by..."
 - "roles requiring..."
-unless there is no more natural way to say it.
 
-The humour should come from recognition, not from making fun of the user or minimizing serious constraints.
+The humour should come from recognition, not from mocking the user.
 
 Do not exaggerate. Do not invent dislikes that are not supported by the answers.
 
@@ -324,6 +348,27 @@ For each tension:
 
 Do not prescribe a resolution. The user decides what tradeoffs are acceptable.
 
+IMPORTANT:
+The section may interpret WHY the tension matters, but it must stop before proposing HOW the user should resolve it.
+
+It is appropriate to say:
+- these preferences may be difficult to maximize simultaneously
+- one side may sometimes come at the expense of the other
+- the tension may feel different across roles or environments
+- both needs appear legitimate
+- the tradeoff itself may be worth noticing
+
+Do NOT follow the tension with a proposed career solution.
+
+Avoid constructions such as:
+- "Balancing these requires finding..."
+- "This means you need a role that..."
+- "The answer may be..."
+- "You will need to..."
+- "The best fit will..."
+- "Finding work that allows X while avoiding Y will be key..."
+
+Describe the tension. Offer light insight into its implications. Then stop.
 ### WHAT KEPT SHOWING UP
 
 Return exactly 4 distinct, evidence-supported patterns.
@@ -506,6 +551,29 @@ The action should help them reflect on:
 - whether the actual work matched the imagined appeal
 
 Week 4 should synthesize evidence, not force a final career decision or ranking unless the user naturally wants to do so.
+
+WEEK 4 RATIONALE RULE:
+The rationale must explain what comparing the evidence may help the user NOTICE.
+
+It must NOT tell the user:
+- how to balance competing needs
+- which direction to choose
+- what career fits best
+- what sacrifice they should make
+- how they should resolve a tension
+
+Avoid rationale language such as:
+- "This shows how to balance..."
+- "This helps determine which path is best..."
+- "This identifies the right direction..."
+- "This helps you choose..."
+
+Prefer language such as:
+- "This puts the month's evidence side by side so you can notice which forms of work felt interesting, sustainable, draining, or unexpectedly appealing."
+- "This may reveal which parts of the experiments created curiosity or resistance worth investigating further."
+- "This gives you something concrete to compare without requiring a final decision."
+
+Week 4 produces observations, not a verdict.
 
 SOLO-FIRST:
 Every required action must be possible to complete independently.
