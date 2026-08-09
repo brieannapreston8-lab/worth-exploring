@@ -289,6 +289,21 @@ For each tension:
 - title: concise "[Pull A] vs. [Pull B]" framing
 - explanation: 2–3 complete sentences describing the evidence for both sides and why the combination is interesting
 
+Light interpretation is encouraged.
+
+It is appropriate to point out that:
+- two preferences may be difficult to maximize at the same time
+- satisfying one side may sometimes involve sacrificing some of the other
+- the tension may show up differently across roles or environments
+- both sides can be legitimate even when they pull against each other
+
+Keep this observational.
+
+For example:
+"Autonomy appears energizing, while predictability seems protective. Those preferences can coexist, but some working environments may make it difficult to maximize both at once."
+
+Do not turn that observation into instructions about what the user must choose, seek, avoid, or do next.
+
 Do not prescribe a resolution. The user decides what tradeoffs are acceptable.
 
 ### WHAT KEPT SHOWING UP
@@ -305,7 +320,18 @@ Build patterns primarily from repeated evidence across:
 - judgment and decision-making
 - working modes the user appears drawn toward
 
-Constraints, energy drains, practical floors, and shadow tradeoffs may QUALIFY or add nuance to a pattern, but should not become the pattern itself.
+Environment preferences, constraints, energy drains, practical floors, and shadow tradeoffs may contribute to a pattern when they converge with several independent signals elsewhere in the answers.
+
+A work-style pattern such as preferring anonymity, individual-contributor work, low social exposure, structure, or autonomy is valid ONLY when it is supported by multiple distinct pieces of evidence.
+
+Do not create an identity-level pattern from a single constraint or tolerated tradeoff.
+
+For example:
+- selecting the anonymity tradeoff alone does NOT justify "Anonymous Architect"
+- but anonymity + strong preference for solo work + behind-the-scenes contribution + energizing independent building may genuinely support a pattern involving low-visibility or individual-contributor work
+- needing remote work alone does NOT justify "Remote Operator"
+
+Look for convergence, not isolated answers.
 
 For example:
 - willingness to work anonymously does NOT by itself justify a pattern such as "Anonymous Builder"
