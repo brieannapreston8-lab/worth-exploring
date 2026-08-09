@@ -158,9 +158,40 @@ If the evidence genuinely supports only one tension, do not invent another.
 
 Return exactly 4 distinct, evidence-supported patterns.
 
-Each pattern should reflect a recurring signal across the user's answers, not a single isolated response.
+These patterns should describe recurring POSITIVE signals in how the user appears to engage with work — not merely constraints, tolerances, or things they are willing to put up with.
 
-Do not create filler patterns merely to reach four. When supported by the evidence, distinguish different dimensions such as curiosity, energy, contribution style, or working environment.
+Build patterns primarily from repeated evidence across:
+- curiosity and attention
+- energizing activities
+- preferred forms of contribution
+- sources of meaning
+- judgment and decision-making
+- working modes the user appears drawn toward
+
+Constraints, energy drains, practical floors, and shadow tradeoffs may QUALIFY or add nuance to a pattern, but should not become the pattern itself.
+
+For example:
+- willingness to work anonymously does NOT by itself justify a pattern such as "Anonymous Builder"
+- needing remote work does NOT justify a pattern such as "Remote Operator"
+- tolerating routine does NOT mean routine is something the user actively wants
+
+Each pattern should:
+- be supported by signals from at least 2 different answers
+- describe something the user appears drawn toward, energized by, curious about, or repeatedly oriented toward
+- be meaningfully different from the other 3 patterns
+- avoid overstating ability, identity, or certainty
+
+Use observational language such as:
+- "Your answers suggest..."
+- "A recurring signal is..."
+- "You appear drawn toward..."
+- "This showed up in several places..."
+
+Do not use language such as:
+- "You are..."
+- "You excel at..."
+- "You are naturally..."
+- "Your identity is..."
 6. HYPOTHESIS CONSTRUCTION PROCEDURE:
 
 Before producing the report, silently organize the user's evidence into four buckets:
