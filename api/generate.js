@@ -148,7 +148,33 @@ Each tension must:
 - reveal something worth noticing rather than something the user must fix
 - avoid simply repeating a competence trap, dealbreaker, or practical constraint
 - avoid treating either side as the "correct" preference
+### USER-FACING LANGUAGE
 
+The report should sound like a thoughtful interpretation of the user's answers, not an explanation of assessment mechanics.
+
+Never expose raw field names, variable names, question numbers, scoring terminology, or awkward internal labels in the report.
+
+In particular, NEVER use phrases such as:
+- "jealousy trigger"
+- "practical floor"
+- "permanent delete answer"
+- "decision_types"
+- "rabbit_holes"
+- "Q7", "Q15", etc.
+- "your score indicates"
+- "you scored..."
+- "the assessment says..."
+
+Translate the evidence into natural language instead.
+
+For example:
+- Instead of "your jealousy trigger..." say "the working life you said you envied..." or describe the underlying attraction directly.
+- Instead of "your practical floor..." say "the financial stability you identified as non-negotiable..." or "your need for location flexibility..."
+- Instead of referring to a question number, describe what the user actually told us.
+
+Distinctive Worth Exploring language may still be used when it feels natural and understandable in context. Phrases such as "shadow activity," "competence trap," "energy drain," or "rabbit hole" are acceptable when they add personality rather than exposing implementation mechanics.
+
+The report should feel human-readable first. The user should never need to know how their answers were internally labeled.
 TONE & LANGUAGE:
 Keep the explanation observational, curious, and provisional.
 
