@@ -602,36 +602,62 @@ Return ONLY a valid JSON object matching this exact schema:
   }
 }`;
 
-export default async function handler(req) {
+export default async function handler(req, res) {
+  res.setHeader('Content-Type', 'application/json');
+
   if (req.method !== 'POST') {
-    return new Response(
-      JSON.stringify({ error: 'Method not allowed' }),
-      { status: 405 }
+    res.statusCode = 405;
+    return res.end(
+      JSON.stringify({ error: 'Method not allowed' })
     );
   }
 
   const apiKey = process.env.GEMINI_API_KEY;
 
   if (!apiKey) {
-    return new Response(
-      JSON.stringify({ error: 'API key not configured on server' }),
-      { status: 500 }
+    res.statusCode = 500;
+    return res.end(
+      JSON.stringify({ error: 'API key not configured on server' })
     );
   }
 
   try {
-    const { answers } = await req.json();
+    let body = req.body;
+
+    // Safely handle environments where the JSON body
+    // has not already been parsed for us.
+    if (!body) {
+      const chunks = [];
+
+      for await (const chunk of req) {
+        chunks.push(chunk);
+      }
+
+      const rawBody = Buffer.concat(chunks).toString('utf8');
+      body = rawBody ? JSON.parse(rawBody) : {};
+    } else if (typeof body === 'string') {
+      body = JSON.parse(body);
+    }
+
+    const { answers } = body;
+
+    if (!answers || typeof answers !== 'object') {
+      res.statusCode = 400;
+      return res.end(
+        JSON.stringify({ error: 'Answers were not received correctly.' })
+      );
+    }
 
     const userPrompt = `Here are the user's raw answers to the 16 assessment questions:
 ${JSON.stringify(answers, null, 2)}
 
 Synthesize their report now following the strict JSON schema and Autonomy Multiplier rules.`;
 
-    let res;
+    let geminiResponse;
     let data;
 
     for (let attempt = 0; attempt < 3; attempt++) {
-      res = await fetch(
+      geminiResponse = await fetch(
         `https://generativelanguage.googleapis.com/v1beta/models/gemini-3.6-flash:generateContent?key=${apiKey}`,
         {
           method: 'POST',
@@ -657,13 +683,15 @@ Synthesize their report now following the strict JSON schema and Autonomy Multip
         }
       );
 
-      data = await res.json();
+      data = await geminiResponse.json();
 
-      if (res.ok) {
+      if (geminiResponse.ok) {
         break;
       }
 
-      const retryable = res.status === 503 || res.status === 429;
+      const retryable =
+        geminiResponse.status === 503 ||
+        geminiResponse.status === 429;
 
       if (!retryable || attempt === 2) {
         break;
@@ -674,9 +702,10 @@ Synthesize their report now following the strict JSON schema and Autonomy Multip
       );
     }
 
-    if (!res.ok) {
+    if (!geminiResponse.ok) {
       throw new Error(
-        data?.error?.message || `Gemini API returned status ${res.status}`
+        data?.error?.message ||
+        `Gemini API returned status ${geminiResponse.status}`
       );
     }
 
@@ -684,32 +713,22 @@ Synthesize their report now following the strict JSON schema and Autonomy Multip
       data.candidates?.[0]?.content?.parts?.[0]?.text;
 
     if (!candidateText) {
-      throw new Error("Empty response from Gemini API.");
+      throw new Error('Empty response from Gemini API.');
     }
 
     const parsedJson = JSON.parse(candidateText);
 
-    return new Response(
-      JSON.stringify(parsedJson),
-      {
-        status: 200,
-        headers: {
-          'Content-Type': 'application/json'
-        }
-      }
-    );
+    res.statusCode = 200;
+    return res.end(JSON.stringify(parsedJson));
 
   } catch (error) {
-    return new Response(
+    console.error('Worth Exploring generation error:', error);
+
+    res.statusCode = 500;
+    return res.end(
       JSON.stringify({
         error: error.message || 'Error processing request'
-      }),
-      {
-        status: 500,
-        headers: {
-          'Content-Type': 'application/json'
-        }
-      }
+      })
     );
   }
 }
