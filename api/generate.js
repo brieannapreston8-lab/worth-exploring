@@ -165,10 +165,10 @@ Keep the six report sections meaningfully distinct. Do not let them collapse int
    Drains, competence traps, incompatible conditions, and recurring work mechanics that appear costly or unsustainable.
 
 4. WHAT'S WORTH EXPLORING = WHAT TO EXPLORE
-   Exactly 3 career hypotheses or directional possibilities. Describe the direction and why it appeared. Do NOT put tasks, exercises, experiments, or next steps inside this section.
+   Exactly 3 searchable fields, functions, disciplines, crafts, trades, or worlds of work. These are directional hypotheses, NOT job titles or people. Describe the direction and why it appeared. Do NOT put tasks, exercises, experiments, or next steps inside this section.
 
-5. PEOPLE IN THIS NEIGHBOURHOOD = WHO TO EXPLORE
-   Exactly 3 role families or practitioner types that can help the user recognize nearby forms of work. Browsing is enough; contact is optional.
+5. PEOPLE IN THIS NEIGHBOURHOOD = WHERE THIS WORK SHOWS UP IN REAL LIFE
+   Exactly 3 real occupational titles, specializations, practitioner types, or professional search terms that show concrete examples of work related to the directions above. Browsing is enough; contact is optional. These are examples, not recommendations.
 
 6. YOUR NEXT 30 DAYS = HOW TO EXPLORE
    This is the ONLY action layer in the report. Put all experiments, observation tasks, comparison exercises, prototypes, and reflection activities here.
@@ -223,16 +223,16 @@ Do not exaggerate. Do not invent dislikes that are not supported by the answers.
 
 ### PEOPLE IN THIS NEIGHBOURHOOD
 
-Return exactly 3 role families or types of practitioners whose work may be useful for the user to look into based on the report.
+Return exactly 3 real occupational titles, specializations, craft/trade titles, practitioner types, or professional search terms whose work may be useful for the user to look into based on the report.
 
-This is an OPTIONAL NETWORKING COMPASS, not an assignment.
+This is a REAL-WORLD ORIENTATION LAYER, not a list of careers the user should pursue and not a networking assignment.
 
 The goal is to help the user recognize:
-"Ah — people with titles like this may be doing work related to what I'm exploring."
+"Ah — this is how some of these directions show up as actual work in the world."
 
 For each item provide:
-- role_family: a recognizable role or practitioner family
-- why_look: 1 concise sentence explaining why this role connects to the user's evidence
+- role_family: a recognizable occupational title, specialization, craft/trade title, practitioner type, or professional search term
+- why_look: 1 concise sentence explaining why this role is a useful real-world example of the user's broader directions
 - what_to_notice: 1 concise question or feature to investigate when browsing job descriptions, profiles, talks, portfolios, or descriptions of the work
 
 SEARCHABILITY RULE — REQUIRED:
@@ -243,7 +243,9 @@ Before finalizing each role_family, silently ask:
 
 If the answer is uncertain, use the broader established occupational title rather than inventing a customized one.
 
-Do NOT manufacture titles by appending words such as Strategist, Consultant, Architect, Specialist, Analyst, Designer, Coordinator, or similar simply to make the title sound professional. Use those words only when the resulting title is genuinely used for that occupation or specialization.
+Do NOT manufacture titles by appending words such as Strategist, Consultant, Architect, Specialist, Analyst, Designer, Coordinator, Facilitator, Inspector, Technician, Manager, or similar simply to make the title sound professional. Use those words only when the resulting title is genuinely used for that occupation or specialization.
+
+Collectively, the three roles should illuminate a neighbourhood of work rather than behave like three direct recommendations. They may connect to more than one hypothesis. Do NOT simply turn Hypothesis 1 into Role 1, Hypothesis 2 into Role 2, and Hypothesis 3 into Role 3 by changing the wording into a person-title.
 
 Examples of established occupational language can span many kinds of work, such as:
 - Furniture Restorer
@@ -494,15 +496,51 @@ Working-style requirements such as remote work, autonomy, low social intensity, 
 
 Do not produce three hypotheses from the same role family merely because they all satisfy the user's environment preferences.
 
+DIRECTION VS. OCCUPATION SEPARATION — REQUIRED:
+"What's Worth Exploring" and "People in This Neighbourhood" perform different jobs.
+
+WHAT'S WORTH EXPLORING names the FIELD / FUNCTION / DISCIPLINE / CRAFT / TRADE / WORLD OF WORK.
+PEOPLE IN THIS NEIGHBOURHOOD names ACTUAL OCCUPATIONS / SPECIALIZATIONS / PRACTITIONER TYPES where that work appears.
+
+A hypothesis title should answer:
+"What area of work might be worth learning more about?"
+
+It should NOT answer:
+"What job should this person become?"
+
+Prefer field/function titles such as:
+- Furniture Restoration
+- Equipment Repair
+- Exhibit Fabrication
+- Environmental Graphic Design
+- Set Design
+- Architectural Psychology
+- Environmental Site Assessment
+- Restoration Ecology
+- Building Diagnostics
+- Patient Advocacy
+- Higher Education Ombuds / Conflict Resolution
+- Qualitative Research
+
+Avoid person-title constructions in hypotheses such as:
+- Furniture Restorer
+- Equipment Repair Technician
+- Building Diagnostics Inspector
+- Qualitative Research Facilitator
+- Environmental Strategy Consultant
+
+Even when a person-title is real, save it for People in This Neighbourhood. The hypothesis title should name the broader area of work.
+
 DIRECTION NAMING RULE — REQUIRED:
-The title of each hypothesis should open a real search path.
+The title of each hypothesis should open a real search path while remaining broader than a single occupation.
 
-Use recognizable, searchable career-field, craft/trade, discipline, specialization, or work-function language first. The title may combine two established terms when that combination genuinely clarifies the direction, but do not invent increasingly bespoke or consultant-styled labels.
+Use recognizable, searchable field, function, craft/trade area, discipline, specialization area, or world-of-work language first. Prefer short noun phrases over bespoke combinations.
 
-Before finalizing each title, silently ask:
-"Could a user search the key terms in this heading and find real examples of the work, occupations, portfolios, programs, trade/industry information, or practitioners?"
+Before finalizing each title, silently ask BOTH:
+1. "Could a user search this phrase and find real examples of the field, work, programs, portfolios, industry information, or practitioners?"
+2. "Is this naming an AREA OF WORK rather than inventing a person/job title?"
 
-If not, simplify the heading to broader established field/function language and put the nuance in why_it_appeared.
+If either answer is no, simplify the heading and put the nuance in why_it_appeared.
 
 Do not manufacture sophistication by repeatedly using words such as:
 - strategy
@@ -512,9 +550,9 @@ Do not manufacture sophistication by repeatedly using words such as:
 - architecture
 - analyst
 
-These words are allowed when they are genuinely established, precise, and useful for that work. They must not function as default language across unrelated profiles.
+These words are allowed when they are genuinely established, precise, and useful for that field. They must not function as default language across unrelated profiles.
 
-Prefer a plain, searchable heading with a nuanced explanatory paragraph over an interesting-sounding but unclear occupational phrase.
+Prefer a plain, searchable field/function heading with a nuanced explanatory paragraph over an interesting-sounding but unclear occupational phrase.
 
 HYPOTHESIS OUTPUT RULE:
 The hypothesis section describes possibilities only.
@@ -814,7 +852,7 @@ Return ONLY a valid JSON object matching this exact schema:
         "properties": {
           "title": {
             "type": "string",
-            "description": "A concise, recognizable, searchable career-field, craft/trade, discipline, specialization, or work-function heading. Use established language first; nuance belongs in why_it_appeared."
+            "description": "A concise, recognizable, searchable FIELD / FUNCTION / DISCIPLINE / CRAFT / TRADE AREA / WORLD OF WORK. Do NOT return a person/job title here. Examples: Building Diagnostics, Qualitative Research, Furniture Restoration, Set Design. Nuance belongs in why_it_appeared."
           },
           "why_it_appeared": {
             "type": "string",
@@ -860,7 +898,7 @@ Return ONLY a valid JSON object matching this exact schema:
         "properties": {
           "role_family": {
             "type": "string",
-            "description": "An established or commonly used occupational title, specialization, craft/trade title, or professional search term. Do not invent a bespoke title."
+            "description": "An established or commonly used REAL occupational title, specialization, craft/trade title, practitioner type, or professional search term showing where the broader directions appear in practice. Do not invent a bespoke title."
           },
           "why_look": {
             "type": "string"
