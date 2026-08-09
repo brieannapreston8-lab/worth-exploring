@@ -279,31 +279,31 @@
 
       </section>
 
-      <!-- Hypotheses -->
+      <!-- Where the Battery Might Die -->
+      <section class="p-6 bg-stone-100 rounded-xl border border-stone-200 space-y-3">
+
+        <h3 class="font-serif text-xl text-stone-900">
+          Where the Battery Might Die
+        </h3>
+
+        <ul
+          id="dealbreakers-container"
+          class="space-y-2 text-sm text-stone-600 list-disc pl-5"
+        ></ul>
+
+      </section>
+
+      <!-- What's Worth Exploring -->
       <section class="space-y-6">
 
         <h3 class="font-serif text-2xl text-stone-900">
-          Career Hypotheses to Test
+          What’s Worth Exploring
         </h3>
 
         <div
           id="hypotheses-container"
           class="space-y-6"
         ></div>
-
-      </section>
-
-      <!-- Dealbreakers -->
-      <section class="p-6 bg-stone-900 text-white rounded-xl space-y-3">
-
-        <h3 class="font-serif text-xl">
-          Where the Battery Might Die
-        </h3>
-
-        <ul
-          id="dealbreakers-container"
-          class="space-y-2 text-sm text-stone-300 list-disc list-inside"
-        ></ul>
 
       </section>
 
@@ -864,10 +864,16 @@
           </div>
         `).join('');
 
-      // Hypotheses
+      // Where the Battery Might Die
+      document.getElementById('dealbreakers-container').innerHTML =
+        (res.dealbreakers || [])
+          .map(d => `<li>${d}</li>`)
+          .join('');
+
+      // What's Worth Exploring
       document.getElementById('hypotheses-container').innerHTML =
         (res.hypotheses || []).map((h, i) => `
-          <div class="bg-white p-6 rounded-2xl border border-stone-200 space-y-4">
+          <div class="bg-white p-6 rounded-2xl border border-stone-200 space-y-3">
 
             <span class="text-xs font-semibold uppercase text-stone-400">
               Hypothesis 0${i + 1}
@@ -881,26 +887,8 @@
               ${h.why_it_appeared}
             </p>
 
-            <div class="bg-sage-50 p-4 rounded-xl border border-sage-100 text-xs space-y-1">
-
-              <p class="font-bold text-sage-800">
-                Try it → ${h.small_experiment}
-              </p>
-
-              <p class="text-sage-700">
-                Look closer → ${h.medium_experiment}
-              </p>
-
-            </div>
-
           </div>
         `).join('');
-
-      // Dealbreakers
-      document.getElementById('dealbreakers-container').innerHTML =
-        (res.dealbreakers || [])
-          .map(d => `<li>${d}</li>`)
-          .join('');
 
       // People in This Neighbourhood
       document.getElementById('networking-container').innerHTML =
