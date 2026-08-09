@@ -3,8 +3,7 @@ export const config = {
 };
 const REPORT_SCHEMA = {
   type: "object",
-  required: ["patterns", "tensions", "hypotheses", "dealbreakers", "thirty_day_plan"],
-  properties: {
+required: ["patterns", "tensions", "hypotheses", "dealbreakers", "networking_compass", "thirty_day_plan"],  properties: {
     patterns: {
       type: "array",
       minItems: 3,
@@ -76,7 +75,20 @@ const REPORT_SCHEMA = {
       maxItems: 4,
       items: { type: "string" }
     },
-
+networking_compass: {
+  type: "array",
+  minItems: 3,
+  maxItems: 3,
+  items: {
+    type: "object",
+    required: ["role_family", "why_look", "what_to_notice"],
+    properties: {
+      role_family: { type: "string" },
+      why_look: { type: "string" },
+      what_to_notice: { type: "string" }
+    }
+  }
+},
     thirty_day_plan: {
       type: "array",
       minItems: 4,
@@ -148,6 +160,39 @@ unless there is no more natural way to say it.
 The humour should come from recognition, not from making fun of the user or minimizing serious constraints.
 
 Do not exaggerate. Do not invent dislikes that are not supported by the answers.
+### PEOPLE IN THIS NEIGHBOURHOOD
+
+Return exactly 3 role families or types of practitioners whose work may be useful for the user to look into based on the report.
+
+This is an OPTIONAL NETWORKING COMPASS, not an assignment.
+
+The goal is to help the user recognize:
+"Ah — people with titles like this may be doing work related to what I'm exploring."
+
+For each item provide:
+- role_family: a recognizable role or practitioner family
+- why_look: 1 concise sentence explaining why this role connects to the user's evidence
+- what_to_notice: 1 concise question or feature to investigate when browsing job descriptions, profiles, talks, portfolios, or descriptions of the work
+
+Examples of appropriate role families:
+- Knowledge Manager
+- Service Designer
+- Qualitative Researcher
+- Learning Designer
+- Research Operations Specialist
+- Health Communications Strategist
+
+Do not:
+- tell the user to contact anyone
+- require informational interviews
+- prescribe networking quotas
+- recommend named individuals, companies, creators, or organizations
+- imply the user is qualified for the role
+- present these as job recommendations
+
+Use language like "worth looking at," "notice whether," "you may want to understand," and "one role family nearby is..."
+
+The user may simply browse and learn. Contacting people is entirely optional.
 5. CORE TENSION ANALYSIS:
 
 Identify 1–2 meaningful tensions in the user's answers.
@@ -386,7 +431,7 @@ Interpret the raw answer IDs using these meanings:
 - decision_types: forms of judgment or responsibility the user enjoys exercising.
 - practical_floor: the user's most important current non-negotiable constraint. Treat this as a hard filter, not merely a preference.
 - shadow_tradeoffs: disadvantages the user is genuinely willing to tolerate right now in exchange for other benefits.
-
+"thirty_day_plan"
 EVIDENCE PRIORITY:
 1. Hard constraints and explicit negative evidence must be respected.
 2. Patterns repeated across several independent answers are strongest.
@@ -398,8 +443,7 @@ Return ONLY a valid JSON object matching this exact schema:
 {
   "$schema": "http://json-schema.org/draft-07/schema#",
   "type": "object",
-  "required": ["patterns", "tensions", "hypotheses", "dealbreakers", "thirty_day_plan"],
-  "properties": {
+"required": ["patterns", "tensions", "hypotheses", "dealbreakers", "networking_compass", "thirty_day_plan"],  "properties": {
     "patterns": {
       "type": "array",
       "minItems": 3,
