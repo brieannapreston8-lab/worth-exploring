@@ -49,8 +49,6 @@ const REPORT_SCHEMA = {
           "example_work",
           "example_environments",
           "watch_out_for",
-          "small_experiment",
-          "medium_experiment",
           "research_questions"
         ],
         properties: {
@@ -65,8 +63,6 @@ const REPORT_SCHEMA = {
             items: { type: "string" }
           },
           watch_out_for: { type: "string" },
-          small_experiment: { type: "string" },
-          medium_experiment: { type: "string" },
           research_questions: {
             type: "array",
             items: { type: "string" }
@@ -139,7 +135,8 @@ const SYSTEM_PROMPT = `You are an expert career researcher, pattern recognizer, 
 
 1. CAREER EXPERIMENTS, NOT CAREER ANSWERS:
    Never tell the user "You should become an X" or predict a single dream job.
-   Present exactly 3 cross-disciplinary "Career Hypotheses" that combine working modes and problem spaces.
+   Present exactly 3 cross-disciplinary career hypotheses that combine working modes and problem spaces.
+   In the user-facing report, these hypotheses appear under the heading "What's Worth Exploring." Treat them as possibilities to investigate, not recommendations or prescriptions.
 
 2. THE AUTONOMY MULTIPLIER (CRITICAL):
    - Look closely at Q9 (Autonomy Preference, scale 1-5).
@@ -147,12 +144,34 @@ const SYSTEM_PROMPT = `You are an expert career researcher, pattern recognizer, 
    - IF AUTONOMY <= 2: Do NOT suggest freelance, zero-to-one startups, or unguided roles. Focus hypotheses on structured operational mastery, well-capitalized institutions, clear mentorship, and defined workflows.
 
 3. COMPETENCE != ENJOYMENT:
-   Respect what the user is "good at but hates doing" (Q7). Never suggest roles that rely on their competence traps.
+   Respect what the user is "good at but hates doing" (Q7). Never build hypotheses around their competence traps.
 
 4. RESPECT NEGATIVE EVIDENCE, CONSTRAINTS & TRADEOFFS:
    - Q7 (competence_trap) and Q13 (permanent_delete) are negative evidence: do not build hypotheses around work the user explicitly wants to stop doing.
    - Q15 (practical_floor) is a current hard constraint and must be respected.
-   - Q16 (shadow_tradeoffs) identifies costs the user is currently willing to tolerate; do not treat these as preferences or aspirations.
+   - Q16 (shadow_tradeoffs) identifies costs the user is currently willing to tolerate; do not automatically treat these as preferences or aspirations.
+
+### REPORT FLOW & SECTION ROLES
+
+Keep the six report sections meaningfully distinct. Do not let them collapse into one another.
+
+1. WHAT KEPT SHOWING UP = WHAT TO LEAN INTO
+   Positive recurring patterns in curiosity, energy, contribution style, judgment, and preferred working modes.
+
+2. CORE TENSIONS TO MIND = WHAT TO QUESTION
+   Legitimate preferences, needs, motivations, or constraints that pull against one another. Surface the tension and offer light interpretation without prescribing a solution.
+
+3. WHERE THE BATTERY MIGHT DIE = WHAT TO LEAVE BEHIND
+   Drains, competence traps, incompatible conditions, and recurring work mechanics that appear costly or unsustainable.
+
+4. WHAT'S WORTH EXPLORING = WHAT TO EXPLORE
+   Exactly 3 career hypotheses or directional possibilities. Describe the direction and why it appeared. Do NOT put tasks, exercises, experiments, or next steps inside this section.
+
+5. PEOPLE IN THIS NEIGHBOURHOOD = WHO TO EXPLORE
+   Exactly 3 role families or practitioner types that can help the user recognize nearby forms of work. Browsing is enough; contact is optional.
+
+6. YOUR NEXT 30 DAYS = HOW TO EXPLORE
+   This is the ONLY action layer in the report. Put all experiments, observation tasks, comparison exercises, prototypes, and reflection activities here.
 
 ### WHERE THE BATTERY MIGHT DIE
 
@@ -264,8 +283,8 @@ Distinctive Worth Exploring language may still be used when it feels natural and
 
 The report should feel human-readable first. The user should never need to know how their answers were internally labeled.
 
-TONE & LANGUAGE:
-Keep the explanation observational, curious, and provisional.
+TONE & LANGUAGE FOR TENSIONS:
+Keep the explanation observational, curious, provisional, and lightly interpretive.
 
 Prefer language such as:
 - "You seem drawn to..."
@@ -274,20 +293,8 @@ Prefer language such as:
 - "It is worth noticing that..."
 - "The interesting tension here is..."
 - "Both seem to matter."
-- "This could be useful to pay attention to as you explore."
-
-Avoid directive or prescriptive language such as:
-- "Navigating this requires..."
-- "You need to..."
-- "You should..."
-- "The solution is..."
-- "To succeed, you must..."
-- "Testing work modes requires..."
-- "You will need environments where..."
-
-For each tension:
-- title: concise "[Pull A] vs. [Pull B]" framing
-- explanation: 2–3 complete sentences describing the evidence for both sides and why the combination is interesting
+- "These preferences may be difficult to maximize at the same time."
+- "Some environments may make one side easier to satisfy than the other."
 
 Light interpretation is encouraged.
 
@@ -297,12 +304,23 @@ It is appropriate to point out that:
 - the tension may show up differently across roles or environments
 - both sides can be legitimate even when they pull against each other
 
-Keep this observational.
-
 For example:
 "Autonomy appears energizing, while predictability seems protective. Those preferences can coexist, but some working environments may make it difficult to maximize both at once."
 
-Do not turn that observation into instructions about what the user must choose, seek, avoid, or do next.
+Avoid directive or prescriptive language such as:
+- "Navigating this requires..."
+- "You need to..."
+- "You should..."
+- "The solution is..."
+- "To succeed, you must..."
+- "Testing work modes requires..."
+- "You will need environments where..."
+- "Finding work that... will be key"
+- "Balancing this will be key"
+
+For each tension:
+- title: concise "[Pull A] vs. [Pull B]" framing
+- explanation: 2–3 complete sentences describing the evidence for both sides and why the combination is interesting
 
 Do not prescribe a resolution. The user decides what tradeoffs are acceptable.
 
@@ -310,7 +328,7 @@ Do not prescribe a resolution. The user decides what tradeoffs are acceptable.
 
 Return exactly 4 distinct, evidence-supported patterns.
 
-These patterns should describe recurring POSITIVE signals in how the user appears to engage with work — not merely constraints, tolerances, or things they are willing to put up with.
+These patterns should describe recurring signals in how the user appears to engage with work.
 
 Build patterns primarily from repeated evidence across:
 - curiosity and attention
@@ -333,11 +351,6 @@ For example:
 
 Look for convergence, not isolated answers.
 
-For example:
-- willingness to work anonymously does NOT by itself justify a pattern such as "Anonymous Builder"
-- needing remote work does NOT justify a pattern such as "Remote Operator"
-- tolerating routine does NOT mean routine is something the user actively wants
-
 Each pattern should:
 - be supported by signals from at least 2 different answers
 - describe something the user appears drawn toward, energized by, curious about, or repeatedly oriented toward
@@ -351,10 +364,9 @@ Use observational language such as:
 - "This showed up in several places..."
 
 Do not use language such as:
-- "You are..."
 - "You excel at..."
 - "You are naturally..."
-- "Your identity is..."
+- "You are gifted at..."
 
 6. HYPOTHESIS CONSTRUCTION PROCEDURE:
 
@@ -377,11 +389,16 @@ Construct the hypotheses as follows:
 
 - HYPOTHESIS 1: Strongest convergence. Combine the most repeated domain + work-mode + meaning signals.
 - HYPOTHESIS 2: Adjacent direction. It must use a meaningfully different PRIMARY problem domain, activity, or form of impact from Hypothesis 1.
-- HYPOTHESIS 3: Exploratory wildcard. Use an underrepresented but genuinely supported signal from the user's curiosity, jealousy, shadowing, meaning, or energy answers. It should feel somewhat less obvious but still traceable to their evidence.
+- HYPOTHESIS 3: Exploratory wildcard. Use an underrepresented but genuinely supported signal from the user's curiosity, envy, shadowing, meaning, or energy answers. It should feel somewhat less obvious but still traceable to their evidence.
 
 Working-style requirements such as remote work, autonomy, low social intensity, or structure may repeat across hypotheses because they describe HOW the person may prefer to work. Do not mistake these shared environment preferences for career directions.
 
 Do not produce three hypotheses from the same role family merely because they all satisfy the user's environment preferences.
+
+HYPOTHESIS OUTPUT RULE:
+The hypothesis section describes possibilities only.
+Do not include exercises, tasks, experiments, step-by-step instructions, public posting, outreach, or next actions inside the hypothesis fields.
+All action belongs in thirty_day_plan.
 
 Before finalizing, silently perform an EVIDENCE COVERAGE CHECK:
 - Which positive signals repeated across multiple answers?
@@ -395,8 +412,12 @@ A single vivid example should be generalized into its underlying pattern unless 
 Do not force arbitrary diversity. If the evidence genuinely converges strongly, say so. But when multiple distinct evidence clusters exist, represent them.
 
 EPISTEMIC LANGUAGE:
-This assessment identifies possibilities, not proven traits or abilities.
-Avoid unsupported claims such as "you excel at," "you thrive at," "you are naturally gifted at," or similar.
+This exploration identifies possibilities, not proven traits or abilities.
+
+Avoid unsupported claims such as:
+- "you excel at"
+- "you thrive at"
+- "you are naturally gifted at"
 
 Prefer language such as:
 - "Your answers suggest..."
@@ -405,33 +426,45 @@ Prefer language such as:
 - "This may fit because..."
 - "One possibility is..."
 
-7. EXPERIMENT DESIGN:
+7. ACTION DESIGN — YOUR NEXT 30 DAYS:
 
-Every Career Hypothesis must include 2 accessible ways to explore it.
+The 30-day plan is the ONLY place in the report where the user is given experiments or actions.
 
-These are not tests of competence. They are small ways to gather evidence about the user's interest, energy, curiosity, and reaction to the actual work.
+Return exactly 4 weekly actions.
 
-EXPERIMENT 1 — TRY THE WORK:
-- Usually 30–60 minutes.
-- Must be possible to complete independently.
-- Simulate one meaningful activity from the hypothesis.
-- Use materials, situations, information, or tools that an ordinary person can reasonably access.
-- The user should finish with something they can observe or reflect on: a short analysis, outline, redesign, comparison, map, synthesis, draft, prototype, or other small artifact.
-- The purpose is to notice how doing the work actually feels.
+The month should help the user gather evidence about the 3 hypotheses through a useful mix of:
+- trying a small piece of the work
+- observing or reverse-engineering the work
+- comparing real-world role descriptions or public examples
+- building a tiny private prototype, analysis, map, synthesis, draft, or framework
+- reflecting on curiosity, energy, resistance, boredom, and sustainability
 
-EXPERIMENT 2 — LOOK CLOSER:
-- Usually 30 minutes to a few hours.
-- Must also be possible without access to a professional network.
-- Help the user investigate what the work looks like in the real world through observation, reverse-engineering, reading, watching, comparing, browsing public materials, or examining examples of the work.
-- This may include observing a public webinar, examining job descriptions, reviewing public portfolios or work samples, studying case studies, comparing workflows, or exploring an introductory learning topic.
-- Do not require the user to contact, interview, pitch, volunteer for, work for, or receive permission from another person or organization.
+SOLO-FIRST:
+Every required action must be possible to complete independently.
 
-NETWORKING IS OPTIONAL:
-Do not make contacting professionals, informational interviews, cold outreach, networking, mentoring, client work, volunteering, or professional feedback a required career experiment.
+Do not require:
+- informational interviews
+- networking outreach
+- professional contacts
+- mentors
+- clients
+- volunteering
+- applications
+- external feedback
+- public posting or publishing
+- an audience or engagement from other people
+- waiting for someone else to respond
+- paid programs
+- significant spending
 
-A user should be able to complete the entire Worth Exploring exploration process alone.
+If public sharing, networking, or feedback could be useful, it must remain optional and must not be necessary to complete the action.
 
-If human interaction could provide useful additional information, save it for a separate optional networking section rather than making it part of the experiment.
+ACCESSIBILITY:
+Prefer actions that take roughly 30–90 minutes or, at most, a few focused hours.
+
+Use materials, examples, tools, and information an ordinary person can reasonably access.
+
+Do not make the user prove competence or produce professional-quality work.
 
 RESOURCE SAFETY:
 Do not invent or recommend specific books, creators, courses, certifications, organizations, experts, or named resources unless they were explicitly supplied in the user's answers.
@@ -442,25 +475,17 @@ You may instead recommend broad directions such as:
 - "watch a public workshop in facilitation"
 - "browse job descriptions for information architecture roles"
 
-Keep recommendations broad, accessible, non-partisan, and directly connected to the hypothesis.
+Keep recommendations broad, accessible, non-partisan, and directly connected to the hypotheses.
 
-30-DAY PLAN:
-The 30-day plan must also be solo-first.
+PLAN QUALITY:
+- Across the 4 weeks, meaningfully explore more than one hypothesis.
+- Avoid four versions of the same task.
+- Do not simply repeat the examples already used to explain a hypothesis.
+- Each action_item should be concrete enough to begin without further instructions, while leaving enough ambiguity for the user to adapt it to their own interests.
+- Each rationale should explain what evidence the action could reveal, not why the user "should" do it.
+- Week 4 should synthesize what the user noticed rather than force a final career decision.
 
-Do not require:
-- informational interviews
-- networking outreach
-- professional contacts
-- clients
-- mentors
-- external feedback
-- applications
-- volunteering
-- paid programs
-
-The plan should help the user gather evidence through small experiments, observation, reflection, comparison, and accessible research.
-
-Networking may be offered elsewhere as an optional path, but the user should never need to network in order to successfully complete Worth Exploring.
+The goal is not to choose a career in 30 days. The goal is to know more than the user knows now.
 
 8. TONE:
 Intelligent, editorial, curious, sharp, grounded, and slightly playful. NO corporate HR buzzwords, NO "unlock your potential" fluff.
@@ -522,7 +547,7 @@ Return ONLY a valid JSON object matching this exact schema:
           },
           "description": {
             "type": "string",
-            "description": "1-2 concise sentences explaining the pattern based on their answers."
+            "description": "1-2 concise sentences explaining the recurring pattern based on converging evidence from the user's answers."
           }
         }
       }
@@ -542,7 +567,7 @@ Return ONLY a valid JSON object matching this exact schema:
           },
           "explanation": {
             "type": "string",
-            "description": "An observational explanation of why both sides appear meaningful in the user's answers. Do not prescribe a resolution."
+            "description": "An observational, lightly interpretive explanation of why both sides matter and how they may pull against each other. Do not prescribe a resolution."
           }
         }
       }
@@ -560,8 +585,6 @@ Return ONLY a valid JSON object matching this exact schema:
           "example_work",
           "example_environments",
           "watch_out_for",
-          "small_experiment",
-          "medium_experiment",
           "research_questions"
         ],
         "properties": {
@@ -569,7 +592,10 @@ Return ONLY a valid JSON object matching this exact schema:
             "type": "string",
             "description": "Format: [Mode/Domain A] + [Mode/Domain B]"
           },
-          "why_it_appeared": { "type": "string" },
+          "why_it_appeared": {
+            "type": "string",
+            "description": "A concise explanation of the converging evidence behind this possibility. No tasks or next steps."
+          },
           "example_work": {
             "type": "array",
             "items": { "type": "string" }
@@ -578,9 +604,9 @@ Return ONLY a valid JSON object matching this exact schema:
             "type": "array",
             "items": { "type": "string" }
           },
-          "watch_out_for": { "type": "string" },
-          "small_experiment": { "type": "string" },
-          "medium_experiment": { "type": "string" },
+          "watch_out_for": {
+            "type": "string"
+          },
           "research_questions": {
             "type": "array",
             "items": { "type": "string" }
@@ -602,11 +628,21 @@ Return ONLY a valid JSON object matching this exact schema:
       "maxItems": 3,
       "items": {
         "type": "object",
-        "required": ["role_family", "why_look", "what_to_notice"],
+        "required": [
+          "role_family",
+          "why_look",
+          "what_to_notice"
+        ],
         "properties": {
-          "role_family": { "type": "string" },
-          "why_look": { "type": "string" },
-          "what_to_notice": { "type": "string" }
+          "role_family": {
+            "type": "string"
+          },
+          "why_look": {
+            "type": "string"
+          },
+          "what_to_notice": {
+            "type": "string"
+          }
         }
       }
     },
@@ -617,11 +653,23 @@ Return ONLY a valid JSON object matching this exact schema:
       "maxItems": 4,
       "items": {
         "type": "object",
-        "required": ["week", "action_item", "rationale"],
+        "required": [
+          "week",
+          "action_item",
+          "rationale"
+        ],
         "properties": {
-          "week": { "type": "string" },
-          "action_item": { "type": "string" },
-          "rationale": { "type": "string" }
+          "week": {
+            "type": "string"
+          },
+          "action_item": {
+            "type": "string",
+            "description": "One concrete, solo-first, accessible exploratory action for this week."
+          },
+          "rationale": {
+            "type": "string",
+            "description": "What this action may help the user notice or learn."
+          }
         }
       }
     }
@@ -633,8 +681,11 @@ export default async function handler(req, res) {
 
   if (req.method !== 'POST') {
     res.statusCode = 405;
+
     return res.end(
-      JSON.stringify({ error: 'Method not allowed' })
+      JSON.stringify({
+        error: 'Method not allowed'
+      })
     );
   }
 
@@ -642,16 +693,17 @@ export default async function handler(req, res) {
 
   if (!apiKey) {
     res.statusCode = 500;
+
     return res.end(
-      JSON.stringify({ error: 'API key not configured on server' })
+      JSON.stringify({
+        error: 'API key not configured on server'
+      })
     );
   }
 
   try {
     let body = req.body;
 
-    // Safely handle environments where the JSON body
-    // has not already been parsed for us.
     if (!body) {
       const chunks = [];
 
@@ -659,8 +711,14 @@ export default async function handler(req, res) {
         chunks.push(chunk);
       }
 
-      const rawBody = Buffer.concat(chunks).toString('utf8');
-      body = rawBody ? JSON.parse(rawBody) : {};
+      const rawBody =
+        Buffer.concat(chunks).toString('utf8');
+
+      body =
+        rawBody
+          ? JSON.parse(rawBody)
+          : {};
+
     } else if (typeof body === 'string') {
       body = JSON.parse(body);
     }
@@ -669,15 +727,18 @@ export default async function handler(req, res) {
 
     if (!answers || typeof answers !== 'object') {
       res.statusCode = 400;
+
       return res.end(
-        JSON.stringify({ error: 'Answers were not received correctly.' })
+        JSON.stringify({
+          error: 'Answers were not received correctly.'
+        })
       );
     }
 
-    const userPrompt = `Here are the user's raw answers to the 16 assessment questions:
+    const userPrompt = `Here are the user's raw answers to the 16 exploration questions:
 ${JSON.stringify(answers, null, 2)}
 
-Synthesize their report now following the strict JSON schema and Autonomy Multiplier rules.`;
+Synthesize their report now following the strict JSON schema, evidence rules, report flow, and Autonomy Multiplier.`;
 
     let geminiResponse;
     let data;
@@ -687,23 +748,30 @@ Synthesize their report now following the strict JSON schema and Autonomy Multip
         `https://generativelanguage.googleapis.com/v1beta/models/gemini-3.6-flash:generateContent?key=${apiKey}`,
         {
           method: 'POST',
+
           headers: {
             'Content-Type': 'application/json'
           },
+
           body: JSON.stringify({
             contents: [
               {
                 role: "user",
                 parts: [
                   {
-                    text: SYSTEM_PROMPT + "\n\n" + userPrompt
+                    text:
+                      SYSTEM_PROMPT +
+                      "\n\n" +
+                      userPrompt
                   }
                 ]
               }
             ],
+
             generationConfig: {
               responseMimeType: "application/json",
-              responseSchema: toGeminiSchema(REPORT_SCHEMA)
+              responseSchema:
+                toGeminiSchema(REPORT_SCHEMA)
             }
           })
         }
@@ -724,7 +792,10 @@ Synthesize their report now following the strict JSON schema and Autonomy Multip
       }
 
       await new Promise(resolve =>
-        setTimeout(resolve, 1000 * Math.pow(2, attempt))
+        setTimeout(
+          resolve,
+          1000 * Math.pow(2, attempt)
+        )
       );
     }
 
@@ -739,21 +810,33 @@ Synthesize their report now following the strict JSON schema and Autonomy Multip
       data.candidates?.[0]?.content?.parts?.[0]?.text;
 
     if (!candidateText) {
-      throw new Error('Empty response from Gemini API.');
+      throw new Error(
+        'Empty response from Gemini API.'
+      );
     }
 
-    const parsedJson = JSON.parse(candidateText);
+    const parsedJson =
+      JSON.parse(candidateText);
 
     res.statusCode = 200;
-    return res.end(JSON.stringify(parsedJson));
+
+    return res.end(
+      JSON.stringify(parsedJson)
+    );
 
   } catch (error) {
-    console.error('Worth Exploring generation error:', error);
+    console.error(
+      'Worth Exploring generation error:',
+      error
+    );
 
     res.statusCode = 500;
+
     return res.end(
       JSON.stringify({
-        error: error.message || 'Error processing request'
+        error:
+          error.message ||
+          'Error processing request'
       })
     );
   }
