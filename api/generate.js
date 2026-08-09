@@ -357,6 +357,27 @@ Each pattern should:
 - be meaningfully different from the other 3 patterns
 - avoid overstating ability, identity, or certainty
 
+PAIRWISE DISTINCTNESS CHECK — REQUIRED:
+Before finalizing the 4 patterns, compare each pattern against every other pattern.
+
+Ask silently:
+- Are these two patterns mostly supported by the same answers?
+- Are they describing the same underlying preference using different words?
+- Would a user reasonably say, "These are basically the same thing"?
+
+If YES, keep the stronger or more evidence-rich pattern and replace the weaker one with a genuinely different recurring signal.
+
+Do not split one strong theme into multiple cards just to reach four.
+
+Whenever the evidence supports it, aim for the four patterns to illuminate different dimensions, such as:
+- what kinds of problems catch the user's attention
+- what activities create flow or energy
+- how they prefer to contribute
+- what kind of impact, meaning, or judgment matters
+- how they prefer to structure the work
+
+Do not force artificial diversity when the evidence truly converges, but never create near-duplicate patterns merely to fill the required four slots.
+
 Use observational language such as:
 - "Your answers suggest..."
 - "A recurring signal is..."
@@ -430,14 +451,61 @@ Prefer language such as:
 
 The 30-day plan is the ONLY place in the report where the user is given experiments or actions.
 
-Return exactly 4 weekly actions.
+Return exactly 4 weekly actions with this progression:
 
-The month should help the user gather evidence about the 3 hypotheses through a useful mix of:
-- trying a small piece of the work
-- observing or reverse-engineering the work
-- comparing real-world role descriptions or public examples
-- building a tiny private prototype, analysis, map, synthesis, draft, or framework
-- reflecting on curiosity, energy, resistance, boredom, and sustainability
+WEEK 1 — NOTICE
+Start with low-pressure observation, not homework.
+The user should notice what naturally catches their attention before being asked to produce a substantial artifact.
+
+Good Week 1 actions include:
+- collecting 3 small examples of systems, information, interactions, or work moments that feel unusually interesting, frustrating, satisfying, or elegant
+- keeping brief notes on moments of curiosity, friction, energy, resistance, or fascination
+- noticing which kinds of problems they instinctively want to understand, improve, organize, explain, or redesign
+
+Week 1 should NOT require:
+- a multi-page teardown
+- a polished deliverable
+- a formal audit
+- a portfolio-quality artifact
+- hours of structured research
+- committing to one hypothesis too early
+
+The goal of Week 1 is simply to create a small evidence trail about what the user's attention moves toward.
+
+WEEK 2 — MAKE
+Have the user try a small piece of work connected to one or more hypotheses.
+
+The action should:
+- be concrete and solo-first
+- usually take about 30–90 minutes
+- produce a small private artifact such as a 1-page guide, map, synthesis, outline, prototype, taxonomy, comparison, draft, or redesign
+- help the user notice how doing the work actually feels
+
+WEEK 3 — LOOK OUTWARD
+Have the user inspect the real-world version of the work.
+
+Good Week 3 actions include:
+- browsing several job descriptions
+- comparing public examples of deliverables
+- reviewing public portfolios or case studies
+- observing how a role is described across different organizations
+- looking for hidden requirements such as meetings, presentation load, client exposure, schedule demands, or credential expectations
+
+The purpose is reality-testing, not applying.
+
+WEEK 4 — COMPARE
+Have the user compare what they noticed across Weeks 1–3.
+
+The action should help them reflect on:
+- curiosity
+- energy
+- resistance
+- boredom
+- sustainability
+- desire to continue
+- whether the actual work matched the imagined appeal
+
+Week 4 should synthesize evidence, not force a final career decision or ranking unless the user naturally wants to do so.
 
 SOLO-FIRST:
 Every required action must be possible to complete independently.
@@ -460,8 +528,6 @@ Do not require:
 If public sharing, networking, or feedback could be useful, it must remain optional and must not be necessary to complete the action.
 
 ACCESSIBILITY:
-Prefer actions that take roughly 30–90 minutes or, at most, a few focused hours.
-
 Use materials, examples, tools, and information an ordinary person can reasonably access.
 
 Do not make the user prove competence or produce professional-quality work.
@@ -480,10 +546,10 @@ Keep recommendations broad, accessible, non-partisan, and directly connected to 
 PLAN QUALITY:
 - Across the 4 weeks, meaningfully explore more than one hypothesis.
 - Avoid four versions of the same task.
-- Do not simply repeat the examples already used to explain a hypothesis.
+- Do not simply repeat the same artifact format every week.
 - Each action_item should be concrete enough to begin without further instructions, while leaving enough ambiguity for the user to adapt it to their own interests.
 - Each rationale should explain what evidence the action could reveal, not why the user "should" do it.
-- Week 4 should synthesize what the user noticed rather than force a final career decision.
+- The month should feel like a sequence of curiosity experiments, not a miniature course or job-search bootcamp.
 
 The goal is not to choose a career in 30 days. The goal is to know more than the user knows now.
 
@@ -547,7 +613,7 @@ Return ONLY a valid JSON object matching this exact schema:
           },
           "description": {
             "type": "string",
-            "description": "1-2 concise sentences explaining the recurring pattern based on converging evidence from the user's answers."
+            "description": "1-2 concise sentences explaining a distinct recurring pattern based on converging evidence from the user's answers. Avoid overlap with the other three patterns."
           }
         }
       }
@@ -664,7 +730,7 @@ Return ONLY a valid JSON object matching this exact schema:
           },
           "action_item": {
             "type": "string",
-            "description": "One concrete, solo-first, accessible exploratory action for this week."
+            "description": "One concrete, solo-first, accessible exploratory action following the required Week 1 Notice, Week 2 Make, Week 3 Look Outward, Week 4 Compare progression."
           },
           "rationale": {
             "type": "string",
