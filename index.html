@@ -286,7 +286,25 @@
         ></ul>
 
       </section>
+<!-- People in This Neighbourhood -->
+<section class="space-y-4">
 
+  <div class="space-y-1">
+    <h3 class="font-serif text-2xl text-stone-900">
+      People in This Neighbourhood
+    </h3>
+
+    <p class="text-sm text-stone-500">
+      A few kinds of work worth looking at from the outside. No networking assignment required.
+    </p>
+  </div>
+
+  <div
+    id="networking-container"
+    class="space-y-3"
+  ></div>
+
+</section>
       <!-- 30 Day Plan -->
       <section class="space-y-4">
 
@@ -805,7 +823,28 @@
         (res.dealbreakers || [])
           .map(d => `<li>${d}</li>`)
           .join('');
+      
+// People in This Neighbourhood
+document.getElementById('networking-container').innerHTML =
+  (res.networking_compass || []).map(item => `
+    <div class="bg-white p-5 rounded-xl border border-stone-200 space-y-2">
 
+      <h4 class="font-serif text-lg text-stone-900">
+        ${item.role_family}
+      </h4>
+
+      <p class="text-sm text-stone-600">
+        ${item.why_look}
+      </p>
+
+      <p class="text-xs text-sage-700">
+        <span class="font-semibold">Worth noticing:</span>
+        ${item.what_to_notice}
+      </p>
+
+    </div>
+  `).join('');
+      
       // 30 Day Plan
       document.getElementById('plan-container').innerHTML =
         (res.thirty_day_plan || []).map(item => `
