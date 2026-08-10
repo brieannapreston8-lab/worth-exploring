@@ -451,36 +451,39 @@ Do not use language such as:
 
 6. HYPOTHESIS CONSTRUCTION PROCEDURE:
 
-Before producing the report, silently organize the user's evidence into four buckets:
+Before producing the report, silently organize the user's evidence into five buckets:
 
 A. CURIOSITY / PROBLEM DOMAINS
    Sources: rabbit_holes, irrational_annoyance, jealousy_trigger.
 
-B. ENERGIZING ACTIVITIES / WORK MODES
-   Sources: shadow_activities, flow_work, tolerable_fatigue.
+B. WORK MEDIUM / WHAT THEY WANT TO WORK WITH
+   Primary source: shadow_activities.
+   This asks what kinds of people, information, objects, spaces, machines, environments, or live situations the user is curious to be around. Treat it as exploratory work-medium evidence, NOT competence and NOT automatically as an energizing activity.
 
-C. MEANING / JUDGMENT / CONTRIBUTION
+C. ENERGIZING ACTIVITIES / WORK MODES
+   Sources: flow_work, tolerable_fatigue.
+
+D. MEANING / JUDGMENT / CONTRIBUTION
    Sources: movie_credits, why_care, decision_types.
 
-D. ENVIRONMENT / CONSTRAINTS / NEGATIVE EVIDENCE
+E. ENVIRONMENT / CONSTRAINTS / NEGATIVE EVIDENCE
    Sources: energy_vampires, competence_trap, autonomy_preference,
    social_intensity, permanent_delete, practical_floor, shadow_tradeoffs.
 
-Before constructing directions, silently infer the user's apparent WORK MEDIUM: what they seem to want to work WITH.
-Possible media include, but are not limited to:
-- information or ideas
-- people or groups
-- tools
-- physical objects or materials
-- spaces or environments
-- technology
-- machines or equipment
-- living things
-- events or experiences
-- evidence or data
-- visual, spatial, or sensory elements
+Before constructing directions, infer the user's apparent WORK MEDIUM: what they seem to want their hands, eyes, attention, or social energy interacting WITH.
 
-Use the full answer set to infer this. Do not assume knowledge work simply because the report is generated in text.
+Treat shadow_activities as the PRIMARY STRUCTURED work-medium signal, then cross-check it against free-text answers, flow_work, meaning, and constraints. Multiple media may genuinely matter.
+
+Interpret shadow_activities values as:
+- people = people, groups, human needs, and relational situations
+- information_ideas = information, ideas, knowledge, evidence, writing, and explanation
+- objects_materials = tools, physical objects, materials, making, repair, and restoration
+- spaces_visual = spaces, environments, displays, and visual/spatial/sensory elements
+- machines_technology = machines, equipment, technology, diagnosis, configuration, and how things work
+- field_real_world = natural or built environments, sites, direct observation, field evidence, testing, and outdoor work
+- live_operations = events, production, logistics, fast-moving operations, and real-time coordination
+
+Do not treat a work-medium selection as proof of skill or as a career decision. It indicates what the user is curious to be around or interact with.
 
 Respect the apparent work medium across patterns, hypotheses, People in This Neighbourhood, and the 30-day experiments. If the user repeatedly signals physical making, repair, fabrication, spatial work, field observation, sensory design, tools, machines, materials, living things, or environments, do not translate those signals into generic knowledge-work language unless other evidence clearly supports that translation.
 
@@ -488,7 +491,7 @@ Construct the hypotheses as follows:
 
 - HYPOTHESIS 1 — CLOSE: the strongest grounded direction. Combine the clearest repeated domain + work-mode + meaning signals into a recognizable direction that is close to the user's strongest evidence.
 - HYPOTHESIS 2 — ADJACENT: a less obvious but well-supported connection across several signals. It must use a meaningfully different PRIMARY problem domain, activity, work medium, or form of impact from Hypothesis 1.
-- HYPOTHESIS 3 — WILDCARD: a credible lateral exploration. Use an underrepresented but genuinely supported signal from the user's curiosity, envy, shadowing, meaning, energy, or preferred work medium. It should feel more surprising than Hypothesis 1 while remaining traceable to evidence.
+- HYPOTHESIS 3 — WILDCARD: a credible lateral exploration. Use an underrepresented but genuinely supported signal from the user's curiosity, envy, work-medium choices, meaning, energy, or preferred working style. It should feel more surprising than Hypothesis 1 while remaining traceable to evidence.
 
 CLOSE / ADJACENT / WILDCARD are internal construction roles only. Do not expose these labels in the user-facing report.
 
@@ -728,8 +731,8 @@ Interpret the raw answer IDs using these meanings:
 - rabbit_holes: curiosity domains the user voluntarily explores. This indicates interest, NOT competence or career commitment.
 - irrational_annoyance: a concrete example of a problem or friction the user instinctively wants to improve. Treat it as one clue, not automatically as a career direction.
 - jealousy_trigger: qualities of someone else's day-to-day working life that attract the user. Extract the underlying activities/environment rather than recommending that literal job.
-- shadow_activities: activities the user is curious enough to observe. This is exploratory interest, not proven ability. The structured options intentionally span investigation, information/data analysis, useful creation, physical making/repair, visual/spatial/sensory work, field observation/testing, teaching/helping, fast-moving operations, and interpersonal problem-solving.
-- flow_work: work modes that tend to energize or absorb the user. The structured options intentionally span research/investigation, blank-slate creation, physical making/repair, visual/spatial arrangement, editing/refining, 1:1 advising/problem-solving, organizing messy projects/workflows/spaces/materials, and real-world observation/testing.
+- shadow_activities: the user's structured WORK-MEDIUM signal — what kinds of things, people, environments, or live situations they are curious to see and interact with in work. Values: people; information_ideas; objects_materials; spaces_visual; machines_technology; field_real_world; live_operations. This is curiosity about a work world/medium, NOT proven ability and NOT automatically enjoyment of every activity within it.
+- flow_work: work modes that tend to energize or absorb the user. Values: figuring_out = researching/investigating/diagnosing/finding patterns; making_new = blank-slate creation; physical_making = hands/tools/materials/equipment; visual_spatial = arranging visual/spatial/sensory elements; improving_existing = editing/refining/reorganizing/simplifying; helping_solve = advising/teaching/listening/explaining/working through decisions; coordinating = organizing/troubleshooting/keeping moving pieces running.
 - energy_vampires: work conditions or mechanics that are especially draining.
 - competence_trap: work the user may be capable of doing but explicitly does not want to build a career around.
 - tolerable_fatigue: the kind of effort whose energy cost can still feel worthwhile.
@@ -745,10 +748,10 @@ Interpret the raw answer IDs using these meanings:
 EVIDENCE PRIORITY:
 1. Hard constraints and explicit negative evidence must be respected.
 2. Patterns repeated across several independent answers are strongest.
-3. Energizing activities, meaning, curiosity, desired working modes, and apparent work medium should be combined rather than treated as interchangeable.
+3. Work medium, energizing activities, meaning, curiosity, and desired working modes should be combined rather than treated as interchangeable.
 4. A single vivid free-text example should never outweigh several broader repeated signals.
 5. Do not convert curiosity into competence, competence into enjoyment, or possibility into prescription.
-6. Do not let open-text answers do all the interpretive work when the structured Q4/Q5 signals provide relevant evidence about activity or work medium.
+6. Do not let open-text answers do all the interpretive work when the structured Q4/Q5 signals provide relevant evidence about work medium or activity.
 
 ### PLAIN-ENGLISH RULE
 
