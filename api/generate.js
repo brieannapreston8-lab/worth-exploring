@@ -568,6 +568,32 @@ CLOSE / ADJACENT / WILDCARD are internal construction roles only. Do not expose 
 
 The three hypotheses should not simply be three versions of the same underlying intersection. Compare them pairwise and ensure each tests a meaningfully different combination of signals.
 
+HYPOTHESIS EXPERIENCE DISTINCTNESS CHECK — REQUIRED:
+After drafting all three hypotheses, compare each pair as if they were REAL WORKDAYS rather than titles.
+
+For each pair, silently identify:
+- PRIMARY WORK MEDIUM: what the person is mainly interacting with — information, people, digital tools, physical objects/materials, spaces/environments, machines/equipment, evidence/data, live events/operations, or another supported medium
+- CORE ACTIVITY: what they are mainly doing — investigating, creating, editing/refining, advising, repairing/making, coordinating, evaluating, teaching, organizing, or another supported activity
+- PROBLEM CONTEXT: what kind of problem or subject matter the work is acting on
+- CONTRIBUTION / OUTPUT: what changes or gets produced because the work happened
+
+Then ask:
+"If these two hypotheses became real workdays, would the person actually be doing meaningfully different things?"
+
+Different X + Y labels are NOT enough. Two hypotheses are too similar when their PRIMARY WORK MEDIUM + CORE ACTIVITY + CONTRIBUTION/OUTPUT are substantially the same, even if the titles use different domains or conceptual language.
+
+If two hypotheses are too similar:
+- keep the stronger, more evidence-rich hypothesis
+- rebuild the weaker hypothesis using a different supported evidence cluster, work medium, core activity, problem context, or contribution/output
+- prefer a genuinely adjacent or lateral manifestation over slicing the same kind of work into narrower semantic categories
+
+Example of a FAILED distinction:
+- Information Curation + Human Behaviour
+- Editorial Assessment + Process Standardization
+If both imply a workday dominated by reading information, evaluating/editing it, organizing it, and producing cleaner structured information, they are functionally overlapping even though the titles differ.
+
+Do NOT force arbitrary diversity when the evidence genuinely converges. If one form of work strongly dominates the answers, let Hypothesis 1 capture that convergence. Hypotheses 2 and 3 should then explore other supported ways the underlying signals could manifest in meaningfully different workdays rather than creating three finely sliced versions of the same work.
+
 WHAT'S WORTH EXPLORING — ANALYTICAL TONE:
 This should be the most analytical and clinically precise section of the report, while remaining explicitly exploratory rather than diagnostic or psychometric.
 
@@ -609,6 +635,7 @@ Before finalizing, silently perform an EVIDENCE COVERAGE CHECK:
 - Which important curiosity, activity, meaning, envy, or work-medium signals have not appeared anywhere?
 - Is one vivid free-text example dominating the report?
 - Are the three hypotheses testing genuinely different intersections?
+- Would the three hypotheses produce meaningfully different real workdays, not merely differently named versions of similar work?
 - Do the three hypotheses include CLOSE, ADJACENT, and WILDCARD levels of distance without becoming unsupported?
 - Are constraints filtering possibilities rather than determining the entire career direction?
 - Is the work medium being preserved, or has a physical/spatial/field/material preference been translated into knowledge-work terminology without evidence?
