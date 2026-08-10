@@ -164,11 +164,11 @@ Keep the six report sections meaningfully distinct. Do not let them collapse int
 3. WHERE THE BATTERY MIGHT DIE = WHAT TO LEAVE BEHIND
    Drains, competence traps, incompatible conditions, and recurring work mechanics that appear costly or unsustainable.
 
-4. WHAT'S WORTH EXPLORING = WHAT TO EXPLORE
-   Exactly 3 searchable fields, functions, disciplines, crafts, trades, or worlds of work. These are directional hypotheses, NOT job titles or people. Describe the direction and why it appeared. Do NOT put tasks, exercises, experiments, or next steps inside this section.
+4. WHAT'S WORTH EXPLORING = HYPOTHESES TO TEST
+   Exactly 3 evidence-derived intersections. Each hypothesis pairs two real, understandable work functions, media, problem domains, disciplines, crafts, or contribution modes using the format "X + Y". The two component concepts must each be meaningful and grounded in the user's evidence; the combination itself does NOT need to be an established job title or formal field. This is the most analytical, precise, and provisional section of the report. Describe the evidence behind the intersection, what it may suggest, and what remains uncertain. Do NOT put tasks, exercises, experiments, or next steps inside this section.
 
-5. PEOPLE IN THIS NEIGHBOURHOOD = WHERE THIS WORK SHOWS UP IN REAL LIFE
-   Exactly 3 real occupational titles, specializations, practitioner types, or professional search terms that show concrete examples of work related to the directions above. Browsing is enough; contact is optional. These are examples, not recommendations.
+5. PEOPLE IN THIS NEIGHBOURHOOD = WHERE THESE INTERSECTIONS SHOW UP IN REAL LIFE
+   Exactly 3 real occupational titles, specializations, practitioner types, craft/trade titles, or professional search terms that help the user see how one or more of the hypotheses can manifest in actual work. This section must EXPAND the occupational landscape rather than translate the three hypotheses into job-title equivalents. Browsing is enough; contact is optional. These are examples, not recommendations.
 
 6. YOUR NEXT 30 DAYS = HOW TO EXPLORE
    This is the ONLY action layer in the report. Put all experiments, observation tasks, comparison exercises, prototypes, and reflection activities here.
@@ -225,14 +225,14 @@ Do not exaggerate. Do not invent dislikes that are not supported by the answers.
 
 Return exactly 3 real occupational titles, specializations, craft/trade titles, practitioner types, or professional search terms whose work may be useful for the user to look into based on the report.
 
-This is a REAL-WORLD ORIENTATION LAYER, not a list of careers the user should pursue and not a networking assignment.
+This is a REAL-WORLD ORIENTATION AND EXPANSION LAYER, not a list of careers the user should pursue and not a networking assignment.
 
 The goal is to help the user recognize:
-"Ah — this is how some of these directions show up as actual work in the world."
+"Ah — these are some different places where combinations like this actually show up in working life."
 
 For each item provide:
 - role_family: a recognizable occupational title, specialization, craft/trade title, practitioner type, or professional search term
-- why_look: 1 concise sentence explaining why this role is a useful real-world example of the user's broader directions
+- why_look: 1 concise sentence explaining which evidence-derived intersection(s) this role helps make concrete
 - what_to_notice: 1 concise question or feature to investigate when browsing job descriptions, profiles, talks, portfolios, or descriptions of the work
 
 SEARCHABILITY RULE — REQUIRED:
@@ -245,7 +245,28 @@ If the answer is uncertain, use the broader established occupational title rathe
 
 Do NOT manufacture titles by appending words such as Strategist, Consultant, Architect, Specialist, Analyst, Designer, Coordinator, Facilitator, Inspector, Technician, Manager, or similar simply to make the title sound professional. Use those words only when the resulting title is genuinely used for that occupation or specialization.
 
-Collectively, the three roles should illuminate a neighbourhood of work rather than behave like three direct recommendations. They may connect to more than one hypothesis. Do NOT simply turn Hypothesis 1 into Role 1, Hypothesis 2 into Role 2, and Hypothesis 3 into Role 3 by changing the wording into a person-title.
+NEIGHBOURHOOD EXPANSION RULE — REQUIRED:
+People in This Neighbourhood must add NEW occupational information after What's Worth Exploring.
+
+Do NOT simply convert an X + Y hypothesis into the obvious person-title version.
+For example, do not automatically turn:
+- Qualitative Research + Human Support into Qualitative Researcher
+- Information Architecture + Editorial Judgment into Information Architect
+- Building Diagnostics + Field Investigation into Building Diagnostics Inspector
+
+An obvious practitioner counterpart is allowed only when it materially teaches the user something that the hypothesis itself did not already make obvious. Across the three roles, use no more than one obvious direct counterpart when stronger adjacent examples are available.
+
+Each role should ideally open a different door into the neighbourhood by showing one of the following:
+- a specialization inside or adjacent to an intersection
+- a different industry or environment where the same combination appears
+- an established occupation where two or more of the user's hypotheses overlap
+- a less obvious real-world application of the same underlying work functions or media
+
+The three roles do NOT need to map one-to-one to Hypotheses 1, 2, and 3. A role may illuminate more than one hypothesis.
+
+Before finalizing the section, silently ask:
+"Does the occupational neighbourhood feel larger after these three roles than it did after reading the hypotheses?"
+If not, replace the repetitive role(s) with established occupations that add genuinely new orientation.
 
 Examples of established occupational language can span many kinds of work, such as:
 - Furniture Restorer
@@ -470,7 +491,7 @@ E. ENVIRONMENT / CONSTRAINTS / NEGATIVE EVIDENCE
    Sources: energy_vampires, competence_trap, autonomy_preference,
    social_intensity, permanent_delete, practical_floor, shadow_tradeoffs.
 
-Before constructing directions, infer the user's apparent WORK MEDIUM: what they seem to want their hands, eyes, attention, or social energy interacting WITH.
+Before constructing hypotheses, infer the user's apparent WORK MEDIUM: what they seem to want their hands, eyes, attention, or social energy interacting WITH.
 
 Treat shadow_activities as the PRIMARY STRUCTURED work-medium signal, then cross-check it against free-text answers, flow_work, meaning, and constraints. Multiple media may genuinely matter.
 
@@ -487,75 +508,86 @@ Do not treat a work-medium selection as proof of skill or as a career decision. 
 
 Respect the apparent work medium across patterns, hypotheses, People in This Neighbourhood, and the 30-day experiments. If the user repeatedly signals physical making, repair, fabrication, spatial work, field observation, sensory design, tools, machines, materials, living things, or environments, do not translate those signals into generic knowledge-work language unless other evidence clearly supports that translation.
 
-Construct the hypotheses as follows:
+WHAT'S WORTH EXPLORING — INTERSECTION METHOD:
+Construct each hypothesis as the intersection of TWO distinct evidence clusters.
 
-- HYPOTHESIS 1 — CLOSE: the strongest grounded direction. Combine the clearest repeated domain + work-mode + meaning signals into a recognizable direction that is close to the user's strongest evidence.
-- HYPOTHESIS 2 — ADJACENT: a less obvious but well-supported connection across several signals. It must use a meaningfully different PRIMARY problem domain, activity, work medium, or form of impact from Hypothesis 1.
-- HYPOTHESIS 3 — WILDCARD: a credible lateral exploration. Use an underrepresented but genuinely supported signal from the user's curiosity, envy, work-medium choices, meaning, energy, or preferred working style. It should feel more surprising than Hypothesis 1 while remaining traceable to evidence.
+The title must use this form:
+X + Y
+
+Each side of the + must be a real, independently understandable concept drawn from the evidence, such as a:
+- work function
+- work medium
+- problem domain
+- discipline or craft
+- form of contribution
+- type of inquiry or judgment
+
+The combination itself is an exploration hypothesis. It does NOT need to be an established job title, occupation, academic field, or exact search phrase.
+
+The two halves must contribute DIFFERENT information. Do not pair synonyms or near-synonyms merely to sound sophisticated.
+
+GOOD examples of the construction style:
+- Physical Diagnostics + Restoration
+- Spatial Design + Human Behaviour
+- Field Investigation + Building Science
+- Human Support + Institutional Navigation
+- Information Curation + Editorial Judgment
+- Building Infrastructure + Systems Design
+- Archival Research + Cultural Preservation
+
+BAD examples:
+- Research + Investigation
+- Spatial Design + Environmental Design
+- Strategy + Strategic Consulting
+- Systems + Systems Thinking
+
+NAMING RULES:
+- Each side should normally be 1–3 words.
+- Both sides should be understandable on their own.
+- Use real functional/domain language, not invented person-titles.
+- Do not manufacture sophistication through vague words such as strategy, consulting, systems, architecture, analyst, or innovation. These words are allowed only when they are genuinely precise and supported.
+- Do not require the full X + Y phrase to be searchable. The COMPONENTS should be real; the intersection is the hypothesis.
+- Do not use occupational person-titles such as Researcher, Consultant, Technician, Specialist, Manager, Designer, or Inspector as a way to force the intersection into a job title.
+
+DISTANCE ACROSS THE THREE HYPOTHESES:
+- HYPOTHESIS 1 — CLOSE: combine the two strongest independent evidence clusters. This should be the most grounded intersection.
+- HYPOTHESIS 2 — ADJACENT: connect two well-supported signals that are less obviously paired. It should reveal a different way the user's evidence could combine.
+- HYPOTHESIS 3 — WILDCARD: combine one strong recurring signal with a less represented but still supported work medium, domain, contribution mode, or curiosity signal. It should expand the user's view without becoming random.
 
 CLOSE / ADJACENT / WILDCARD are internal construction roles only. Do not expose these labels in the user-facing report.
 
-Working-style requirements such as remote work, autonomy, low social intensity, or structure may repeat across hypotheses because they describe HOW the person may prefer to work. Do not mistake these shared environment preferences for career directions.
+The three hypotheses should not simply be three versions of the same underlying intersection. Compare them pairwise and ensure each tests a meaningfully different combination of signals.
 
-Do not produce three hypotheses from the same role family merely because they all satisfy the user's environment preferences.
+WHAT'S WORTH EXPLORING — ANALYTICAL TONE:
+This should be the most analytical and clinically precise section of the report, while remaining explicitly exploratory rather than diagnostic or psychometric.
 
-DIRECTION VS. OCCUPATION SEPARATION — REQUIRED:
-"What's Worth Exploring" and "People in This Neighbourhood" perform different jobs.
+Do NOT use motivational or recommendation language such as:
+- "This exciting field..."
+- "You would be great at..."
+- "This is a strong fit..."
+- "You should pursue..."
 
-WHAT'S WORTH EXPLORING names the FIELD / FUNCTION / DISCIPLINE / CRAFT / TRADE / WORLD OF WORK.
-PEOPLE IN THIS NEIGHBOURHOOD names ACTUAL OCCUPATIONS / SPECIALIZATIONS / PRACTITIONER TYPES where that work appears.
+For each why_it_appeared paragraph, follow this reasoning sequence without adding visible labels:
+1. EVIDENCE — identify the recurring signals that are intersecting.
+2. INTERPRETATION — explain why their overlap creates a hypothesis worth investigating.
+3. UNCERTAINTY — identify one meaningful thing the current answers do NOT establish yet.
 
-A hypothesis title should answer:
-"What area of work might be worth learning more about?"
+The uncertainty is important. It should make the hypothesis testable rather than turn it into a conclusion.
 
-It should NOT answer:
-"What job should this person become?"
+Good uncertainty language includes:
+- "What remains unclear is whether..."
+- "The open question is whether..."
+- "The current answers do not yet show whether..."
+- "It would still be useful to learn whether..."
 
-Prefer field/function titles such as:
-- Furniture Restoration
-- Equipment Repair
-- Exhibit Fabrication
-- Environmental Graphic Design
-- Set Design
-- Architectural Psychology
-- Environmental Site Assessment
-- Restoration Ecology
-- Building Diagnostics
-- Patient Advocacy
-- Higher Education Ombuds / Conflict Resolution
-- Qualitative Research
+The uncertainty should distinguish between plausible explanations of the user's interest, such as:
+- whether they enjoy the activity itself or mainly the subject matter
+- whether they prefer diagnosis or making/repair
+- whether direct human interaction is energizing or merely meaningful
+- whether they enjoy creating from scratch or refining something existing
+- whether the appeal survives the actual administrative, physical, social, or schedule conditions of the work
 
-Avoid person-title constructions in hypotheses such as:
-- Furniture Restorer
-- Equipment Repair Technician
-- Building Diagnostics Inspector
-- Qualitative Research Facilitator
-- Environmental Strategy Consultant
-
-Even when a person-title is real, save it for People in This Neighbourhood. The hypothesis title should name the broader area of work.
-
-DIRECTION NAMING RULE — REQUIRED:
-The title of each hypothesis should open a real search path while remaining broader than a single occupation.
-
-Use recognizable, searchable field, function, craft/trade area, discipline, specialization area, or world-of-work language first. Prefer short noun phrases over bespoke combinations.
-
-Before finalizing each title, silently ask BOTH:
-1. "Could a user search this phrase and find real examples of the field, work, programs, portfolios, industry information, or practitioners?"
-2. "Is this naming an AREA OF WORK rather than inventing a person/job title?"
-
-If either answer is no, simplify the heading and put the nuance in why_it_appeared.
-
-Do not manufacture sophistication by repeatedly using words such as:
-- strategy
-- consulting
-- systems
-- building
-- architecture
-- analyst
-
-These words are allowed when they are genuinely established, precise, and useful for that field. They must not function as default language across unrelated profiles.
-
-Prefer a plain, searchable field/function heading with a nuanced explanatory paragraph over an interesting-sounding but unclear occupational phrase.
+Do not invent an uncertainty solely for symmetry. It must follow naturally from what the current evidence cannot establish.
 
 HYPOTHESIS OUTPUT RULE:
 The hypothesis section describes possibilities only.
@@ -566,7 +598,7 @@ Before finalizing, silently perform an EVIDENCE COVERAGE CHECK:
 - Which positive signals repeated across multiple answers?
 - Which important curiosity, activity, meaning, envy, or work-medium signals have not appeared anywhere?
 - Is one vivid free-text example dominating the report?
-- Are the three hypotheses testing genuinely different possibilities?
+- Are the three hypotheses testing genuinely different intersections?
 - Do the three hypotheses include CLOSE, ADJACENT, and WILDCARD levels of distance without becoming unsupported?
 - Are constraints filtering possibilities rather than determining the entire career direction?
 - Is the work medium being preserved, or has a physical/spatial/field/material preference been translated into knowledge-work terminology without evidence?
@@ -587,8 +619,9 @@ Prefer language such as:
 - "Your answers suggest..."
 - "You appear drawn to..."
 - "A pattern worth testing is..."
-- "This may fit because..."
+- "This may be worth investigating because..."
 - "One possibility is..."
+- "What remains unclear is..."
 
 7. ACTION DESIGN — YOUR NEXT 30 DAYS:
 
@@ -855,11 +888,11 @@ Return ONLY a valid JSON object matching this exact schema:
         "properties": {
           "title": {
             "type": "string",
-            "description": "A concise, recognizable, searchable FIELD / FUNCTION / DISCIPLINE / CRAFT / TRADE AREA / WORLD OF WORK. Do NOT return a person/job title here. Examples: Building Diagnostics, Qualitative Research, Furniture Restoration, Set Design. Nuance belongs in why_it_appeared."
+            "description": "A concise evidence-derived hypothesis in X + Y format. Each side must be a real, independently understandable work function, medium, problem domain, discipline/craft, or contribution mode; the combined phrase does not need to be an established job title. Examples: Physical Diagnostics + Restoration, Spatial Design + Human Behaviour, Human Support + Institutional Navigation."
           },
           "why_it_appeared": {
             "type": "string",
-            "description": "A concise explanation of the converging evidence behind this possibility. No tasks or next steps."
+            "description": "2-3 concise, analytical sentences following evidence -> interpretation -> uncertainty: identify the recurring signals that intersect, explain why the overlap is worth investigating, and state one meaningful thing the current answers do not yet establish. No tasks or next steps."
           },
           "example_work": {
             "type": "array",
@@ -901,7 +934,7 @@ Return ONLY a valid JSON object matching this exact schema:
         "properties": {
           "role_family": {
             "type": "string",
-            "description": "An established or commonly used REAL occupational title, specialization, craft/trade title, practitioner type, or professional search term showing where the broader directions appear in practice. Do not invent a bespoke title."
+            "description": "An established or commonly used REAL occupational title, specialization, craft/trade title, practitioner type, or professional search term that expands the occupational neighbourhood around one or more hypotheses. Do not merely convert a hypothesis into its obvious practitioner title, and do not invent a bespoke title."
           },
           "why_look": {
             "type": "string"
