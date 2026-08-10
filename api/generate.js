@@ -477,9 +477,9 @@ Before producing the report, silently organize the user's evidence into five buc
 A. CURIOSITY / PROBLEM DOMAINS
    Sources: rabbit_holes, irrational_annoyance, jealousy_trigger.
 
-B. WORK MEDIUM / WHAT THEY WANT TO WORK WITH
+B. EXPLORATORY ACTIVITIES / SHADOW CURIOSITY
    Primary source: shadow_activities.
-   This asks what kinds of people, information, objects, spaces, machines, environments, or live situations the user is curious to be around. Treat it as exploratory work-medium evidence, NOT competence and NOT automatically as an energizing activity.
+   This captures kinds of work the user is curious enough to watch up close. Treat it as exploratory interest, NOT competence and NOT automatically as enjoyment.
 
 C. ENERGIZING ACTIVITIES / WORK MODES
    Sources: flow_work, tolerable_fatigue.
@@ -493,20 +493,30 @@ E. ENVIRONMENT / CONSTRAINTS / NEGATIVE EVIDENCE
 
 Before constructing hypotheses, infer the user's apparent WORK MEDIUM: what they seem to want their hands, eyes, attention, or social energy interacting WITH.
 
-Treat shadow_activities as the PRIMARY STRUCTURED work-medium signal, then cross-check it against free-text answers, flow_work, meaning, and constraints. Multiple media may genuinely matter.
+Infer work medium from the FULL answer set rather than treating any one question as definitive. Relevant media may include information/ideas, people, digital tools, physical objects/materials, spaces/environments, machines/equipment, evidence/data, or live events/operations.
+
+The physical_world shadow option and hands_on flow option are especially direct evidence of interest in physical/material/spatial/field work. Other Q4/Q5 selections may still imply media indirectly, but do not force a medium that is not supported elsewhere.
 
 Interpret shadow_activities values as:
-- people = people, groups, human needs, and relational situations
-- information_ideas = information, ideas, knowledge, evidence, writing, and explanation
-- objects_materials = tools, physical objects, materials, making, repair, and restoration
-- spaces_visual = spaces, environments, displays, and visual/spatial/sensory elements
-- machines_technology = machines, equipment, technology, diagnosis, configuration, and how things work
-- field_real_world = natural or built environments, sites, direct observation, field evidence, testing, and outdoor work
-- live_operations = events, production, logistics, fast-moving operations, and real-time coordination
+- investigating = curiosity about complex, unresolved questions and investigative work
+- facilitating = curiosity about live group facilitation, disagreement, and collective decision-making
+- building = curiosity about designing/building digital tools or creative assets
+- analyzing = curiosity about messy data/information and finding patterns or narratives
+- teaching = curiosity about teaching/coaching individuals through transitions
+- operations = curiosity about fast-moving operational/project environments
+- physical_world = curiosity about hands-on work with tools, materials, spaces, or physical environments through building, repair, testing, or shaping
 
-Do not treat a work-medium selection as proof of skill or as a career decision. It indicates what the user is curious to be around or interact with.
+Interpret flow_work values as:
+- research = deep solo research or reading
+- writing = writing, drafting, or building from a blank page
+- editing = editing, polishing, or refining an existing system
+- advising = 1-on-1 advising or problem-solving
+- organizing = organizing chaotic files, budgets, schedules, or similar moving parts into order
+- hands_on = hands-on making, fixing, testing, or arranging something physical
 
-Respect the apparent work medium across patterns, hypotheses, People in This Neighbourhood, and the 30-day experiments. If the user repeatedly signals physical making, repair, fabrication, spatial work, field observation, sensory design, tools, machines, materials, living things, or environments, do not translate those signals into generic knowledge-work language unless other evidence clearly supports that translation.
+Do not treat a Q4/Q5 selection as proof of skill or as a career decision. Q4 shows curiosity about seeing the work; Q5 is stronger evidence about what may create absorption or flow.
+
+Respect the apparent work medium across patterns, hypotheses, People in This Neighbourhood, and the 30-day experiments. If the user signals physical making, repair, fabrication, spatial work, field observation, sensory design, tools, machines, materials, living things, or environments, do not translate those signals into generic knowledge-work language unless other evidence clearly supports that translation.
 
 WHAT'S WORTH EXPLORING — INTERSECTION METHOD:
 Construct each hypothesis as the intersection of TWO distinct evidence clusters.
@@ -764,8 +774,8 @@ Interpret the raw answer IDs using these meanings:
 - rabbit_holes: curiosity domains the user voluntarily explores. This indicates interest, NOT competence or career commitment.
 - irrational_annoyance: a concrete example of a problem or friction the user instinctively wants to improve. Treat it as one clue, not automatically as a career direction.
 - jealousy_trigger: qualities of someone else's day-to-day working life that attract the user. Extract the underlying activities/environment rather than recommending that literal job.
-- shadow_activities: the user's structured WORK-MEDIUM signal — what kinds of things, people, environments, or live situations they are curious to see and interact with in work. Values: people; information_ideas; objects_materials; spaces_visual; machines_technology; field_real_world; live_operations. This is curiosity about a work world/medium, NOT proven ability and NOT automatically enjoyment of every activity within it.
-- flow_work: work modes that tend to energize or absorb the user. Values: figuring_out = researching/investigating/diagnosing/finding patterns; making_new = blank-slate creation; physical_making = hands/tools/materials/equipment; visual_spatial = arranging visual/spatial/sensory elements; improving_existing = editing/refining/reorganizing/simplifying; helping_solve = advising/teaching/listening/explaining/working through decisions; coordinating = organizing/troubleshooting/keeping moving pieces running.
+- shadow_activities: activities the user is curious enough to observe. Values: investigating = complex unresolved inquiry; facilitating = high-stakes group facilitation/alignment; building = digital tool or creative asset creation; analyzing = messy data/information pattern-finding; teaching = teaching/coaching through transitions; operations = fast-moving project operations; physical_world = hands-on work with tools, materials, spaces, or physical environments through building, repair, testing, or shaping. This is exploratory interest, NOT proven ability.
+- flow_work: work modes that tend to energize or absorb the user. Values: research = deep solo research/reading; writing = writing/drafting/building from a blank page; editing = editing/polishing/refining an existing system; advising = 1-on-1 advising/problem-solving; organizing = bringing chaotic files, budgets, schedules, or similar moving parts into order; hands_on = hands-on making/fixing/testing/arranging something physical.
 - energy_vampires: work conditions or mechanics that are especially draining.
 - competence_trap: work the user may be capable of doing but explicitly does not want to build a career around.
 - tolerable_fatigue: the kind of effort whose energy cost can still feel worthwhile.
@@ -784,7 +794,7 @@ EVIDENCE PRIORITY:
 3. Work medium, energizing activities, meaning, curiosity, and desired working modes should be combined rather than treated as interchangeable.
 4. A single vivid free-text example should never outweigh several broader repeated signals.
 5. Do not convert curiosity into competence, competence into enjoyment, or possibility into prescription.
-6. Do not let open-text answers do all the interpretive work when the structured Q4/Q5 signals provide relevant evidence about work medium or activity.
+6. Do not let open-text answers do all the interpretive work when the structured Q4/Q5 signals provide relevant evidence about activity or work medium.
 
 ### PLAIN-ENGLISH RULE
 
