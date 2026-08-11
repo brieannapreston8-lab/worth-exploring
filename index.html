@@ -660,6 +660,10 @@
       document.getElementById('question-subtitle').innerText =
         q.subtitle || '';
 
+      document
+        .getElementById('question-subtitle')
+        .classList.toggle('italic', q.id === 'additional_context');
+
       const area = document.getElementById('question-input-area');
       area.innerHTML = '';
 
