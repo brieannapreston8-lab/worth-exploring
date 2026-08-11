@@ -114,12 +114,31 @@
             <li>API request storage is disabled for this Worth Exploring Gemini project.</li>
             <li>Worth Exploring does not save your answers or generated report to its own database.</li>
             <li>Please avoid entering confidential or highly sensitive information.</li>
+            <li>Worth Exploring is for adults 18 and over.</li>
             <li>The results are hypotheses, not diagnoses or instructions. They may be useful, surprising, incomplete, or wrong.</li>
           </ul>
         </div>
 
         <p class="text-sm font-semibold text-sage-700">
           Keep what makes you curious. Question what doesn’t. Follow what feels worth it.
+        </p>
+      </div>
+
+      <div class="space-y-2">
+        <label class="flex items-start gap-3 text-sm text-stone-600 cursor-pointer">
+          <input
+            id="age-confirmation"
+            type="checkbox"
+            class="mt-0.5 w-4 h-4 accent-sage-600"
+          >
+          <span>I confirm I am 18 or older.</span>
+        </label>
+
+        <p
+          id="age-error"
+          class="hidden text-sm text-stone-500 italic"
+        >
+          Worth Exploring is currently for adults 18 and over.
         </p>
       </div>
 
@@ -634,6 +653,15 @@
     let answers = {};
 
     function startAssessment() {
+      const ageConfirmation = document.getElementById('age-confirmation');
+      const ageError = document.getElementById('age-error');
+
+      if (!ageConfirmation.checked) {
+        ageError.classList.remove('hidden');
+        return;
+      }
+
+      ageError.classList.add('hidden');
       document.getElementById('view-home').classList.add('hidden');
       document.getElementById('view-assessment').classList.remove('hidden');
       renderQuestion();
