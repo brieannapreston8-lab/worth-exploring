@@ -1,0 +1,148 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "worth-exploring-profile-v1",
+  "title": "Worth Exploring Profile Handoff",
+  "description": "Versioned data contract for a future Worth Exploring to Worth Applying handoff. This schema documents the signals Worth Exploring already collects and the distinction between user-stated evidence and AI-inferred report content. Worth Exploring does not currently persist individual user profiles.",
+  "type": "object",
+  "required": [
+    "schema_version",
+    "questionnaire_version",
+    "user_stated",
+    "ai_inferred"
+  ],
+  "properties": {
+    "schema_version": {
+      "const": "worth-exploring-profile-v1"
+    },
+    "questionnaire_version": {
+      "type": "string",
+      "description": "Identifier for the Worth Exploring questionnaire version that produced the answers."
+    },
+    "generated_at": {
+      "type": "string",
+      "format": "date-time"
+    },
+    "user_stated": {
+      "type": "object",
+      "description": "Evidence supplied directly by the user. These values must never be silently reclassified as competence, ability, validated fit, or permanent traits.",
+      "required": [
+        "raw_answers",
+        "structured_signals"
+      ],
+      "properties": {
+        "raw_answers": {
+          "type": "object",
+          "required": [
+            "rabbit_holes",
+            "irrational_annoyance",
+            "jealousy_trigger",
+            "shadow_activities",
+            "flow_work",
+            "energy_vampires",
+            "competence_trap",
+            "tolerable_fatigue",
+            "autonomy_preference",
+            "social_intensity",
+            "movie_credits",
+            "why_care",
+            "permanent_delete",
+            "decision_types",
+            "practical_floor",
+            "shadow_tradeoffs"
+          ],
+          "properties": {
+            "rabbit_holes": { "type": "array", "items": { "type": "string" } },
+            "irrational_annoyance": { "type": "string" },
+            "jealousy_trigger": { "type": "string" },
+            "shadow_activities": { "type": "array", "items": { "type": "string" } },
+            "flow_work": { "type": "array", "items": { "type": "string" } },
+            "energy_vampires": { "type": "array", "items": { "type": "string" } },
+            "competence_trap": { "type": "string" },
+            "tolerable_fatigue": { "type": "string" },
+            "autonomy_preference": { "type": ["string", "number"] },
+            "social_intensity": { "type": ["string", "number"] },
+            "movie_credits": { "type": "string" },
+            "why_care": { "type": "string" },
+            "permanent_delete": { "type": "string" },
+            "decision_types": { "type": "array", "items": { "type": "string" } },
+            "practical_floor": { "type": "string" },
+            "shadow_tradeoffs": { "type": "array", "items": { "type": "string" } }
+          },
+          "additionalProperties": true
+        },
+        "structured_signals": {
+          "type": "object",
+          "description": "Stable downstream aliases for high-value user-stated signals. These are reorganizations of raw answers, not new AI conclusions.",
+          "properties": {
+            "curiosity_domains": { "type": "array", "items": { "type": "string" } },
+            "exploratory_activities": { "type": "array", "items": { "type": "string" } },
+            "energizing_activities": { "type": "array", "items": { "type": "string" } },
+            "energy_drains": { "type": "array", "items": { "type": "string" } },
+            "competence_trap": { "type": "string" },
+            "satisfying_effort": { "type": "string" },
+            "autonomy_preference": { "type": ["string", "number"] },
+            "social_intensity": { "type": ["string", "number"] },
+            "contribution_style": { "type": "string" },
+            "meaning_source": { "type": "string" },
+            "wants_less_of": { "type": "string" },
+            "preferred_decision_types": { "type": "array", "items": { "type": "string" } },
+            "current_non_negotiable": { "type": "string" },
+            "tolerated_tradeoffs": { "type": "array", "items": { "type": "string" } }
+          },
+          "additionalProperties": true
+        }
+      },
+      "additionalProperties": true
+    },
+    "ai_inferred": {
+      "type": "object",
+      "description": "AI-generated interpretation. These fields remain hypotheses until a user tests, confirms, rejects, or revises them.",
+      "required": [
+        "patterns",
+        "tensions",
+        "battery_drains",
+        "exploration_hypotheses",
+        "neighbourhood_roles",
+        "thirty_day_plan"
+      ],
+      "properties": {
+        "patterns": { "type": "array" },
+        "tensions": { "type": "array" },
+        "battery_drains": { "type": "array" },
+        "exploration_hypotheses": { "type": "array" },
+        "neighbourhood_roles": { "type": "array" },
+        "thirty_day_plan": { "type": "array" }
+      },
+      "additionalProperties": true
+    },
+    "user_tested": {
+      "type": "array",
+      "description": "Reserved for future real-world experiment evidence. Empty or absent in the current MVP."
+    },
+    "user_confirmed": {
+      "type": "array",
+      "description": "Reserved for future signals explicitly confirmed by the user. Empty or absent in the current MVP."
+    },
+    "user_rejected": {
+      "type": "array",
+      "description": "Reserved for future AI hypotheses or signals explicitly rejected by the user. Empty or absent in the current MVP."
+    }
+  },
+  "additionalProperties": true,
+  "x-worthit-principles": {
+    "provenance_order": [
+      "USER SAID",
+      "AI INFERRED",
+      "USER TESTED",
+      "USER CONFIRMED OR REJECTED"
+    ],
+    "do_not_equate": [
+      "curiosity with competence",
+      "competence with enjoyment",
+      "low social preference with inability to work with people",
+      "an exploration hypothesis with career fit",
+      "a current practical constraint with a permanent preference"
+    ],
+    "persistence": "The current Worth Exploring MVP does not save individual profiles. This file preserves the handoff contract for future opt-in persistence, export, or direct Worth Applying integration."
+  }
+}
