@@ -95,7 +95,7 @@
         </div>
 
         <p class="text-sm text-stone-600 leading-relaxed">
-          Worth Exploring won’t tell you what you <em>should</em> do. You’ll answer 16 questions about what catches your attention, what gives or drains energy, how you like to work, and what matters in your life.
+          Worth Exploring won’t tell you what you <em>should</em> do. You’ll move through a short set of questions about what catches your attention, what gives or drains energy, how you like to work, and what matters in your life.
         </p>
 
         <p class="text-sm text-stone-600 leading-relaxed">
@@ -145,7 +145,7 @@
           </span>
 
           <span id="question-number">
-            Question 1 of 16
+            Question 1 of 18
           </span>
         </div>
 
@@ -524,6 +524,23 @@
       },
 
       {
+        id: "interaction_style",
+        phase: "Environment & Style",
+        title: "When you are working with other people, which kinds of interaction tend to suit you best?",
+        subtitle: "Select up to 2.",
+        type: "multi",
+        max: 2,
+        options: [
+          { label: "Focused 1:1 conversations or collaboration", value: "one_to_one" },
+          { label: "Working closely with a small, familiar team", value: "small_team" },
+          { label: "Group discussion, brainstorming, or workshops", value: "group_collaboration" },
+          { label: "Teaching, presenting, or facilitating for a group", value: "group_facilitation" },
+          { label: "Mostly asynchronous collaboration — writing, comments, shared documents", value: "async_collaboration" },
+          { label: "Mostly solo work with occasional check-ins", value: "solo_checkins" }
+        ]
+      },
+
+      {
         id: "movie_credits",
         phase: "Environment & Style",
         title: "Imagine the credits rolling on a project you’re proud of. Which role would feel most like yours?",
@@ -599,6 +616,16 @@
           { label: "Income Shadow: Lower ceiling on wealth, as long as daily work aligns with my sanity.", value: "income" },
           { label: "Routine Shadow: Predictable work, as long as evenings/weekends belong 100% to my life.", value: "routine" }
         ]
+      },
+
+      {
+        id: "additional_context",
+        phase: "One Last Thing",
+        title: "Is there something important about how you work that these questions didn’t quite capture?",
+        subtitle: "Optional. A sentence or two is plenty.",
+        type: "text",
+        optional: true,
+        placeholder: "Anything you want the report to keep in mind."
       }
     ];
 
@@ -748,7 +775,7 @@
               answer !== null &&
               answer !== '';
 
-      if (!hasAnswer) {
+      if (!q.optional && !hasAnswer) {
         document
           .getElementById('answer-error')
           .classList.remove('hidden');
