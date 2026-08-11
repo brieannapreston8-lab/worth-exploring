@@ -613,7 +613,10 @@
     function renderQuestion() {
       const q = QUESTIONS[currentIdx];
 
-      document.getElementById('answer-error').classList.add('hidden');
+      const answerError = document.getElementById('answer-error');
+      answerError.innerText = 'Add an answer before continuing.';
+      answerError.classList.add('hidden');
+      document.getElementById('next-btn').innerText = 'Next';
 
       document.getElementById('question-phase').innerText = q.phase;
 
@@ -794,14 +797,9 @@
         });
 
         if (!res.ok) {
-
-          const errorData =
-            await res.json().catch(() => ({}));
-
-          throw new Error(
-            errorData.error ||
-            'Failed to generate results.'
-          );
+          const error = new Error('generation_failed');
+          error.status = res.status;
+          throw error;
         }
 
         const output = await res.json();
@@ -810,11 +808,6 @@
 
       } catch (err) {
 
-        alert(
-          'Error analyzing responses: ' +
-          err.message
-        );
-
         document
           .getElementById('view-loading')
           .classList.add('hidden');
@@ -822,6 +815,16 @@
         document
           .getElementById('view-assessment')
           .classList.remove('hidden');
+
+        const errorMessage = document.getElementById('answer-error');
+
+        errorMessage.innerText =
+          err.status === 429
+            ? 'A few too many reports were requested from this connection. Your answers are still here. Please wait about 10 minutes and try again.'
+            : 'That didn’t go through. Your answers are still here. Please try again in a moment.';
+
+        errorMessage.classList.remove('hidden');
+        document.getElementById('next-btn').innerText = 'Try Again';
       }
     }
 
