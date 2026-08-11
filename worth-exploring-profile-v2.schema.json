@@ -1,0 +1,116 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "worth-exploring-profile-v2",
+  "title": "Worth Exploring Profile Handoff v2",
+  "description": "Versioned data contract for a future Worth Exploring to Worth Applying handoff. This version adds interaction format and optional user-supplied context while preserving the distinction between user-stated evidence and AI-inferred report content. Worth Exploring does not currently persist individual user profiles.",
+  "type": "object",
+  "required": ["schema_version", "questionnaire_version", "user_stated", "ai_inferred"],
+  "properties": {
+    "schema_version": { "const": "worth-exploring-profile-v2" },
+    "questionnaire_version": { "type": "string" },
+    "generated_at": { "type": "string", "format": "date-time" },
+    "user_stated": {
+      "type": "object",
+      "required": ["raw_answers", "structured_signals"],
+      "properties": {
+        "raw_answers": {
+          "type": "object",
+          "required": [
+            "rabbit_holes",
+            "irrational_annoyance",
+            "jealousy_trigger",
+            "shadow_activities",
+            "flow_work",
+            "energy_vampires",
+            "competence_trap",
+            "tolerable_fatigue",
+            "autonomy_preference",
+            "social_intensity",
+            "interaction_style",
+            "movie_credits",
+            "why_care",
+            "permanent_delete",
+            "decision_types",
+            "practical_floor",
+            "shadow_tradeoffs"
+          ],
+          "properties": {
+            "rabbit_holes": { "type": "array", "items": { "type": "string" } },
+            "irrational_annoyance": { "type": "string" },
+            "jealousy_trigger": { "type": "string" },
+            "shadow_activities": { "type": "array", "items": { "type": "string" } },
+            "flow_work": { "type": "array", "items": { "type": "string" } },
+            "energy_vampires": { "type": "array", "items": { "type": "string" } },
+            "competence_trap": { "type": "string" },
+            "tolerable_fatigue": { "type": "string" },
+            "autonomy_preference": { "type": ["string", "number"] },
+            "social_intensity": { "type": ["string", "number"] },
+            "interaction_style": { "type": "array", "items": { "type": "string" } },
+            "movie_credits": { "type": "string" },
+            "why_care": { "type": "string" },
+            "permanent_delete": { "type": "string" },
+            "decision_types": { "type": "array", "items": { "type": "string" } },
+            "practical_floor": { "type": "string" },
+            "shadow_tradeoffs": { "type": "array", "items": { "type": "string" } },
+            "additional_context": {
+              "type": "string",
+              "description": "Optional user-supplied context about their working style that the structured questions did not capture. Treat as contextual evidence; do not let one vivid free-text answer automatically override repeated evidence elsewhere."
+            }
+          },
+          "additionalProperties": true
+        },
+        "structured_signals": {
+          "type": "object",
+          "description": "Stable downstream aliases for high-value user-stated signals. These are reorganizations of raw answers, not new AI conclusions.",
+          "properties": {
+            "curiosity_domains": { "type": "array", "items": { "type": "string" } },
+            "exploratory_activities": { "type": "array", "items": { "type": "string" } },
+            "energizing_activities": { "type": "array", "items": { "type": "string" } },
+            "energy_drains": { "type": "array", "items": { "type": "string" } },
+            "competence_trap": { "type": "string" },
+            "satisfying_effort": { "type": "string" },
+            "autonomy_preference": { "type": ["string", "number"] },
+            "social_intensity": { "type": ["string", "number"] },
+            "preferred_interaction_formats": { "type": "array", "items": { "type": "string" } },
+            "contribution_style": { "type": "string" },
+            "meaning_source": { "type": "string" },
+            "wants_less_of": { "type": "string" },
+            "preferred_decision_types": { "type": "array", "items": { "type": "string" } },
+            "current_non_negotiable": { "type": "string" },
+            "tolerated_tradeoffs": { "type": "array", "items": { "type": "string" } },
+            "additional_context": { "type": "string" }
+          },
+          "additionalProperties": true
+        }
+      },
+      "additionalProperties": true
+    },
+    "ai_inferred": {
+      "type": "object",
+      "description": "AI-generated interpretation. These fields remain hypotheses until a user tests, confirms, rejects, or revises them.",
+      "required": ["patterns", "tensions", "battery_drains", "exploration_hypotheses", "neighbourhood_roles", "thirty_day_plan"],
+      "properties": {
+        "patterns": { "type": "array" },
+        "tensions": { "type": "array" },
+        "battery_drains": { "type": "array" },
+        "exploration_hypotheses": { "type": "array" },
+        "neighbourhood_roles": { "type": "array" },
+        "thirty_day_plan": { "type": "array" }
+      },
+      "additionalProperties": true
+    },
+    "user_tested": { "type": "array" },
+    "user_confirmed": { "type": "array" },
+    "user_rejected": { "type": "array" }
+  },
+  "additionalProperties": true,
+  "x-worthit-principles": {
+    "interaction_interpretation": [
+      "social_intensity describes quantity of interaction; interaction_style describes preferred format",
+      "low social intensity must not be treated as no interest in human connection",
+      "a user may prefer fewer, deeper one-to-one interactions while finding frequent group interaction draining"
+    ],
+    "provenance_order": ["USER SAID", "AI INFERRED", "USER TESTED", "USER CONFIRMED OR REJECTED"],
+    "persistence": "The current Worth Exploring MVP does not save individual profiles."
+  }
+}
