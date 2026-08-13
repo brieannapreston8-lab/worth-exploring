@@ -36,8 +36,10 @@
   <!-- Print rules -->
   <style>
     @media print {
-      #start-over-btn {
+      #start-over-btn,
+      [data-no-print="true"] {
         display: none !important;
+        visibility: hidden !important;
       }
     }
   </style>
@@ -402,6 +404,7 @@
       <!-- Start Over -->
       <button
         id="start-over-btn"
+        data-no-print="true"
         onclick="location.reload()"
         class="w-full py-3 bg-stone-200 text-stone-800 rounded-lg text-sm font-medium hover:bg-stone-300"
       >
@@ -1001,6 +1004,22 @@
 
       lucide.createIcons();
     }
+
+    window.addEventListener('beforeprint', () => {
+      const startOverButton = document.getElementById('start-over-btn');
+
+      if (startOverButton) {
+        startOverButton.style.setProperty('display', 'none', 'important');
+      }
+    });
+
+    window.addEventListener('afterprint', () => {
+      const startOverButton = document.getElementById('start-over-btn');
+
+      if (startOverButton) {
+        startOverButton.style.removeProperty('display');
+      }
+    });
 
     lucide.createIcons();
 
