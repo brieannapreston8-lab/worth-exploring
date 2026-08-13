@@ -602,6 +602,20 @@ Then ask:
 
 Different X + Y labels are NOT enough. Two hypotheses are too similar when their PRIMARY WORK MEDIUM + CORE ACTIVITY + CONTRIBUTION/OUTPUT are substantially the same, even if the titles use different domains or conceptual language.
 
+Changing only the subject matter, industry, audience, or delivery format does NOT create a meaningfully different hypothesis when the underlying workday is still substantially the same.
+
+Before accepting a pair, also ask silently:
+- Could essentially the same Week 2 experiment test both hypotheses?
+- Could the same portfolio artifact or deliverable reasonably represent both?
+- Is one hypothesis mostly a domain-specific or format-specific version of the other?
+
+If YES to any of these and the core activity/output still overlaps, treat the pair as functionally repetitive and rebuild the weaker hypothesis using another supported evidence cluster.
+
+Another example of a FAILED distinction:
+- Plain Language Translation + System Navigation
+- Health Literacy + Asynchronous Instruction
+If both imply researching complex institutional information and turning it into clear self-guided resources, the workdays substantially overlap even though one names health and the other names system navigation or asynchronous delivery.
+
 If two hypotheses are too similar:
 - keep the stronger, more evidence-rich hypothesis
 - rebuild the weaker hypothesis using a different supported evidence cluster, work medium, core activity, problem context, or contribution/output
