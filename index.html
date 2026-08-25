@@ -166,7 +166,7 @@
           </span>
 
           <span id="question-number">
-            Step 1 of 15
+            Step 1 of 16
           </span>
         </div>
 
@@ -174,7 +174,7 @@
           <div
             id="progress-bar"
             class="bg-sage-600 h-full transition-all duration-300"
-            style="width: 7%;"
+            style="width: 6%;"
           ></div>
         </div>
 
@@ -225,59 +225,6 @@
           Next
         </button>
 
-      </div>
-
-    </div>
-
-    <!-- OPTIONAL REPORT CONTEXT -->
-    <div id="view-context" class="hidden space-y-8">
-
-      <div class="space-y-5">
-        <button
-          id="context-toggle"
-          type="button"
-          onclick="toggleAdditionalContext()"
-          class="inline-flex items-center gap-2 text-left text-sm font-semibold text-sage-700 hover:text-sage-900 transition"
-          aria-expanded="false"
-          aria-controls="context-panel"
-        >
-          <span>Anything you want the report to keep in mind?</span>
-          <i data-lucide="chevron-down" class="w-4 h-4"></i>
-        </button>
-
-        <div id="context-panel" class="hidden space-y-3">
-          <h3 class="font-serif text-3xl text-stone-900 leading-snug">
-            Is there something important about how you work that these questions didn’t quite capture?
-          </h3>
-
-          <textarea
-            id="additional-context-input"
-            rows="3"
-            placeholder="Optional. A sentence or two is plenty."
-            class="w-full p-4 rounded-xl border border-stone-200 bg-white text-sm placeholder:italic focus:outline-none focus:ring-2 focus:ring-sage-600"
-          ></textarea>
-        </div>
-
-        <p
-          id="context-error"
-          class="hidden text-sm text-stone-500 italic"
-        ></p>
-      </div>
-
-      <div class="pt-6 flex items-center justify-between border-t border-stone-200">
-        <button
-          onclick="returnToLastQuestion()"
-          class="px-4 py-2 text-stone-600 hover:text-stone-900 text-sm font-medium"
-        >
-          Back
-        </button>
-
-        <button
-          onclick="submitToGemini()"
-          class="px-6 py-2.5 bg-sage-600 text-white rounded-lg text-sm font-medium hover:bg-sage-700 transition"
-        >
-          Generate my report
-        </button>
       </div>
 
     </div>
@@ -697,15 +644,14 @@
         id: "additional_context",
         phase: "One Last Thing",
         title: "Is there something important about how you work that these questions didn’t quite capture?",
-        subtitle: "Optional. A sentence or two is plenty.",
+        subtitle: "",
         type: "text",
         optional: true,
-        placeholder: "Anything you want the report to keep in mind."
+        placeholder: "Optional. A sentence or two is plenty."
       }
     ];
 
-    // 17 structured questions across 15 screens. additional_context remains available
-    // as an optional report-correction channel after the structured flow.
+    // 17 structured questions plus one optional context question across 16 screens.
     const STEPS = [
       ["rabbit_holes"],
       ["irrational_annoyance"],
@@ -721,7 +667,8 @@
       ["permanent_delete"],
       ["decision_types"],
       ["practical_floor"],
-      ["shadow_tradeoffs"]
+      ["shadow_tradeoffs"],
+      ["additional_context"]
     ];
 
     // APP STATE
@@ -816,6 +763,10 @@
         txt.className =
           "w-full p-4 rounded-xl border border-stone-200 bg-white text-sm focus:outline-none focus:ring-2 focus:ring-sage-600";
 
+        if (q.id === 'additional_context') {
+          txt.classList.add('placeholder:italic');
+        }
+
         txt.rows = 3;
         txt.placeholder = q.placeholder;
         txt.value = answers[q.id] || '';
@@ -865,7 +816,8 @@
       const answerError = document.getElementById('answer-error');
       answerError.innerText = 'Add an answer before continuing.';
       answerError.classList.add('hidden');
-      document.getElementById('next-btn').innerText = 'Next';
+      document.getElementById('next-btn').innerText =
+        currentIdx === STEPS.length - 1 ? 'Generate my report' : 'Next';
 
       document.getElementById('question-phase').innerText = firstQuestion.phase;
 
@@ -947,7 +899,7 @@
 
       } else {
 
-        showContextView();
+        submitToGemini();
 
       }
     }
@@ -959,52 +911,9 @@
       }
     }
 
-    function showContextView() {
-      document.getElementById('view-assessment').classList.add('hidden');
-      document.getElementById('view-context').classList.remove('hidden');
-
-      const contextInput = document.getElementById('additional-context-input');
-      contextInput.value = answers.additional_context || '';
-
-      document.getElementById('context-error').classList.add('hidden');
-      lucide.createIcons();
-    }
-
-    function returnToLastQuestion() {
-      document.getElementById('view-context').classList.add('hidden');
-      document.getElementById('view-assessment').classList.remove('hidden');
-      currentIdx = STEPS.length - 1;
-      renderQuestion();
-    }
-
-    function toggleAdditionalContext() {
-      const panel = document.getElementById('context-panel');
-      const toggle = document.getElementById('context-toggle');
-      const isOpening = panel.classList.contains('hidden');
-
-      panel.classList.toggle('hidden');
-      toggle.setAttribute('aria-expanded', String(isOpening));
-
-      if (isOpening) {
-        const input = document.getElementById('additional-context-input');
-        input.value = answers.additional_context || '';
-        input.focus();
-      }
-    }
-
-    document
-      .getElementById('additional-context-input')
-      .addEventListener('input', (event) => {
-        answers.additional_context = event.target.value;
-      });
-
     async function submitToGemini() {
       document
         .getElementById('view-assessment')
-        .classList.add('hidden');
-
-      document
-        .getElementById('view-context')
         .classList.add('hidden');
 
       document
@@ -1038,10 +947,12 @@
           .classList.add('hidden');
 
         document
-          .getElementById('view-context')
+          .getElementById('view-assessment')
           .classList.remove('hidden');
 
-        const errorMessage = document.getElementById('context-error');
+        renderQuestion();
+
+        const errorMessage = document.getElementById('answer-error');
 
         errorMessage.innerText =
           err.status === 429
@@ -1049,6 +960,7 @@
             : 'That didn’t go through. Your answers are still here. Please try again in a moment.';
 
         errorMessage.classList.remove('hidden');
+        document.getElementById('next-btn').innerText = 'Try Again';
       }
     }
 
