@@ -396,6 +396,36 @@
     });
   }
 
+  function installPrivacyUi() {
+    const home = document.getElementById('view-home');
+
+    if (home && !document.getElementById('analytics-privacy-note')) {
+      const infoList = Array.from(home.querySelectorAll('ul')).find(ul =>
+        ul.textContent.includes('No account is required.')
+      );
+
+      if (infoList) {
+        const item = document.createElement('li');
+        item.id = 'analytics-privacy-note';
+        item.innerHTML = 'Limited, privacy-conscious product analytics help us understand whether people start, finish, and receive reports. Questionnaire answers and report content are not sent to analytics. <a href="/privacy.html" class="font-semibold text-sage-700 hover:text-sage-900 underline underline-offset-2">Privacy details.</a>';
+        infoList.appendChild(item);
+      }
+    }
+
+    if (!document.getElementById('privacy-footer')) {
+      const main = document.querySelector('main');
+
+      if (main) {
+        const footer = document.createElement('div');
+        footer.id = 'privacy-footer';
+        footer.setAttribute('data-no-print', 'true');
+        footer.className = 'max-w-2xl mx-auto px-6 pb-8 -mt-4 text-center';
+        footer.innerHTML = '<a href="/privacy.html" class="text-xs font-medium text-stone-500 hover:text-sage-700 underline underline-offset-2 transition">Privacy</a>';
+        main.insertAdjacentElement('afterend', footer);
+      }
+    }
+  }
+
   // Intercept only the existing generation request. Analytics requests use
   // nativeFetch directly and are never intercepted here.
   window.fetch = async function trackedFetch(input, init) {
@@ -540,5 +570,6 @@
     });
   }
 
+  installPrivacyUi();
   capture('landing_viewed');
 })();
