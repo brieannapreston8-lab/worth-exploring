@@ -8,6 +8,7 @@
   const VISITOR_TTL_MS = 90 * 24 * 60 * 60 * 1000;
   const REQUIRED_STEP_COUNT = 15;
   const PROGRESS_MILESTONES = [25, 50, 75, 100];
+  const PDF_LIBRARY_URL = 'https://cdn.jsdelivr.net/npm/html2pdf.js@0.10.1/dist/html2pdf.bundle.min.js';
   const SAFE_ERROR_CATEGORIES = new Set([
     'application_rate_limit',
     'provider_rate_limit',
@@ -32,6 +33,7 @@
   const nativeFetch = window.fetch.bind(window);
   const trackingAllowed = navigator.doNotTrack !== '1';
   let captureQueue = Promise.resolve();
+  let pdfLibraryPromise = null;
 
   const state = {
     started: false,
@@ -489,6 +491,133 @@
     tensionObserver.observe(tensionsContainer, { childList: true });
   }
 
+  function loadPdfLibrary() {
+    if (window.html2pdf) return Promise.resolve(window.html2pdf);
+    if (pdfLibraryPromise) return pdfLibraryPromise;
+
+    pdfLibraryPromise = new Promise((resolve, reject) => {
+      const script = document.createElement('script');
+      script.src = PDF_LIBRARY_URL;
+      script.async = true;
+      script.onload = () =>
+        window.html2pdf
+          ? resolve(window.html2pdf)
+          : reject(new Error('pdf_library_unavailable'));
+      script.onerror = () => reject(new Error('pdf_library_unavailable'));
+      document.head.appendChild(script);
+    });
+
+    return pdfLibraryPromise;
+  }
+
+  function buildPdfReportClone() {
+    const report = document.getElementById('view-result');
+    if (!report) return null;
+
+    const clone = report.cloneNode(true);
+    clone.removeAttribute('id');
+    clone.classList.remove('hidden');
+    clone.style.width = '672px';
+    clone.style.maxWidth = '672px';
+    clone.style.margin = '0';
+    clone.style.padding = '28px';
+    clone.style.background = '#FAF8F5';
+    clone.style.boxSizing = 'border-box';
+
+    clone.querySelectorAll('button, [data-no-print="true"]').forEach(el => el.remove());
+
+    const feedbackLink = clone.querySelector(
+      'a[href*="forms.gle"], a[href*="docs.google.com/forms"]'
+    );
+    feedbackLink?.closest('section')?.remove();
+
+    const cards = clone.querySelectorAll(
+      '#patterns-container > div, #tensions-container > div, #hypotheses-container > div, #networking-container > div, #plan-container > div'
+    );
+
+    cards.forEach(card => {
+      card.style.breakInside = 'avoid';
+      card.style.pageBreakInside = 'avoid';
+    });
+
+    clone.querySelectorAll('h3, h4, h5').forEach(heading => {
+      heading.style.breakAfter = 'avoid';
+      heading.style.pageBreakAfter = 'avoid';
+    });
+
+    const host = document.createElement('div');
+    host.setAttribute('aria-hidden', 'true');
+    host.style.position = 'fixed';
+    host.style.left = '-10000px';
+    host.style.top = '0';
+    host.style.width = '672px';
+    host.style.background = '#FAF8F5';
+    host.appendChild(clone);
+    document.body.appendChild(host);
+
+    return { host, clone };
+  }
+
+  function installPdfDownloadUi() {
+    const printButton = document.querySelector(
+      '#view-result button[onclick="window.print()"]'
+    );
+
+    if (!printButton) return;
+
+    printButton.removeAttribute('onclick');
+    printButton.textContent = 'Download PDF';
+    printButton.setAttribute('type', 'button');
+    printButton.setAttribute('title', 'Download your report as a PDF');
+
+    printButton.addEventListener('click', async () => {
+      if (printButton.disabled) return;
+
+      const originalText = printButton.textContent;
+      printButton.disabled = true;
+      printButton.textContent = 'Preparing PDF…';
+
+      let pdfClone = null;
+
+      try {
+        const html2pdf = await loadPdfLibrary();
+        pdfClone = buildPdfReportClone();
+
+        if (!pdfClone) throw new Error('report_not_found');
+
+        await html2pdf()
+          .set({
+            margin: [10, 10, 10, 10],
+            filename: 'worth-exploring-report.pdf',
+            image: { type: 'jpeg', quality: 0.98 },
+            html2canvas: {
+              scale: 2,
+              useCORS: true,
+              backgroundColor: '#FAF8F5',
+              scrollX: 0,
+              scrollY: 0
+            },
+            jsPDF: {
+              unit: 'mm',
+              format: 'a4',
+              orientation: 'portrait'
+            },
+            pagebreak: {
+              mode: ['css', 'legacy']
+            }
+          })
+          .from(pdfClone.clone)
+          .save();
+      } catch {
+        window.print();
+      } finally {
+        pdfClone?.host?.remove();
+        printButton.disabled = false;
+        printButton.textContent = originalText;
+      }
+    });
+  }
+
   // Intercept only the existing generation request. Analytics requests use
   // nativeFetch directly and are never intercepted here.
   window.fetch = async function trackedFetch(input, init) {
@@ -635,5 +764,6 @@
 
   installPrivacyUi();
   installReportDesignUi();
+  installPdfDownloadUi();
   capture('landing_viewed');
 })();
