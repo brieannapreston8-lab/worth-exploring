@@ -701,14 +701,25 @@ The 30-day plan is the ONLY place in the report where the user is given experime
 
 Return exactly 4 weekly actions with this progression:
 
-WEEK 1 — NOTICE
-Start with low-pressure observation, not homework.
-The user should notice what naturally catches their attention before being asked to produce a substantial artifact.
+WEEK 1 — NOTICE TWO THINGS
+Week 1 is deliberately the easiest and loosest part of the month. Give the user TWO small, clearly separated mini-activities inside the single Week 1 action_item.
 
-Good Week 1 actions include:
-- collecting 3 small examples of systems, information, interactions, objects, spaces, materials, environments, or work moments that feel unusually interesting, frustrating, satisfying, or elegant
-- keeping brief notes on moments of curiosity, friction, energy, resistance, or fascination
-- noticing which kinds of problems they instinctively want to understand, improve, organize, explain, repair, make, test, arrange, or redesign
+REQUIRED:
+- Mini-activity 1 must be grounded in one hypothesis.
+- Mini-activity 2 must be grounded in a DIFFERENT hypothesis.
+- Both are intended to be tried; do not frame them as "choose one."
+- Keep each one low-pressure and easy to fit into ordinary life. They should usually involve a few minutes of noticing, saving, browsing, observing, comparing, jotting, photographing, sketching, or briefly investigating — not substantial production.
+- Where the evidence allows it, make the two mini-activities gather DIFFERENT kinds of evidence rather than repeating the same mechanic twice.
+
+Examples of the RANGE of acceptable Week 1 mechanics include:
+- save or screenshot 2–3 examples that make the user think "I want to understand/fix/make that"
+- notice one ordinary workday moment when their energy rises or drops and jot down what they were actually doing
+- browse a handful of public work examples and save only the ones that provoke genuine curiosity
+- photograph or note an object, space, system, material, interaction, or piece of information whose design catches their attention
+- pay attention to a question, conversation, problem, or process they keep thinking about afterward
+- make a tiny sketch, list, comparison, or note that takes only a few minutes and reveals what they instinctively focus on
+
+These are examples of mechanics only. Tailor both mini-activities to the user's actual hypotheses and work medium.
 
 Week 1 should NOT require:
 - a multi-page teardown
@@ -716,35 +727,41 @@ Week 1 should NOT require:
 - a formal audit
 - a portfolio-quality artifact
 - hours of structured research
+- outreach to another person
 - committing to one hypothesis too early
 
-The goal of Week 1 is simply to create a small evidence trail about what the user's attention moves toward.
+The goal of Week 1 is to create two small pieces of evidence from two different possible directions before asking the user to go deeper.
 
-WEEK 2 — MAKE
-Have the user try a small piece of work connected to one or more hypotheses.
+WEEK 2 — TRY
+Have the user do a small piece of representative work connected to one hypothesis.
 
 The action should:
 - be concrete and solo-first
 - usually take about 30–90 minutes
-- create, repair, arrange, test, observe, or produce something appropriate to the user's apparent work medium
-- help the user notice how doing the work actually feels
+- involve DOING rather than only reading or browsing
+- create, repair, arrange, test, observe, evaluate, explain, organize, investigate, or produce something appropriate to the user's apparent work medium
+- help the user notice how doing that kind of work actually feels
 
-A small artifact may be written or digital when appropriate, but it may also be a physical repair, mock-up, material test, spatial arrangement, field observation, sketch, prototype, sample, photo study, measurement log, or other accessible form of real-world experimentation.
+A small artifact may be written or digital when appropriate, but it may also be a physical repair, mock-up, material test, spatial arrangement, field observation, sketch, prototype, sample, photo study, measurement log, decision exercise, or other accessible form of real-world experimentation.
 
-WEEK 3 — LOOK OUTWARD
-Have the user inspect the real-world version of the work.
+WEEK 3 — TRY SOMETHING DIFFERENT
+Have the user test a meaningfully different hypothesis or work experience from Week 2.
 
-Good Week 3 actions include:
-- browsing several job descriptions or trade/occupation descriptions
-- comparing public examples of deliverables, finished work, portfolios, processes, or projects
-- reviewing public portfolios, case studies, trade pages, educational program descriptions, or industry information
-- observing how a role or craft is described across different organizations or settings
-- looking for hidden requirements such as meetings, presentation load, client exposure, physical demands, schedule demands, field conditions, tools/equipment, credentials, training, or location requirements
+REQUIRED:
+- Week 3 must not simply repeat the Week 2 core activity or output in a different domain.
+- It should expose the user to a different work medium, core activity, contribution/output, interaction format, or problem context when the evidence supports that distinction.
+- It should usually take about 30–90 minutes and involve doing a small piece of the work, not merely researching the title.
+- Public job descriptions, portfolios, case studies, demonstrations, occupational pages, or examples may be used as context, but browsing alone should not be the whole experiment unless direct practice is genuinely inaccessible.
 
-The purpose is reality-testing, not applying.
+Before finalizing Weeks 2 and 3, silently ask:
+- Could essentially the same task test both weeks?
+- Would both weeks produce basically the same artifact or evidence?
+- Is Week 3 merely Week 2 with a different subject matter?
+
+If YES, rebuild Week 3 around another supported hypothesis or work experience.
 
 WEEK 4 — COMPARE
-Have the user compare what they noticed across Weeks 1–3.
+Have the user compare what they noticed across BOTH Week 1 mini-activities, the Week 2 experiment, and the Week 3 experiment.
 
 The action should help them reflect on:
 - curiosity
@@ -753,9 +770,10 @@ The action should help them reflect on:
 - boredom
 - sustainability
 - desire to continue
+- which kind of work they wanted to keep thinking about after the experiment ended
 - whether the actual work matched the imagined appeal
 
-Week 4 should synthesize evidence, not force a final career decision or ranking unless the user naturally wants to do so.
+Week 4 should synthesize evidence across different directions, not force a final career decision or ranking unless the user naturally wants to do so.
 
 WEEK 4 RATIONALE RULE:
 The rationale must explain what comparing the evidence may help the user NOTICE.
@@ -817,12 +835,19 @@ You may instead recommend broad directions such as:
 Keep recommendations broad, accessible, non-partisan, and directly connected to the hypotheses.
 
 PLAN QUALITY:
-- Across the 4 weeks, meaningfully explore more than one hypothesis.
-- Avoid four versions of the same task.
+- Week 1 must contain two light mini-activities tied to two different hypotheses.
+- Across the month, meaningfully explore at least two hypotheses; ideally expose the user to all three when that can happen naturally.
+- Do NOT force one week per hypothesis merely for symmetry when the evidence does not support it.
+- Weeks 2 and 3 must test meaningfully different work experiences, not two versions of the same task.
+- Avoid four versions of the same activity or evidence-gathering mechanic.
 - Do not simply repeat the same artifact format every week.
 - Each action_item should be concrete enough to begin without further instructions, while leaving enough ambiguity for the user to adapt it to their own interests.
 - Each rationale should explain what evidence the action could reveal, not why the user "should" do it.
-- The month should feel like a sequence of curiosity experiments, not a miniature course or job-search bootcamp.
+- The month should feel like several curiosity experiments that create useful comparison, not a four-week validation exercise for one favored hypothesis, a miniature course, or a job-search bootcamp.
+
+Before finalizing the plan, silently ask:
+"If the user completes this month, will they have evidence about more than one possible kind of work?"
+If not, diversify the plan using another supported hypothesis.
 
 The goal is not to choose a career in 30 days. The goal is to know more than the user knows now.
 
@@ -1038,7 +1063,7 @@ Return ONLY a valid JSON object matching this exact schema:
           },
           "action_item": {
             "type": "string",
-            "description": "One concrete, solo-first, accessible exploratory action following the required Week 1 Notice, Week 2 Make, Week 3 Look Outward, Week 4 Compare progression and respecting the user's apparent work medium."
+            "description": "A concrete, solo-first, accessible exploratory action following the required progression: Week 1 contains TWO light, clearly separated mini-activities grounded in two different hypotheses; Week 2 tries a small piece of representative work; Week 3 tries a meaningfully different hypothesis/work experience from Week 2; Week 4 compares the evidence across the month. Respect the user's apparent work medium."
           },
           "rationale": {
             "type": "string",
