@@ -45,11 +45,13 @@ const EVENT_PROPERTY_KEYS = Object.freeze({
   ]),
   report_generation_succeeded: new Set([
     'generation_attempt_number',
+    'provider_retry_count',
     'generation_duration_ms',
     'application_http_status'
   ]),
   report_generation_failed: new Set([
     'generation_attempt_number',
+    'provider_retry_count',
     'generation_duration_ms',
     'application_http_status',
     'error_category',
@@ -167,6 +169,9 @@ function sanitizeProperty(key, value) {
 
     case 'generation_attempt_number':
       return safeNumber(value, { min: 1, max: 20 });
+
+    case 'provider_retry_count':
+      return safeNumber(value, { min: 0, max: 2 });
 
     case 'generation_duration_ms':
     case 'generation_to_view_ms':
