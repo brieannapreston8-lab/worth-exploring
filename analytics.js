@@ -34,6 +34,7 @@
   const trackingAllowed = navigator.doNotTrack !== '1';
   let captureQueue = Promise.resolve();
   let pdfLibraryPromise = null;
+  let loadingMessageTimer = null;
 
   const state = {
     started: false,
@@ -398,6 +399,60 @@
     });
   }
 
+  function installLoadingMessagesUi() {
+    const loadingView = document.getElementById('view-loading');
+    const loadingSubtext = document.getElementById('loading-subtext');
+
+    if (!loadingView || !loadingSubtext) return;
+
+    const messages = [
+      'Patterns that keep tapping us on the shoulder…',
+      'Good at it vs. actually want more of it…',
+      'Where your energy lights up — and where it quietly leaves the building…',
+      'Preferences that coexist nicely. Preferences that are arguing in the hallway…',
+      'Possibilities, not prescriptions…',
+      'Real workdays, not shiny job titles…',
+      'Small experiments. No five-year plan required…',
+      'Still connecting dots. Some of them are being a little dramatic…'
+    ];
+
+    let messageIndex = 0;
+
+    const stopRotation = () => {
+      if (loadingMessageTimer) {
+        window.clearInterval(loadingMessageTimer);
+        loadingMessageTimer = null;
+      }
+    };
+
+    const startRotation = () => {
+      stopRotation();
+      messageIndex = 0;
+      loadingSubtext.textContent = messages[messageIndex];
+
+      loadingMessageTimer = window.setInterval(() => {
+        messageIndex = (messageIndex + 1) % messages.length;
+        loadingSubtext.textContent = messages[messageIndex];
+      }, 4500);
+    };
+
+    const syncRotation = () => {
+      if (loadingView.classList.contains('hidden')) {
+        stopRotation();
+      } else if (!loadingMessageTimer) {
+        startRotation();
+      }
+    };
+
+    const loadingObserver = new MutationObserver(syncRotation);
+    loadingObserver.observe(loadingView, {
+      attributes: true,
+      attributeFilter: ['class']
+    });
+
+    syncRotation();
+  }
+
   function installPrivacyUi() {
     const home = document.getElementById('view-home');
 
@@ -524,6 +579,12 @@
     clone.style.background = '#FAF8F5';
     clone.style.boxSizing = 'border-box';
 
+    // The on-screen report uses generous section spacing. Tighten only the
+    // PDF clone slightly so A4 pages pack naturally without changing the web UI.
+    Array.from(clone.children).forEach((child, index) => {
+      if (index > 0) child.style.marginTop = '32px';
+    });
+
     clone.querySelectorAll('button, [data-no-print="true"]').forEach(el => el.remove());
 
     const feedbackLink = clone.querySelector(
@@ -536,8 +597,36 @@
     );
 
     cards.forEach(card => {
+      card.classList.add('pdf-card');
       card.style.breakInside = 'avoid';
       card.style.pageBreakInside = 'avoid';
+    });
+
+    clone.querySelectorAll('section').forEach(section => {
+      const intro = section.firstElementChild;
+      const content = intro?.nextElementSibling;
+
+      if (intro) {
+        intro.style.breakAfter = 'avoid';
+        intro.style.pageBreakAfter = 'avoid';
+      }
+
+      if (content) {
+        content.style.breakBefore = 'avoid';
+        content.style.pageBreakBefore = 'avoid';
+      }
+    });
+
+    // These two sections are compact enough to fit on a page as complete
+    // blocks. Keeping them intact prevents a sliced Battery card and an
+    // orphaned People heading at the bottom of a page.
+    [
+      clone.querySelector('#dealbreakers-container')?.closest('section'),
+      clone.querySelector('#networking-container')?.closest('section')
+    ].filter(Boolean).forEach(section => {
+      section.classList.add('pdf-keep-together');
+      section.style.breakInside = 'avoid';
+      section.style.pageBreakInside = 'avoid';
     });
 
     clone.querySelectorAll('h3, h4, h5').forEach(heading => {
@@ -603,7 +692,8 @@
               orientation: 'portrait'
             },
             pagebreak: {
-              mode: ['css', 'legacy']
+              mode: ['css', 'legacy'],
+              avoid: ['.pdf-card', '.pdf-keep-together']
             }
           })
           .from(pdfClone.clone)
@@ -763,6 +853,7 @@
   }
 
   installPrivacyUi();
+  installLoadingMessagesUi();
   installReportDesignUi();
   installPdfDownloadUi();
   capture('landing_viewed');
