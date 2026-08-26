@@ -249,6 +249,7 @@ export async function captureAnalyticsEvent({
     environment: 'production',
     anonymous_session_id: safeSessionId,
     ...sanitizeProperties(event, properties),
+    $geoip_disable: true,
     $process_person_profile: false
   };
 
