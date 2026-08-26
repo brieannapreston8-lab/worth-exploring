@@ -407,10 +407,10 @@
       if (infoList) {
         infoList.innerHTML = `
           <li>No account is required, and Worth Exploring does not save your answers or generated report to its own database.</li>
-          <li>Your answers are sent to Google’s Gemini API to generate your report. API request storage is disabled for this Worth Exploring project.</li>
-          <li>Limited product analytics help us understand things like starts, progress, and whether reports generate successfully. Your questionnaire answers and report content are not sent to analytics. <a href="/privacy.html" class="font-semibold text-sage-700 hover:text-sage-900 underline underline-offset-2">Privacy details.</a></li>
-          <li>Please avoid entering confidential or highly sensitive information. Worth Exploring is for adults 18 and over.</li>
-          <li>The results are hypotheses, not diagnoses or instructions. They may be useful, surprising, incomplete, or wrong.</li>
+          <li>Your answers are sent to Google’s Gemini API to generate your report. API request storage is disabled for this project.</li>
+          <li>Limited product analytics help us understand things like starts, progress, and whether reports generate successfully. Your questionnaire answers and report content are not sent to analytics.</li>
+          <li>The results are hypotheses, not diagnoses or instructions. They may be useful, surprising, incomplete, or wrong. Please avoid entering confidential or highly sensitive information.</li>
+          <li><a href="/privacy.html" class="font-semibold text-sage-700 hover:text-sage-900 underline underline-offset-2">Privacy details</a> <strong>can be found here.</strong></li>
         `;
       }
 
