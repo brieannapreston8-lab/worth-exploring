@@ -399,16 +399,34 @@
   function installPrivacyUi() {
     const home = document.getElementById('view-home');
 
-    if (home && !document.getElementById('analytics-privacy-note')) {
+    if (home) {
       const infoList = Array.from(home.querySelectorAll('ul')).find(ul =>
         ul.textContent.includes('No account is required.')
       );
 
       if (infoList) {
-        const item = document.createElement('li');
-        item.id = 'analytics-privacy-note';
-        item.innerHTML = 'Limited, privacy-conscious product analytics help us understand whether people start, finish, and receive reports. Questionnaire answers and report content are not sent to analytics. <a href="/privacy.html" class="font-semibold text-sage-700 hover:text-sage-900 underline underline-offset-2">Privacy details.</a>';
-        infoList.appendChild(item);
+        infoList.innerHTML = `
+          <li>No account is required, and Worth Exploring does not save your answers or generated report to its own database.</li>
+          <li>Your answers are sent to Google’s Gemini API to generate your report; API request storage is disabled for this Worth Exploring project.</li>
+          <li>Limited product analytics help us understand whether people start, finish, and receive reports. Questionnaire answers and report content are not sent to analytics. <a href="/privacy.html" class="font-semibold text-sage-700 hover:text-sage-900 underline underline-offset-2">Privacy details.</a></li>
+          <li>Please avoid confidential or highly sensitive information. Worth Exploring is for adults 18 and over, and results are hypotheses — not diagnoses or instructions.</li>
+        `;
+      }
+
+      const overviewParagraph = Array.from(home.querySelectorAll('p')).find(p =>
+        p.textContent.includes('Worth Exploring won’t tell you what you')
+      );
+
+      const aiParagraph = Array.from(home.querySelectorAll('p')).find(p =>
+        p.textContent.includes('AI looks for patterns across your answers')
+      );
+
+      if (overviewParagraph) {
+        overviewParagraph.innerHTML = 'Worth Exploring won’t tell you what you <em>should</em> do. You’ll answer a short set of questions about curiosity, energy, working style, and what matters to you. AI turns those answers into <strong>career hypotheses, tensions worth noticing, things worth avoiding, and small experiments you can actually try.</strong>';
+      }
+
+      if (aiParagraph) {
+        aiParagraph.remove();
       }
     }
 
