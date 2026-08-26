@@ -407,9 +407,10 @@
       if (infoList) {
         infoList.innerHTML = `
           <li>No account is required, and Worth Exploring does not save your answers or generated report to its own database.</li>
-          <li>Your answers are sent to Google’s Gemini API to generate your report; API request storage is disabled for this Worth Exploring project.</li>
-          <li>Limited product analytics help us understand whether people start, finish, and receive reports. Questionnaire answers and report content are not sent to analytics. <a href="/privacy.html" class="font-semibold text-sage-700 hover:text-sage-900 underline underline-offset-2">Privacy details.</a></li>
-          <li>Please avoid confidential or highly sensitive information. Worth Exploring is for adults 18 and over, and results are hypotheses — not diagnoses or instructions.</li>
+          <li>Your answers are sent to Google’s Gemini API to generate your report. API request storage is disabled for this Worth Exploring project.</li>
+          <li>Limited product analytics help us understand things like starts, progress, and whether reports generate successfully. Your questionnaire answers and report content are not sent to analytics. <a href="/privacy.html" class="font-semibold text-sage-700 hover:text-sage-900 underline underline-offset-2">Privacy details.</a></li>
+          <li>Please avoid entering confidential or highly sensitive information. Worth Exploring is for adults 18 and over.</li>
+          <li>The results are hypotheses, not diagnoses or instructions. They may be useful, surprising, incomplete, or wrong.</li>
         `;
       }
 
@@ -418,15 +419,16 @@
       );
 
       const aiParagraph = Array.from(home.querySelectorAll('p')).find(p =>
-        p.textContent.includes('AI looks for patterns across your answers')
+        p.textContent.includes('AI looks for patterns across your answers') ||
+        p.textContent.includes('AI turns those answers into')
       );
 
       if (overviewParagraph) {
-        overviewParagraph.innerHTML = 'Worth Exploring won’t tell you what you <em>should</em> do. You’ll answer a short set of questions about curiosity, energy, working style, and what matters to you. AI turns those answers into <strong>career hypotheses, tensions worth noticing, things worth avoiding, and small experiments you can actually try.</strong>';
+        overviewParagraph.innerHTML = 'Worth Exploring won’t tell you what you <em>should</em> do. You’ll move through a short set of questions about what catches your attention, what gives or drains energy, how you like to work, and what matters in your life.';
       }
 
       if (aiParagraph) {
-        aiParagraph.remove();
+        aiParagraph.innerHTML = 'AI looks across your answers for patterns and turns them into <strong>career hypotheses, tensions worth noticing, things worth avoiding, and small experiments you can actually try.</strong>';
       }
     }
 
