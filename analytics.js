@@ -446,6 +446,76 @@
     }
   }
 
+  function installReportDesignUi() {
+    const tensionsContainer = document.getElementById('tensions-container');
+
+    if (tensionsContainer) {
+      const tensionSection = tensionsContainer.closest('section');
+      const tensionHeading = tensionSection?.querySelector('h3');
+
+      if (tensionSection) {
+        tensionSection.className = 'space-y-4';
+      }
+
+      if (tensionHeading) {
+        tensionHeading.className = 'font-serif text-2xl text-stone-900';
+      }
+
+      tensionsContainer.className = 'grid grid-cols-1 md:grid-cols-2 gap-4';
+
+      const styleTensionCards = () => {
+        Array.from(tensionsContainer.children).forEach(card => {
+          card.className = 'bg-sage-50 border border-stone-200 rounded-xl p-5';
+
+          const title = card.querySelector('h4');
+          const copy = card.querySelector('p');
+
+          if (title) {
+            title.className = 'font-semibold text-stone-900 text-sm';
+          }
+
+          if (copy) {
+            copy.className = 'text-sm text-stone-600 mt-2 leading-relaxed';
+          }
+        });
+      };
+
+      styleTensionCards();
+
+      const tensionObserver = new MutationObserver(styleTensionCards);
+      tensionObserver.observe(tensionsContainer, { childList: true });
+    }
+
+    const batteryContainer = document.getElementById('dealbreakers-container');
+
+    if (batteryContainer) {
+      const batterySection = batteryContainer.closest('section');
+      const batteryHeading = batterySection?.querySelector('h3');
+
+      if (batterySection) {
+        batterySection.className = 'space-y-4';
+      }
+
+      if (batteryHeading) {
+        batteryHeading.className = 'font-serif text-2xl text-stone-900';
+      }
+
+      batteryContainer.className = 'bg-sage-50 border border-stone-200 rounded-xl p-6 space-y-2 text-sm text-stone-600 list-disc';
+      batteryContainer.style.listStylePosition = 'inside';
+
+      const styleBatteryItems = () => {
+        Array.from(batteryContainer.children).forEach(item => {
+          item.className = 'leading-relaxed';
+        });
+      };
+
+      styleBatteryItems();
+
+      const batteryObserver = new MutationObserver(styleBatteryItems);
+      batteryObserver.observe(batteryContainer, { childList: true });
+    }
+  }
+
   // Intercept only the existing generation request. Analytics requests use
   // nativeFetch directly and are never intercepted here.
   window.fetch = async function trackedFetch(input, init) {
@@ -591,5 +661,6 @@
   }
 
   installPrivacyUi();
+  installReportDesignUi();
   capture('landing_viewed');
 })();
