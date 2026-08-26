@@ -46,163 +46,178 @@
 
   <main class="max-w-2xl mx-auto px-6 py-12 md:py-16">
     <div class="space-y-10">
+
       <div class="space-y-3 border-b border-stone-200 pb-8">
         <a href="/" class="inline-flex items-center text-xs font-semibold uppercase tracking-wider text-sage-600 hover:text-sage-800 transition">
           ← Back to Worth Exploring
         </a>
+
         <h1 class="font-serif text-4xl text-stone-900 leading-tight">
           Privacy, in plain English
         </h1>
+
         <p class="text-sm text-stone-500">Last updated: August 25, 2026</p>
+
         <p class="text-stone-600 leading-relaxed">
-          Worth Exploring is designed to collect as little personal information as it reasonably can. There is no account to create, and Worth Exploring does not build or save a personal career profile about you.
+          Privacy pages have a habit of making simple things sound mysterious. This one is trying not to. Worth Exploring is built to collect as little personal information as it reasonably can, and to keep your career exploration separate from the product data used to improve the tool.
         </p>
       </div>
 
       <section class="space-y-4">
         <h2 class="font-serif text-2xl text-stone-900">The short version</h2>
+
         <div class="bg-white border border-stone-200 rounded-xl p-6">
           <ul class="text-sm text-stone-600 leading-relaxed space-y-2 list-disc pl-5">
-            <li>Your questionnaire answers are sent through Worth Exploring to Google’s Gemini API so generative AI can create the report you request.</li>
-            <li>Worth Exploring does not save your questionnaire answers or generated report to its own user database.</li>
-            <li>API request storage/logging is disabled for the Worth Exploring Gemini project.</li>
-            <li>Worth Exploring uses PostHog for limited product analytics about how the experience is used. Questionnaire answers and report content are not sent to PostHog.</li>
-            <li>Worth Exploring does not use session replay, form autocapture, advertising trackers, or behavioural advertising.</li>
-            <li>The site is hosted by Vercel, which processes technical information needed to deliver and secure the website.</li>
-            <li>Worth Exploring is intended for adults age 18 and older.</li>
+            <li>You answer questions. Those answers go to Google’s Gemini API when you ask for a report.</li>
+            <li>Worth Exploring does not save your questionnaire answers or generated report in its own user database.</li>
+            <li>Gemini request storage/logging is disabled for the Worth Exploring project.</li>
+            <li>PostHog helps us count things like starts, progress, report-generation success, and feedback-link clicks. It does <strong>not</strong> receive your questionnaire answers or report content.</li>
+            <li>No session replay, form recording, advertising trackers, or behavioural advertising.</li>
+            <li>Vercel hosts the site and handles the technical traffic needed to keep it running.</li>
+            <li>Worth Exploring is for adults 18 and over.</li>
           </ul>
         </div>
       </section>
 
       <section class="space-y-3">
-        <h2 class="font-serif text-2xl text-stone-900">What information you provide</h2>
+        <h2 class="font-serif text-2xl text-stone-900">What you tell Worth Exploring</h2>
+
         <p class="text-sm text-stone-600 leading-relaxed">
-          Worth Exploring processes the answers you enter into the questionnaire in order to generate your report. Those answers may describe your interests, energy, working style, preferences, constraints, past experiences, or other context you choose to provide.
+          The questionnaire asks about things like your interests, energy, working style, preferences, constraints, and past experiences. The optional final question lets you add context if the neat little boxes missed something important.
         </p>
+
         <p class="text-sm text-stone-600 leading-relaxed">
-          You do not need to provide your name, email address, résumé, employer, date of birth, or an account in order to use Worth Exploring. Please avoid entering confidential or highly sensitive personal information.
+          You do not need to provide your name, email address, résumé, employer, date of birth, or an account. Please avoid entering confidential or highly sensitive personal information.
         </p>
       </section>
 
       <section class="space-y-3">
-        <h2 class="font-serif text-2xl text-stone-900">How your report is generated</h2>
+        <h2 class="font-serif text-2xl text-stone-900">Where your answers go</h2>
+
         <p class="text-sm text-stone-600 leading-relaxed">
-          When you request your report, your questionnaire responses are sent to Google’s Gemini API. Generative AI analyzes the responses together and produces a report containing patterns, tensions worth noticing, possible areas to explore, examples of nearby roles, and small real-world experiments.
+          When you click <strong>Generate my report</strong>, your questionnaire responses — including anything you typed into an open text box — are sent to Google’s paid Gemini API. Gemini looks across those responses and returns the report you asked for.
         </p>
+
         <p class="text-sm text-stone-600 leading-relaxed">
-          Worth Exploring uses your responses for this purpose: <strong>to generate the report you requested.</strong>
+          Google states that prompts and responses submitted through paid Gemini API services are not used to improve Google products. Worth Exploring has request storage/logging disabled for its Gemini project. Google may still process limited information to operate and secure its services, monitor abuse, or meet legal and regulatory requirements.
         </p>
+
         <p class="text-sm text-stone-600 leading-relaxed">
-          The tool is designed for reflection and exploration. It is not a professional career assessment, psychological assessment, diagnosis, or validated prediction of what career you should pursue.
+          In other words: Gemini needs your answers to make the report. That is why they are sent there. It is also why we ask you not to include information you would consider confidential or highly sensitive.
         </p>
       </section>
 
       <section class="space-y-3">
-        <h2 class="font-serif text-2xl text-stone-900">What Worth Exploring stores</h2>
+        <h2 class="font-serif text-2xl text-stone-900">What Worth Exploring keeps</h2>
+
         <p class="text-sm text-stone-600 leading-relaxed">
-          Worth Exploring does not currently have a user database and does not intentionally save your questionnaire answers, generated report, or a personal career profile connected to you.
+          Not your questionnaire or report. Worth Exploring does not currently have a user database that stores either one, and it does not build a saved career profile about you.
         </p>
+
         <p class="text-sm text-stone-600 leading-relaxed">
-          Your answers remain available in the webpage while you complete the questionnaire and view your report. If you leave or reload the experience, Worth Exploring does not provide a way to recover them.
+          Your answers stay in the webpage while you complete the questionnaire and view your report. If you leave or reload, Worth Exploring does not have a recovery button waiting in the wings.
         </p>
+
         <p class="text-sm text-stone-600 leading-relaxed">
-          Limited analytics identifiers are stored separately in your browser as described below. They are used to understand product usage, not to save or reconstruct questionnaire content.
+          A small amount of analytics information is kept separately, described below. It is there to help us understand whether the product works — not to reconstruct what you told it.
         </p>
       </section>
 
       <section class="space-y-3">
-        <h2 class="font-serif text-2xl text-stone-900">Google Gemini</h2>
-        <p class="text-sm text-stone-600 leading-relaxed">
-          Worth Exploring uses the paid Google Gemini API to generate reports. Questionnaire responses you submit, including any free-text responses, are processed by Gemini when your report is generated.
-        </p>
-        <p class="text-sm text-stone-600 leading-relaxed">
-          Google states that prompts and responses submitted through paid Gemini API services are not used to improve Google products. Worth Exploring has API request storage/logging disabled for its Gemini project. Google may still process limited information as necessary to operate and secure its services, monitor abuse, or meet legal and regulatory requirements.
-        </p>
-        <p class="text-sm text-stone-600 leading-relaxed">
-          Because your answers are processed by a third-party AI provider, please do not include information you would consider confidential or highly sensitive.
-        </p>
-      </section>
+        <h2 class="font-serif text-2xl text-stone-900">What we measure — and what we don’t</h2>
 
-      <section class="space-y-3">
-        <h2 class="font-serif text-2xl text-stone-900">Product analytics</h2>
         <p class="text-sm text-stone-600 leading-relaxed">
-          Worth Exploring uses PostHog to answer a small set of product questions during early testing: whether people start the experience, how far they progress, whether reports generate successfully, how long generation takes, whether reports are viewed, and whether users click through to the separate feedback form.
+          Worth Exploring uses PostHog for lightweight product analytics. Right now we care about a handful of fairly ordinary questions: Did someone start? How far did they get? Did the report generate? How long did it take? Did they actually see it? Did they click through to feedback?
         </p>
+
         <p class="text-sm text-stone-600 leading-relaxed">
-          Analytics events may include a random pseudonymous browser identifier, a temporary session identifier, questionnaire progress milestones (25%, 50%, 75%, 100%), timing information, sanitized generation status/error categories, coarse device category, referral category, UTM campaign tags, and application/questionnaire/prompt/methodology version identifiers.
+          To answer those questions, analytics may include a random browser ID that is not your name or email, a temporary session ID, 25/50/75/100% progress milestones, timing information, whether report generation succeeded or failed, a broad error category, device type, referral source, campaign tags in links, and which version of the app/questionnaire/prompt/method was running.
         </p>
 
         <div class="bg-sage-50 border border-sage-100 rounded-xl p-6 space-y-3">
-          <p class="text-sm font-semibold text-stone-800">PostHog does not receive from Worth Exploring:</p>
+          <p class="text-sm font-semibold text-stone-800">What Worth Exploring does not send to PostHog:</p>
+
           <ul class="text-sm text-stone-600 leading-relaxed space-y-1.5 list-disc pl-5">
-            <li>questionnaire answers or free-text responses;</li>
-            <li>generated report content, career hypotheses, or occupation recommendations;</li>
+            <li>your questionnaire answers or anything you type into the questionnaire;</li>
+            <li>your generated report, career hypotheses, or occupation recommendations;</li>
             <li>your name or email address;</li>
-            <li>health information intentionally entered into the questionnaire; or</li>
+            <li>health or other sensitive details you may have entered; or</li>
             <li>session replay, form recordings, or automatically captured page text.</li>
           </ul>
         </div>
 
         <p class="text-sm text-stone-600 leading-relaxed">
-          Worth Exploring uses a first-party server endpoint to send only approved analytics fields to PostHog. PostHog GeoIP enrichment is disabled, and Worth Exploring does not intentionally send the user’s IP address to PostHog for product analytics.
+          Analytics events pass through Worth Exploring’s own server first, where only an approved list of fields is allowed through. PostHog’s automatic GeoIP location enrichment is turned off, and Worth Exploring does not intentionally send your IP address to PostHog for product analytics.
         </p>
+
         <p class="text-sm text-stone-600 leading-relaxed">
-          A random browser identifier may be kept in local storage for up to 90 days so repeat visits can be counted without an account. A separate session identifier is kept in session storage for the current browsing session. If your browser sends a Do Not Track setting of <code class="text-xs bg-stone-100 px-1.5 py-0.5 rounded">1</code>, Worth Exploring does not send product-analytics events or store the persistent analytics identifier.
+          A random browser ID may stay in local storage for up to 90 days so repeat visits can be counted without an account. A separate session ID lasts for the current browser session. If your browser sends a Do Not Track setting of <code class="text-xs bg-stone-100 px-1.5 py-0.5 rounded">1</code>, Worth Exploring does not send product-analytics events or store the persistent analytics ID.
         </p>
       </section>
 
       <section class="space-y-3">
-        <h2 class="font-serif text-2xl text-stone-900">Vercel</h2>
+        <h2 class="font-serif text-2xl text-stone-900">The website plumbing</h2>
+
         <p class="text-sm text-stone-600 leading-relaxed">
-          Worth Exploring is hosted on Vercel. Vercel processes technical information needed to deliver, secure, diagnose, and operate the website. According to Vercel’s privacy notice, this can include information such as IP address, approximate city/country derived from IP address, browser or device information, request information, and service diagnostics.
+          Worth Exploring is hosted on Vercel. Like most web hosts, Vercel processes technical information needed to deliver, secure, diagnose, and operate the site. Its privacy notice says this can include things such as IP address, approximate city/country derived from IP, browser or device information, request information, and service diagnostics.
         </p>
+
         <p class="text-sm text-stone-600 leading-relaxed">
-          Worth Exploring does not use this infrastructure information to build a career profile about you.
+          Worth Exploring does not use that infrastructure information to build a career profile about you.
         </p>
       </section>
 
       <section class="space-y-3">
-        <h2 class="font-serif text-2xl text-stone-900">Feedback is separate</h2>
+        <h2 class="font-serif text-2xl text-stone-900">Feedback is its own thing</h2>
+
         <p class="text-sm text-stone-600 leading-relaxed">
-          At the end of a report, you may choose to provide feedback through a Google Form. Providing feedback is optional.
+          At the end of your report, you can choose to open a separate Google Form and tell us what worked, what didn’t, or what made you raise an eyebrow. Feedback is optional.
         </p>
+
         <p class="text-sm text-stone-600 leading-relaxed">
-          Your questionnaire answers and generated report are not automatically sent to the feedback form or attached to your feedback response. Worth Exploring records only that the feedback link was opened; it cannot currently observe whether the external form was completed.
+          Your questionnaire answers and generated report are not automatically copied into that form or attached to your feedback. Worth Exploring records that the feedback link was opened, but it cannot currently see whether you completed the external form.
         </p>
+
         <p class="text-sm text-stone-600 leading-relaxed">
-          Information you voluntarily submit through the feedback form may be retained separately for product research and improvement. Worth Exploring will not quietly turn questionnaire responses into research data simply because you used the tool.
+          Anything you voluntarily submit through the form may be kept separately for product research and improvement. Worth Exploring will not quietly turn your questionnaire responses into research data simply because you used the tool.
         </p>
       </section>
 
       <section class="space-y-3">
-        <h2 class="font-serif text-2xl text-stone-900">About the AI</h2>
+        <h2 class="font-serif text-2xl text-stone-900">A note about the AI</h2>
+
         <p class="text-sm text-stone-600 leading-relaxed">
-          Worth Exploring uses generative AI to identify patterns and generate possibilities from your responses. Generative AI can misunderstand context, make inaccurate connections, overlook something important, or produce suggestions that simply do not fit.
+          Generative AI can connect dots. It can also connect the wrong dots, miss a dot entirely, or become far too confident about a dot that was never there.
         </p>
+
         <p class="text-sm text-stone-600 leading-relaxed">
-          The results are intended to support reflection and exploration — not to make career decisions for you. Keep what makes you curious. Question what doesn’t.
+          Worth Exploring is designed for reflection and exploration. It is not a professional career assessment, psychological assessment, diagnosis, or validated prediction of what career you should pursue. The results are hypotheses, not instructions. Keep what makes you curious. Question what doesn’t.
         </p>
       </section>
 
       <section class="space-y-3">
-        <h2 class="font-serif text-2xl text-stone-900">Age</h2>
+        <h2 class="font-serif text-2xl text-stone-900">One firm boundary: 18+</h2>
+
         <p class="text-sm text-stone-600 leading-relaxed">
           Worth Exploring is intended only for adults age 18 and older.
         </p>
       </section>
 
       <section class="space-y-3 border-t border-stone-200 pt-8">
-        <h2 class="font-serif text-2xl text-stone-900">Questions about privacy?</h2>
+        <h2 class="font-serif text-2xl text-stone-900">Still wondering about something?</h2>
+
         <p class="text-sm text-stone-600 leading-relaxed">
-          Email <a class="font-semibold text-sage-700 hover:text-sage-900 underline underline-offset-2" href="mailto:hello.worthexploring@gmail.com">hello.worthexploring@gmail.com</a>.
+          Privacy question, edge case, mysterious internet thing? Email <a class="font-semibold text-sage-700 hover:text-sage-900 underline underline-offset-2" href="mailto:hello.worthexploring@gmail.com">hello.worthexploring@gmail.com</a>.
         </p>
+
         <p class="text-sm text-stone-600 leading-relaxed">
-          As Worth Exploring changes, its privacy practices may change too. This page will be updated when those changes materially affect how information is collected, used, shared, or retained.
+          Worth Exploring will change as we learn. If those changes materially affect how information is collected, used, shared, or retained, this page will change too.
         </p>
       </section>
 
       <section class="space-y-2 text-xs text-stone-500 border-t border-stone-200 pt-6">
-        <p class="font-semibold text-stone-600">Provider privacy information</p>
+        <p class="font-semibold text-stone-600">Want the provider-level fine print?</p>
+
         <p>
           <a class="hover:text-sage-700 underline underline-offset-2" href="https://ai.google.dev/gemini-api/docs/logs-policy" target="_blank" rel="noopener noreferrer">Google Gemini API data logging</a>
           <span aria-hidden="true"> · </span>
@@ -217,6 +232,7 @@
           ← Back to Worth Exploring
         </a>
       </div>
+
     </div>
   </main>
 </body>
