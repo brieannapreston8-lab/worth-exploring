@@ -8,9 +8,30 @@
   const VISITOR_TTL_MS = 90 * 24 * 60 * 60 * 1000;
   const REQUIRED_STEP_COUNT = 15;
   const PROGRESS_MILESTONES = [25, 50, 75, 100];
+  const SAFE_ERROR_CATEGORIES = new Set([
+    'application_rate_limit',
+    'provider_rate_limit',
+    'provider_unavailable',
+    'provider_timeout',
+    'invalid_structured_output',
+    'empty_provider_response',
+    'configuration_error',
+    'invalid_request',
+    'network_error',
+    'server_error',
+    'unknown_generation_error'
+  ]);
+  const SAFE_GENERATION_STAGES = new Set([
+    'submission',
+    'provider_request',
+    'response_validation',
+    'network',
+    'unknown'
+  ]);
 
   const nativeFetch = window.fetch.bind(window);
   const trackingAllowed = navigator.doNotTrack !== '1';
+  let captureQueue = Promise.resolve();
 
   const state = {
     started: false,
@@ -185,7 +206,7 @@
   const acquisition = readAcquisition();
 
   function capture(event, properties = {}) {
-    if (!trackingAllowed) return;
+    if (!trackingAllowed) return Promise.resolve();
 
     const payload = {
       event,
@@ -198,18 +219,22 @@
       }
     };
 
-    try {
-      nativeFetch(ANALYTICS_ENDPOINT, {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json'
-        },
-        body: JSON.stringify(payload),
-        keepalive: true
-      }).catch(() => {});
-    } catch {
-      // Analytics must never affect the product experience.
-    }
+    captureQueue = captureQueue
+      .catch(() => {})
+      .then(() =>
+        nativeFetch(ANALYTICS_ENDPOINT, {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json'
+          },
+          body: JSON.stringify(payload),
+          keepalive: true
+        })
+      )
+      .then(() => undefined)
+      .catch(() => undefined);
+
+    return captureQueue;
   }
 
   function elapsedSeconds(startAt) {
@@ -276,78 +301,49 @@
     );
   }
 
-  function errorCategoryFrom(status, message) {
-    const text = String(message || '').toLowerCase();
+  function safeHeaderValue(response, name, allowedValues) {
+    const value = response.headers.get(name);
 
-    if (status === 429) return 'application_rate_limit';
+    return value && allowedValues.has(value)
+      ? value
+      : undefined;
+  }
 
-    if (
-      text.includes('resource_exhausted') ||
-      text.includes('rate limit') ||
-      text.includes('429')
-    ) {
-      return 'provider_rate_limit';
-    }
+  function providerRetryCount(response) {
+    const attempts = Number(
+      response.headers.get('X-WE-Provider-Attempts')
+    );
 
-    if (
-      text.includes('unavailable') ||
-      text.includes('503')
-    ) {
-      return 'provider_unavailable';
-    }
+    if (!Number.isFinite(attempts)) return undefined;
 
-    if (
-      text.includes('timeout') ||
-      text.includes('timed out') ||
-      text.includes('aborted')
-    ) {
-      return 'provider_timeout';
-    }
+    return Math.min(2, Math.max(0, attempts - 1));
+  }
 
-    if (
-      text.includes('unexpected token') ||
-      text.includes('json') ||
-      text.includes('structured output')
-    ) {
-      return 'invalid_structured_output';
-    }
+  function errorCategoryFromResponse(response) {
+    const backendCategory = safeHeaderValue(
+      response,
+      'X-WE-Generation-Error',
+      SAFE_ERROR_CATEGORIES
+    );
 
-    if (text.includes('empty response')) {
-      return 'empty_provider_response';
-    }
-
-    if (text.includes('api key not configured')) {
-      return 'configuration_error';
-    }
-
-    if (status === 400 || status === 405) {
-      return 'invalid_request';
-    }
-
-    if (status >= 500) return 'server_error';
+    if (backendCategory) return backendCategory;
+    if (response.status === 429) return 'application_rate_limit';
+    if (response.status === 400 || response.status === 405) return 'invalid_request';
+    if (response.status >= 500) return 'server_error';
 
     return 'unknown_generation_error';
   }
 
-  function generationStageFor(errorCategory) {
+  function generationStageFor(response, errorCategory) {
+    const backendStage = safeHeaderValue(
+      response,
+      'X-WE-Generation-Stage',
+      SAFE_GENERATION_STAGES
+    );
+
+    if (backendStage) return backendStage;
     if (errorCategory === 'invalid_request') return 'submission';
     if (errorCategory === 'network_error') return 'network';
-
-    if (
-      errorCategory === 'invalid_structured_output' ||
-      errorCategory === 'empty_provider_response'
-    ) {
-      return 'response_validation';
-    }
-
-    if (
-      errorCategory === 'provider_rate_limit' ||
-      errorCategory === 'provider_unavailable' ||
-      errorCategory === 'provider_timeout'
-    ) {
-      return 'provider_request';
-    }
-
     return 'unknown';
   }
 
@@ -377,36 +373,41 @@
     try {
       const response = await nativeFetch(input, init);
       const duration = elapsedMilliseconds(fetchStartAt);
+      const retryCount = providerRetryCount(response);
       let responseData = null;
 
-      try {
-        responseData = await response.clone().json();
-      } catch {
-        responseData = null;
+      if (response.ok) {
+        try {
+          responseData = await response.clone().json();
+        } catch {
+          responseData = null;
+        }
       }
 
       if (response.ok && isUsableReport(responseData)) {
         capture('report_generation_succeeded', {
           generation_attempt_number:
             Math.max(1, state.generationAttemptNumber),
+          provider_retry_count: retryCount,
           generation_duration_ms: duration,
           application_http_status: response.status
         });
       } else {
         const category = response.ok
           ? 'invalid_structured_output'
-          : errorCategoryFrom(
-              response.status,
-              responseData?.error
-            );
+          : errorCategoryFromResponse(response);
 
         capture('report_generation_failed', {
           generation_attempt_number:
             Math.max(1, state.generationAttemptNumber),
+          provider_retry_count: retryCount,
           generation_duration_ms: duration,
           application_http_status: response.status,
           error_category: category,
-          generation_stage: generationStageFor(category)
+          generation_stage:
+            response.ok
+              ? 'response_validation'
+              : generationStageFor(response, category)
         });
       }
 
