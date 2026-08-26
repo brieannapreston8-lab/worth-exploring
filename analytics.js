@@ -255,22 +255,17 @@
     );
   }
 
-  function countAnsweredQuestions() {
-    try {
-      return Object.values(answers).filter(value => {
-        if (Array.isArray(value)) return value.length > 0;
-        if (typeof value === 'string') return value.trim().length > 0;
-        return value !== undefined && value !== null;
-      }).length;
-    } catch {
-      return 0;
-    }
-  }
-
   function fireProgressForCompletedSteps(completedRequiredSteps) {
+    if (!state.started) return;
+
+    const safeCompletedSteps = Math.min(
+      REQUIRED_STEP_COUNT,
+      Math.max(0, Number(completedRequiredSteps) || 0)
+    );
+
     const percent = Math.min(
       100,
-      (completedRequiredSteps / REQUIRED_STEP_COUNT) * 100
+      (safeCompletedSteps / REQUIRED_STEP_COUNT) * 100
     );
 
     PROGRESS_MILESTONES.forEach(milestone => {
@@ -347,6 +342,60 @@
     return 'unknown';
   }
 
+  function startQuestionnaireIfVisible() {
+    if (state.started) return;
+
+    const assessment = document.getElementById('view-assessment');
+
+    if (!assessment || assessment.classList.contains('hidden')) return;
+
+    state.started = true;
+    state.questionnaireStartAt = performance.now();
+    capture('questionnaire_started');
+  }
+
+  function displayedStepNumber() {
+    const text = document.getElementById('question-number')?.textContent || '';
+    const match = text.match(/Step\s+(\d+)\s+of\s+(\d+)/i);
+
+    if (!match) return null;
+
+    const step = Number(match[1]);
+    return Number.isFinite(step) ? step : null;
+  }
+
+  function trackVisibleProgress() {
+    if (!state.started) return;
+
+    const assessment = document.getElementById('view-assessment');
+
+    if (!assessment || assessment.classList.contains('hidden')) return;
+
+    const visibleStep = displayedStepNumber();
+
+    if (!visibleStep) return;
+
+    // If Step 5 is visible, four required screens have been completed.
+    // The final screen is optional, so entering Step 16 means all 15
+    // required screens are complete and the 100% milestone may fire.
+    fireProgressForCompletedSteps(visibleStep - 1);
+  }
+
+  function captureReportViewIfVisible() {
+    if (state.reportViewed) return;
+
+    const report = document.getElementById('view-result');
+
+    if (!report || report.classList.contains('hidden')) return;
+
+    state.reportViewed = true;
+
+    capture('report_viewed', {
+      generation_to_view_ms:
+        elapsedMilliseconds(state.generationStartAt)
+    });
+  }
+
   // Intercept only the existing generation request. Analytics requests use
   // nativeFetch directly and are never intercepted here.
   window.fetch = async function trackedFetch(input, init) {
@@ -367,6 +416,23 @@
     if (!isGenerationRequest) {
       return nativeFetch(input, init);
     }
+
+    if (!state.questionnaireCompleted) {
+      state.questionnaireCompleted = true;
+
+      capture('questionnaire_completed', {
+        total_completion_seconds:
+          elapsedSeconds(state.questionnaireStartAt)
+      });
+    }
+
+    state.generationAttemptNumber += 1;
+    state.generationStartAt = performance.now();
+
+    capture('report_generation_started', {
+      generation_attempt_number:
+        state.generationAttemptNumber
+    });
 
     const fetchStartAt = performance.now();
 
@@ -426,104 +492,39 @@
     }
   };
 
-  const originalStartAssessment = window.startAssessment;
+  const startButton = document.querySelector(
+    'button[onclick="startAssessment()"]'
+  );
 
-  if (typeof originalStartAssessment === 'function') {
-    window.startAssessment = function trackedStartAssessment(...args) {
-      const assessment = document.getElementById('view-assessment');
-      const wasHidden = assessment?.classList.contains('hidden');
-      const result = originalStartAssessment.apply(this, args);
-      const isVisible = assessment && !assessment.classList.contains('hidden');
-
-      if (wasHidden && isVisible && !state.started) {
-        state.started = true;
-        state.questionnaireStartAt = performance.now();
-        capture('questionnaire_started');
-      }
-
-      return result;
-    };
+  if (startButton) {
+    startButton.addEventListener('click', () => {
+      // The existing inline handler is registered before this listener. Check
+      // the resulting UI state instead of relying on its internal function.
+      startQuestionnaireIfVisible();
+    });
   }
 
-  const originalNextQuestion = window.nextQuestion;
+  const nextButton = document.getElementById('next-btn');
 
-  if (typeof originalNextQuestion === 'function') {
-    window.nextQuestion = function trackedNextQuestion(...args) {
-      let beforeIndex = 0;
-      let totalSteps = 16;
-
-      try {
-        beforeIndex = currentIdx;
-        totalSteps = STEPS.length;
-      } catch {
-        // Use safe defaults if questionnaire internals ever change.
-      }
-
-      const isFinalStep = beforeIndex === totalSteps - 1;
-
-      if (isFinalStep && state.started) {
-        if (!state.questionnaireCompleted) {
-          state.questionnaireCompleted = true;
-
-          capture('questionnaire_completed', {
-            total_completion_seconds:
-              elapsedSeconds(state.questionnaireStartAt),
-            questions_answered_count:
-              countAnsweredQuestions()
-          });
-        }
-
-        state.generationAttemptNumber += 1;
-        state.generationStartAt = performance.now();
-
-        capture('report_generation_started', {
-          generation_attempt_number:
-            state.generationAttemptNumber
-        });
-      }
-
-      const result = originalNextQuestion.apply(this, args);
-
-      try {
-        if (currentIdx > beforeIndex) {
-          const completedRequiredSteps = Math.min(
-            currentIdx,
-            REQUIRED_STEP_COUNT
-          );
-
-          fireProgressForCompletedSteps(completedRequiredSteps);
-        }
-      } catch {
-        // Analytics must not interfere with navigation.
-      }
-
-      return result;
-    };
+  if (nextButton) {
+    nextButton.addEventListener('click', () => {
+      // Navigation is synchronous. Read only the displayed step number after
+      // the core click handler has run; never inspect questionnaire content.
+      requestAnimationFrame(trackVisibleProgress);
+    });
   }
 
-  const originalRenderResults = window.renderResults;
+  const reportView = document.getElementById('view-result');
 
-  if (typeof originalRenderResults === 'function') {
-    window.renderResults = function trackedRenderResults(...args) {
-      const result = originalRenderResults.apply(this, args);
+  if (reportView) {
+    const reportObserver = new MutationObserver(() => {
+      captureReportViewIfVisible();
+    });
 
-      if (!state.reportViewed) {
-        state.reportViewed = true;
-
-        requestAnimationFrame(() => {
-          const report = document.getElementById('view-result');
-
-          if (report && !report.classList.contains('hidden')) {
-            capture('report_viewed', {
-              generation_to_view_ms:
-                elapsedMilliseconds(state.generationStartAt)
-            });
-          }
-        });
-      }
-
-      return result;
-    };
+    reportObserver.observe(reportView, {
+      attributes: true,
+      attributeFilter: ['class']
+    });
   }
 
   const feedbackLink = document.querySelector(
