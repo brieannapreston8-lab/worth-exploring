@@ -34,7 +34,6 @@
   const trackingAllowed = navigator.doNotTrack !== '1';
   let captureQueue = Promise.resolve();
   let pdfLibraryPromise = null;
-  let loadingMessageTimer = null;
 
   const state = {
     started: false,
@@ -397,60 +396,6 @@
       generation_to_view_ms:
         elapsedMilliseconds(state.generationStartAt)
     });
-  }
-
-  function installLoadingMessagesUi() {
-    const loadingView = document.getElementById('view-loading');
-    const loadingSubtext = document.getElementById('loading-subtext');
-
-    if (!loadingView || !loadingSubtext) return;
-
-    const messages = [
-      'Patterns that keep tapping us on the shoulder…',
-      'Good at it vs. actually want more of it…',
-      'Where your energy lights up — and where it quietly leaves the building…',
-      'Preferences that coexist nicely. Preferences that are arguing in the hallway…',
-      'Possibilities, not prescriptions…',
-      'Real workdays, not shiny job titles…',
-      'Small experiments. No five-year plan required…',
-      'Still connecting dots. Some of them are being a little dramatic…'
-    ];
-
-    let messageIndex = 0;
-
-    const stopRotation = () => {
-      if (loadingMessageTimer) {
-        window.clearInterval(loadingMessageTimer);
-        loadingMessageTimer = null;
-      }
-    };
-
-    const startRotation = () => {
-      stopRotation();
-      messageIndex = 0;
-      loadingSubtext.textContent = messages[messageIndex];
-
-      loadingMessageTimer = window.setInterval(() => {
-        messageIndex = (messageIndex + 1) % messages.length;
-        loadingSubtext.textContent = messages[messageIndex];
-      }, 4500);
-    };
-
-    const syncRotation = () => {
-      if (loadingView.classList.contains('hidden')) {
-        stopRotation();
-      } else if (!loadingMessageTimer) {
-        startRotation();
-      }
-    };
-
-    const loadingObserver = new MutationObserver(syncRotation);
-    loadingObserver.observe(loadingView, {
-      attributes: true,
-      attributeFilter: ['class']
-    });
-
-    syncRotation();
   }
 
   function installPrivacyUi() {
@@ -853,7 +798,6 @@
   }
 
   installPrivacyUi();
-  installLoadingMessagesUi();
   installReportDesignUi();
   installPdfDownloadUi();
   capture('landing_viewed');

@@ -205,6 +205,7 @@ Humour must:
 - be directly grounded in something the user actually identified as draining
 - sharpen recognition rather than invent a personality trait
 - feel dry and intelligent rather than silly or meme-like
+- be understandable without insider workplace terminology; if the joke depends on knowing a niche term or reference, rewrite it plainly
 - remain optional; never force a joke simply because this section permits humour
 
 Serious constraints should be stated plainly.
@@ -349,6 +350,13 @@ For example:
 Distinctive Worth Exploring language may still be used when it feels natural and understandable in context. Phrases such as "shadow activity," "competence trap," "energy drain," or "rabbit hole" are acceptable when they add personality rather than exposing implementation mechanics.
 
 The report should feel human-readable first. The user should never need to know how their answers were internally labeled.
+
+PLAIN-LANGUAGE GUARD — REQUIRED:
+- Use language an intelligent general reader can understand without workplace, product, management, consulting, or internet-culture jargon.
+- NEVER use "bike shedding", "bikeshedding", "bike-shedding", "bikeshed", or related jargon. Describe the actual behaviour plainly instead, such as "getting stuck debating minor details" or "spending disproportionate time on low-stakes details."
+- Avoid obscure shorthand, insider terminology, trendy workplace phrases, or clever references unless the meaning is immediately obvious to a general reader.
+- Dry humour is allowed only when the reader can understand the underlying point without knowing the reference. Do not make insider jargon itself the joke.
+- Before finalizing the report, silently scan ALL user-facing text for language that could make a reader reasonably ask "What does that mean?" and rewrite it in ordinary language.
 
 TONE & LANGUAGE FOR TENSIONS:
 Keep the explanation observational, curious, provisional, and lightly interpretive.
