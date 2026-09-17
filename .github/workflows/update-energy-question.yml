@@ -1,0 +1,76 @@
+name: Update depletion question
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - '.github/workflows/update-energy-question.yml'
+
+permissions:
+  contents: write
+
+jobs:
+  update:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: main
+          fetch-depth: 0
+
+      - name: Update question and schema
+        run: |
+          python - <<'PY'
+          from pathlib import Path
+          import re
+
+          index = Path('index.html')
+          text = index.read_text()
+          pattern = re.compile(
+              r'''      \{\n        id: "energy_vampires",.*?\n      \},\n\n      \{\n        id: "competence_trap"''',
+              re.S,
+          )
+          replacement = '''      {
+        id: "energy_vampires",
+        phase: "Energy & Mechanics",
+        title: "Think of a workday that left you unusually depleted. What were you actually doing?",
+        subtitle: "Short answer",
+        type: "text",
+        placeholder: "e.g., Back-to-back meetings, chasing approvals, handling constant interruptions..."
+      },
+
+      {
+        id: "competence_trap"'''
+          text, count = pattern.subn(replacement, text, count=1)
+          if count != 1:
+              raise SystemExit(f'Expected to replace 1 energy_vampires question, replaced {count}')
+          index.write_text(text)
+
+          generate = Path('api/generate.js')
+          text = generate.read_text()
+          old = '- energy_vampires: work conditions or mechanics that are especially draining.'
+          new = '- energy_vampires: concrete recent workday evidence about what the user was actually doing when they felt unusually depleted. Treat this as behavioral evidence, not a general identity claim.'
+          if old not in text:
+              raise SystemExit('Could not find energy_vampires prompt description')
+          generate.write_text(text.replace(old, new, 1))
+
+          for filename in ['worth-exploring-profile.schema.json', 'worth-exploring-profile-v2.schema.json']:
+              path = Path(filename)
+              text = path.read_text()
+              old = '"energy_vampires": { "type": "array", "items": { "type": "string" } }'
+              new = '"energy_vampires": { "type": "string" }'
+              if old not in text:
+                  raise SystemExit(f'Could not find energy_vampires schema in {filename}')
+              path.write_text(text.replace(old, new, 1))
+          PY
+
+      - name: Remove one-time workflow
+        run: rm .github/workflows/update-energy-question.yml
+
+      - name: Commit changes
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add -A
+          git commit -m "Use concrete depletion evidence in question 6"
+          git push origin main
