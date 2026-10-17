@@ -56,7 +56,7 @@
             "jealousy_trigger": { "type": "string" },
             "shadow_activities": { "type": "array", "items": { "type": "string" } },
             "flow_work": { "type": "array", "items": { "type": "string" } },
-            "energy_vampires": { "type": "array", "items": { "type": "string" } },
+            "energy_vampires": { "type": "string" },
             "competence_trap": { "type": "string" },
             "tolerable_fatigue": { "type": "string" },
             "autonomy_preference": { "type": ["string", "number"] },
